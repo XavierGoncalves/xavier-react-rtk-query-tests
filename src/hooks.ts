@@ -6,8 +6,10 @@ export function useCurrentUser() {
 
   useEffect(() => {
     async function updateUser() {
-      const { data } = await HttpClient.instance.get('users/me');
-      setUser(data);
+      if(HttpClient.instance) {
+        const { data } = await HttpClient.instance.get('users/me');
+        setUser(data);
+      }
     }
 
     updateUser();

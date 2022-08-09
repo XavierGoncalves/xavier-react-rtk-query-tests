@@ -1,10 +1,10 @@
 import React from 'react';
-import { createRoot } from 'react-dom/client';
-import App from './App';
+import ReactDOM from 'react-dom/client';
 import AtlasSdk from '@atlas/sdk';
+import configI18n from './config/i18n'
 import TokenGenerator from './config/token.generator';
 import HttpClient from './config/http.client';
-import configI18n from './config/i18n';
+import App from './App';
 
 async function start() {
   AtlasSdk.lifecycle.onLaunch(async () => {
@@ -15,8 +15,15 @@ async function start() {
     const { apiGatewayUrl } = await AtlasSdk.environment.getConfig();
     HttpClient.initialize(apiGatewayUrl)
 
-    const root = createRoot(document.getElementById('root'));
-    root.render(<App />);
+    const root = ReactDOM.createRoot(
+      document.getElementById('root') as HTMLElement,
+    );
+
+    root.render(
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    );
   });
 
   TokenGenerator.initialize(

@@ -13,9 +13,28 @@
 
 # misc
 .DS_Store
-.env.*
 
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 atlas-dev-configuration.json
+
+# Self-signed certificates
+_wildcard.lvh.me*.pem
+
+# Environment configuration
+# .env*
+# !.env.example
+
+#### Code ###
+# Visual Studio Code - https://code.visualstudio.com/
+.settings/
+.vscode/
+.idea
+
+# Reports
+*.xml
+
+# Logs
+logs
+*.log

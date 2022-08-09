@@ -1,5 +1,7 @@
+import { Generator } from "types";
+
 class TokenGenerator {
-  initialize(generator) {
+  initialize(generator: Generator) {
     this.get = generator;
   }
 

@@ -1,7 +1,8 @@
-import axios from 'axios'
+import axios, { AxiosInstance } from 'axios'
 import TokenGenerator from './token.generator'
 
 class HttpClient {
+  private _axiosInstance?: AxiosInstance;
   initialize(baseUrl) {
     if (this._axiosInstance)
       throw new Error('HttpClient already initialized!');

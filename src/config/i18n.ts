@@ -3,8 +3,9 @@ import Backend from 'i18next-xhr-backend';
 import ICU from 'i18next-icu';
 import { initReactI18next } from 'react-i18next';
 import getEnv from './env'
+import { I18nConfiguration } from 'types';
 
-export default async function configI18n(lng) {
+export default async function configI18n(lng: string): Promise<I18nConfiguration> {
   await i18n
     .use(ICU)
     .use(Backend)

@@ -15,7 +15,7 @@ import { useCurrentUser } from './hooks';
 
 import './styles.css';
 
-export default function App() {
+const App = () => {
   const user = useCurrentUser();
 
   return (
@@ -26,6 +26,7 @@ export default function App() {
     </ThemeProvider>
   );
 }
+
 
 function AppContent({ user }) {
   return (
@@ -84,3 +85,5 @@ function Content({ user }) {
 function getInitials(fullname) {
   return fullname.split(' ').map((n) => n[0]).join('');
 }
+
+export default App
