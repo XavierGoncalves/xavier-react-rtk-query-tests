@@ -15,3 +15,7 @@ export type Generator = () => Promise<string>;
 type ChangeLanguageProps = {
   language: string;
 };
+
+export type AppType = {
+  [key: string]: any;
+}

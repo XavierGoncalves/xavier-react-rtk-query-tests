@@ -3,8 +3,30 @@
   "name": "20220808-text-xavier",
   "version": "0.0.0",
   "sdk-version": "0",
-  "capabilities": ["authorization"],
-  "scopes": ["openid"],
+  "capabilities": [
+    "authorization",
+    "form",
+    "navigation",
+    "popup",
+    "toast",
+    "portal",
+    "clipboard"
+  ],
+  "scopes": [
+    "openid",
+    "contact-details:write",
+    "contact-details:read",
+    "account:read",
+    "contacts-activities:read",
+    "numbers:read",
+    "graph-users:read",
+    "policies:evaluate",
+    "recordings:read",
+    "directory-personas:read",
+    "account-favorites:read",
+    "account-custom-fields:read",
+    "presence-hub:read"
+  ],
   "assets": {
     "icon": "https://cdn1.iconfinder.com/data/icons/miscicons/500/globe-512.png"
   },

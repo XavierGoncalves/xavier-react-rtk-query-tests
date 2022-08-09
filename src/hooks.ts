@@ -1,15 +1,13 @@
 import { useState, useEffect } from 'react'
-import HttpClient from './config/http.client';
+import HttpClient from './titanium/common/http.client';
 
 export function useCurrentUser() {
   const [user, setUser] = useState()
 
   useEffect(() => {
     async function updateUser() {
-      if(HttpClient.instance) {
-        const { data } = await HttpClient.instance.get('users/me');
+        const { data } = await HttpClient.getInstance().get('users/me');
         setUser(data);
-      }
     }
 
     updateUser();
