@@ -1,4 +1,3 @@
-import React from 'react';
 import AtlasSdk from '@atlas/sdk';
 import ThemeProvider from '@cobalt/react-theme-provider';
 import ViewportProvider from '@cobalt/react-viewport-provider';
@@ -10,10 +9,10 @@ import Avatar from '@cobalt/react-avatar';
 import { Heading, Text } from '@cobalt/react-typography';
 import Spinner from '@cobalt/react-spinner';
 import { useTranslation } from "react-i18next";
-import Page from './Page';
-import { useCurrentUser } from './hooks';
+import Page from '../../Page';
+import { useCurrentUser } from '../../hooks';
 
-import './styles.css';
+import '../../styles.css';
 
 const App = () => {
   const user = useCurrentUser();

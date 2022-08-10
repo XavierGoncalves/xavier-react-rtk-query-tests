@@ -19,3 +19,10 @@ type ChangeLanguageProps = {
 export type AppType = {
   [key: string]: any;
 }
+
+
+export type _Links = {
+  self: {
+    href: string;
+  }
+}

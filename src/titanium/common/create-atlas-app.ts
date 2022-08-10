@@ -6,19 +6,24 @@ import { createToken } from "./create-token"
 import { configureI18n } from "./i18n"
 
 const createAtlasApp = async (atlasSdk, opts = {}) => {
-    const options = { ...DEFAULT_OPTIONS, ...opts }
-    let app: AppType = {atlasSdk}
-    app.history = configureNavigation(
-        options.navigationEnabled,
-        atlasSdk
-    )
-    configureOnLaunch(app, options)
-    createToken(app.atlasSdk, options.apiScopes)
-    
-    await app.atlasSdk.connect() 
-    await configureI18n(app)
+    try {
+        const options = { ...DEFAULT_OPTIONS, ...opts }
+        let app: AppType = {atlasSdk}
+        app.history = configureNavigation(
+            options.navigationEnabled,
+            atlasSdk
+        )
+        createToken(app.atlasSdk, options.apiScopes)
+        configureOnLaunch(app, options)
+        
+        await app.atlasSdk.connect() 
+        await configureI18n(app)
 
-    return app
+        return app
+    } catch (error) {
+        console.log('createAtlasApp-error')
+    }
+    
 }
 
 export default createAtlasApp

@@ -25,7 +25,8 @@
     "directory-personas:read",
     "account-favorites:read",
     "account-custom-fields:read",
-    "presence-hub:read"
+    "presence-hub:read",
+    "apps:graphql"
   ],
   "assets": {
     "icon": "https://cdn1.iconfinder.com/data/icons/miscicons/500/globe-512.png"

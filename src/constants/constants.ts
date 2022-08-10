@@ -9,7 +9,8 @@ export const apiScopes = [
     'policies:evaluate',
     'recordings:read',
     'account-favorites:read',
-    'account-custom-fields:read'
+    'account-custom-fields:read',
+    'apps:graphql'
 ]
 
 export const policies = [
