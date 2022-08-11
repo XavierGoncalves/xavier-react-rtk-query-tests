@@ -1,3 +1,5 @@
+import { Atlas } from "@atlas/sdk/lib/src/atlas/atlas";
+
 export {};
 
 declare global {
@@ -17,7 +19,7 @@ type ChangeLanguageProps = {
 };
 
 export type AppType = {
-  [key: string]: any;
+  [key: string]: any
 }
 
 
@@ -26,3 +28,4 @@ export type _Links = {
     href: string;
   }
 }
+

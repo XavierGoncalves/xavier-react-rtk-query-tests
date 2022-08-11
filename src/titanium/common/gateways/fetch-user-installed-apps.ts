@@ -14,6 +14,8 @@ interface AppListResponse {
   }
 }
 
+export type AppList = string[]
+
 export const fetchUserInstalledApps = async (http: AxiosInstance) => {
   const {
     data: {
@@ -37,4 +39,4 @@ export const fetchUserInstalledApps = async (http: AxiosInstance) => {
   return presentUserInstalledApps(apps)
 }
 
-const presentUserInstalledApps = (apps: App[]): string[] => apps.map(({ slug }) => slug)
+const presentUserInstalledApps = (apps: App[]): AppList => apps.map(({ slug }) => slug)

@@ -12,7 +12,7 @@ interface AccountResponse {
     _links: _Links
 }
 
-interface Account {
+export interface Account {
     id: string;
     name: string;
     slug: string;

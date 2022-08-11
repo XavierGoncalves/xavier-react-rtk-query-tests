@@ -9,7 +9,7 @@ interface UserResponse {
   _links: _Links 
 }
 
-interface User {
+export interface User {
   email: string;
   id: string;
   name: string;

@@ -5,7 +5,7 @@ interface PolicyResponse {
   target_policy: string;
 }
 
-interface Policies {
+export interface Policies {
   [key: string]: string;
 }
 
