@@ -1,5 +1,5 @@
 import { MemoryHistory } from "history"
-import { createHistoryForAtlas } from "./utils/history"
+import { createHistoryForAtlas } from "./history"
 
 export const configureNavigation = (navigationEnabled, atlasSdk) => {
   if (!navigationEnabled) {

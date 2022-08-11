@@ -1,9 +1,9 @@
 import { AppType } from "types"
-import { configureNavigation } from "./configure-navigation"
-import { configureOnLaunch } from "./configure-on-launch"
+import { configureNavigation } from "./utils/configure-navigation"
+import { configureOnLaunch } from "./utils/configure-on-launch"
 import { DEFAULT_OPTIONS } from "./constants/constants"
-import { createToken } from "./create-token"
-import { configureI18n } from "./i18n"
+import { createToken } from "./utils/create-token"
+import { configureI18n } from "./utils/i18n"
 
 const createAtlasApp = async (atlasSdk, opts = {}) => {
     try {

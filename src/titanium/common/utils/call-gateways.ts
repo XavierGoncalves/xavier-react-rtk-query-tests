@@ -1,7 +1,7 @@
-import { fetchAccount } from "./gateways/fetch-account"
-import { fetchCurrentUser } from "./gateways/fetch-current-user"
-import { fetchPolicies } from "./gateways/fetch-policies"
-import { fetchUserInstalledApps } from "./gateways/fetch-user-installed-apps"
+import { fetchAccount } from "../gateways/fetch-account"
+import { fetchCurrentUser } from "../gateways/fetch-current-user"
+import { fetchPolicies } from "../gateways/fetch-policies"
+import { fetchUserInstalledApps } from "../gateways/fetch-user-installed-apps"
 
 const callGateWays = async (app, options) => {
     if (options.load.user) {

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import HttpClient from './titanium/common/http.client';
+import HttpClient from './titanium/common/utils/http.client';
 
 export function useCurrentUser() {
   const [user, setUser] = useState()
