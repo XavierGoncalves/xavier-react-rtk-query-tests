@@ -14,38 +14,38 @@ import Page from '../page/Page';
 
 import '../../styles.css';
 import { HttpClientProvider, useHttpClient } from 'titanium/common/context/http.context';
-import { AtlasSdkProvider } from 'titanium/common/context/atlas.context';
-import { AccountDataProvider } from 'titanium/common/context/account.context';
-import { PoliciesProvider } from 'titanium/common/context/policies.context';
+import { AtlasSdkProvider, useAtlasSdk } from 'titanium/common/context/atlas.context';
+import { AccountDataProvider, useAccountData } from 'titanium/common/context/account.context';
+import { PoliciesProvider, usePolicies } from 'titanium/common/context/policies.context';
 import { CurrentUserProvider, useCurrentUser } from 'titanium/common/context/user.context';
 import { CurrentUserInstalledAppsProvider, useCurrentUserInstalledApps } from 'titanium/common/context/user-installed-apps.context';
 
-const App = ({ atlasSdk, user, userInstalledApps, account, policies, http, history }) => {
-  // console.log('----------------------------------------')
-  // console.log('app render-account-', account)
-  // console.log('app render-atlasSdk-', atlasSdk)
-  // console.log('app render-history-', history)
-  // console.log('app render-http-', http)
-  // console.log('app render-user-', user)
-  // console.log('app render-policies-', policies)
-  // console.log('app render-userInstalledApps-', userInstalledApps)
-  console.log('render app')
+const App = (app) => {
+  console.log('----------------------------------------')
+  console.log('app render-account-', app?.account)
+  console.log('app render-atlasSdk-', app?.atlasSdk)
+  console.log('app render-history-', app?.history)
+  console.log('app render-http-', app?.http)
+  console.log('app render-user-', app?.user)
+  console.log('app render-policies-', app?.policies)
+  console.log('app render-userInstalledApps-', app?.userInstalledApps)
+  // console.log('render app')
   return (
     <ThemeProvider loader={() => AtlasSdk.theme.getConfig()}>
       <ViewportProvider>
-        {/* <AtlasSdkProvider value={atlasSdk}> */}
-          <CurrentUserProvider value={user}>
-            {/* <AccountDataProvider value={account}> */}
-              {/* <PoliciesProvider value={policies}> */}
-                <HttpClientProvider value={http}>
-                  {/* <CurrentUserInstalledAppsProvider value={userInstalledApps}> */}
+        <AtlasSdkProvider value={app?.atlasSdk}>
+          <CurrentUserProvider value={app?.user}>
+            <AccountDataProvider value={app?.account}>
+              <PoliciesProvider value={app?.policies}>
+                <HttpClientProvider value={app?.http}>
+                  <CurrentUserInstalledAppsProvider value={app?.userInstalledApps}>
                     <AppContent />
-                  {/* </CurrentUserInstalledAppsProvider> */}
+                  </CurrentUserInstalledAppsProvider>
                 </HttpClientProvider>
-              {/* </PoliciesProvider> */}
-            {/* </AccountDataProvider> */}
+              </PoliciesProvider>
+            </AccountDataProvider>
           </CurrentUserProvider>
-        {/* </AtlasSdkProvider> */}
+        </AtlasSdkProvider>
       </ViewportProvider>
     </ThemeProvider>
   );
@@ -53,14 +53,18 @@ const App = ({ atlasSdk, user, userInstalledApps, account, policies, http, histo
 
 
 function AppContent() {
-  // const httpClient = useHttpClient()
+  console.log('render-AppContent')
+  const httpClient = useHttpClient()
   const userInstalledApps = useCurrentUserInstalledApps()
-  // const user = useCurrentUser();
+  const user = useCurrentUser();
+  const policies = usePolicies()
+  const account = useAccountData()
+  const altasSdk = useAtlasSdk()
   return (
     <Page>
       <AppHeader />
       <Page.Content>
-        {/* {!user ? <Loading /> : <Content user={user} />} */}
+        {!user ? <Loading /> : <Content user={user} />}
       </Page.Content>
     </Page>
   );

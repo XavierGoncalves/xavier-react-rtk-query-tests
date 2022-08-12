@@ -6,7 +6,7 @@ import { createToken } from "./utils/create-token"
 import { configureI18n } from "./utils/i18n"
 import { Atlas } from "@atlas/sdk/lib/src/atlas/atlas"
 
-const createAtlasApp= async (atlasSdk: Atlas, opts = {}): Promise<AppType | undefined> => {
+const createAtlasApp= async (atlasSdk: Atlas, opts = {}, component) => {
     try {
         const options = { ...DEFAULT_OPTIONS, ...opts }
         let app: AppType = {atlasSdk}
@@ -15,14 +15,14 @@ const createAtlasApp= async (atlasSdk: Atlas, opts = {}): Promise<AppType | unde
             atlasSdk
         )
         createToken(app.atlasSdk, options.apiScopes)
-        configureOnLaunch(app, options)
+        configureOnLaunch(app, options, component)
         
         await app.atlasSdk.connect() 
         await configureI18n(app)
 
-        return app
+        // return app
     } catch (error) {
-        console.log('createAtlasApp-error')
+        console.log('createAtlasApp-error-', error)
     }
     
 }

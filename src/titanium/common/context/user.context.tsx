@@ -5,7 +5,6 @@ const CurrentUserContext = createContext<User | undefined>(undefined)
 
 const useCurrentUser = () => {
     const context = useContext(CurrentUserContext)
-    console.log('XAVIER -context-', context)
     if(!context) {
         throw new Error('useCurrentUser must be used within a CurrentUserProvider')
     }
