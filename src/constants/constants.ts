@@ -19,3 +19,5 @@ export const policies = [
     'contacts.update',
     'contacts.delete'
 ]
+
+export const perPage = 10

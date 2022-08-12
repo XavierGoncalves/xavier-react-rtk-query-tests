@@ -22,6 +22,8 @@ import { CurrentUserInstalledAppsProvider, useCurrentUserInstalledApps } from 't
 import { useState } from 'react';
 import ContactsPage from 'components/contacts-page/contacts-page.component';
 import FavoritesPage from 'components/favorites/favorites-page.component';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { queryClient } from 'react-query/client';
 
 const App = (app) => {
   return (
@@ -32,16 +34,18 @@ const App = (app) => {
             <AccountDataProvider value={app?.account}>
               <PoliciesProvider value={app?.policies}>
                 <HttpClientProvider value={app?.http}>
-                  <CurrentUserInstalledAppsProvider value={app?.userInstalledApps}>
-                    <HistoryRouter history={app?.history}>
-                      <Routes>
-                        <Route path={"/"} element={<ContactsPage />} />
-                        <Route path={"/"} element={<ContactsPage />} />
-                        <Route path={"/view/:contactId"} element={<ContactsPage />} />
-                        <Route path="*" element={<Navigate to="/" replace={true} />}/>
-                      </ Routes>
-                    </HistoryRouter>
-                  </CurrentUserInstalledAppsProvider>
+                  <QueryClientProvider client={queryClient}>
+                    <CurrentUserInstalledAppsProvider value={app?.userInstalledApps}>
+                      <HistoryRouter history={app?.history}>
+                        <Routes>
+                          <Route path={"/"} element={<ContactsPage />} />
+                          <Route path={"/"} element={<ContactsPage />} />
+                          <Route path={"/view/:contactId"} element={<ContactsPage />} />
+                          <Route path="*" element={<Navigate to="/" replace={true} />} />
+                        </ Routes>
+                      </HistoryRouter>
+                    </CurrentUserInstalledAppsProvider>
+                  </QueryClientProvider>
                 </HttpClientProvider>
               </PoliciesProvider>
             </AccountDataProvider>
