@@ -36,7 +36,8 @@ const App = (app) => {
                     <HistoryRouter history={app?.history}>
                       <Routes>
                         <Route path={"/"} element={<ContactsPage />} />
-                        <Route path={"/favorites"} element={<FavoritesPage />} />
+                        <Route path={"/"} element={<ContactsPage />} />
+                        <Route path={"/view/:contactId"} element={<ContactsPage />} />
                         <Route path="*" element={<Navigate to="/" replace={true} />}/>
                       </ Routes>
                     </HistoryRouter>
