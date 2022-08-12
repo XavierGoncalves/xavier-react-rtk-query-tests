@@ -4,22 +4,29 @@ import { fetchPolicies } from "../gateways/fetch-policies"
 import { fetchUserInstalledApps } from "../gateways/fetch-user-installed-apps"
 
 const callGateWays = async (app, options) => {
+    let promiseArr: any[] = []
     if (options.load.user) {
-        app.user = await fetchCurrentUser(app.http)
+        promiseArr.push(fetchCurrentUser(app.http))
     }
 
     if (options.load.account) {
-        app.account = await fetchAccount(app.http)
+        promiseArr.push(await fetchAccount(app.http))
     }
 
     if (options.load.policies !== false) {
-        app.policies = await fetchPolicies(options.load.policies, app.http)
+        promiseArr.push(fetchPolicies(options.load.policies, app.http))
     }
     
     if (options.load.getUserAppsList !== false) {
-        app.userInstalledApps = await fetchUserInstalledApps(app.http)
+        promiseArr.push(fetchUserInstalledApps(app.http))
     }
-    return app
+
+    const promiseArrResponse = await Promise.all(promiseArr)
+    
+    return {
+        ...app,
+        ...promiseArrResponse.reduce((acc, curr) => ({...acc, ...curr}), {})
+    }
 }
 
 export default callGateWays

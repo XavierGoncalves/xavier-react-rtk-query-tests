@@ -13,6 +13,7 @@ export const createI18NClient = async(lng: string = 'en-US'): Promise<I18nConfig
     .init({
       lng,
       fallbackLng: 'en-US',
+      keySeparator: false,
       backend: {
         crossDomain: true,
         loadPath: `${getEnv('LOCALE_PUBLIC_URL')}/locales/{{lng}}/app.json`
@@ -22,7 +23,7 @@ export const createI18NClient = async(lng: string = 'en-US'): Promise<I18nConfig
       },
       react: {
         useSuspense: false
-      }
+      },
     });
 
   return {

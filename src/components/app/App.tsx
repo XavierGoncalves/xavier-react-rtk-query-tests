@@ -10,7 +10,7 @@ import { Heading, Text } from '@cobalt/react-typography';
 import Spinner from '@cobalt/react-spinner';
 import { useTranslation } from "react-i18next";
 import Page from '../page/Page';
-// import { useCurrentUser } from '../../hooks/hooks';
+import { Navigate, Route, Routes, unstable_HistoryRouter as HistoryRouter } from "react-router-dom";
 
 import '../../styles.css';
 import { HttpClientProvider, useHttpClient } from 'titanium/common/context/http.context';
@@ -19,17 +19,11 @@ import { AccountDataProvider, useAccountData } from 'titanium/common/context/acc
 import { PoliciesProvider, usePolicies } from 'titanium/common/context/policies.context';
 import { CurrentUserProvider, useCurrentUser } from 'titanium/common/context/user.context';
 import { CurrentUserInstalledAppsProvider, useCurrentUserInstalledApps } from 'titanium/common/context/user-installed-apps.context';
+import { useState } from 'react';
+import ContactsPage from 'components/contacts-page/contacts-page.component';
+import FavoritesPage from 'components/favorites/favorites-page.component';
 
 const App = (app) => {
-  console.log('----------------------------------------')
-  console.log('app render-account-', app?.account)
-  console.log('app render-atlasSdk-', app?.atlasSdk)
-  console.log('app render-history-', app?.history)
-  console.log('app render-http-', app?.http)
-  console.log('app render-user-', app?.user)
-  console.log('app render-policies-', app?.policies)
-  console.log('app render-userInstalledApps-', app?.userInstalledApps)
-  // console.log('render app')
   return (
     <ThemeProvider loader={() => AtlasSdk.theme.getConfig()}>
       <ViewportProvider>
@@ -39,7 +33,13 @@ const App = (app) => {
               <PoliciesProvider value={app?.policies}>
                 <HttpClientProvider value={app?.http}>
                   <CurrentUserInstalledAppsProvider value={app?.userInstalledApps}>
-                    <AppContent />
+                    <HistoryRouter history={app?.history}>
+                      <Routes>
+                        <Route path={"/"} element={<ContactsPage />} />
+                        <Route path={"/favorites"} element={<FavoritesPage />} />
+                        <Route path="*" element={<Navigate to="/" replace={true} />}/>
+                      </ Routes>
+                    </HistoryRouter>
                   </CurrentUserInstalledAppsProvider>
                 </HttpClientProvider>
               </PoliciesProvider>
@@ -78,14 +78,16 @@ function Loading() {
   );
 }
 
-function AppHeader() {
+export function AppHeader() {
   const [t] = useTranslation();
-
+  const [count, setCount] = useState(0)
   return (
     <>
       <Box padding={['3', '4', '6']} width="100%">
         <Heading level="1">
-          {t('Connected to Atlas')}
+          {t('contains.plural', {
+            count
+          })}
         </Heading>
       </Box>
       <Divider />

@@ -36,7 +36,7 @@ export const fetchUserInstalledApps = async (http: AxiosInstance) => {
               }
             `
   })
-  return presentUserInstalledApps(apps)
+  return {userInstalledApps: presentUserInstalledApps(apps)}
 }
 
 const presentUserInstalledApps = (apps: App[]): AppList => apps.map(({ slug }) => slug)

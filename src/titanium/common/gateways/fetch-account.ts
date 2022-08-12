@@ -22,7 +22,7 @@ export interface Account {
 export const fetchAccount = async (http: AxiosInstance) => {
     const { data } = await http.get<AccountResponse>('/account')
 
-    return presentAccount(data)
+    return {account: presentAccount(data)}
 }
 
 const presentAccount = (account): Account => ({

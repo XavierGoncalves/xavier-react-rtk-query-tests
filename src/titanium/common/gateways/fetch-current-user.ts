@@ -18,7 +18,7 @@ export interface User {
 export const fetchCurrentUser = async (http: AxiosInstance) => {
     const { data } = await http.get<UserResponse>('/users/me')
   
-    return presentUser(data)
+    return {user: presentUser(data)}
   }
   
   const presentUser = (user): User => ({

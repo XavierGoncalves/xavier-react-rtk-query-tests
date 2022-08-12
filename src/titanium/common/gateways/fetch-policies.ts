@@ -15,9 +15,9 @@ export const fetchPolicies = async (policies , http: AxiosInstance) => {
       policies
     })
   
-    return data.reduce<Policies>((acc, item) => {
+    return {policies: data.reduce<Policies>((acc, item) => {
       acc[item.target_policy] = item.success
       return acc
-    }, {})
+    }, {})}
   }
   

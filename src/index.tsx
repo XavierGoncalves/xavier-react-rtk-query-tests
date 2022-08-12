@@ -15,7 +15,7 @@ createAtlasApp(AtlasSdk, {
     navigationEnabled: true,
   }
 }, (props) => (<React.StrictMode><App {...props} /></React.StrictMode>)).then((app) => {
-  console.log('createAtlasApp - called root.render -app-', app)
+  // console.log('createAtlasApp - called root.render -app-', app)
   // console.log('createAtlasApp - account-', app.account)
   // console.log('createAtlasApp - atlasSdk-', app.atlasSdk)
   // console.log('createAtlasApp - history-', app.history)
