@@ -16,9 +16,7 @@ export const configureOnLaunch = (app, options, Component) => {
       document.getElementById('root') as HTMLElement,
     );
     root.render(
-      <React.StrictMode>
         <Component {...app} />
-      </React.StrictMode>
     );
   })
 }
