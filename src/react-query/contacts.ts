@@ -1,13 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Contact, fetchContacts } from "api/fetch-contacts.api";
 import useAppUrlParams from "hooks/use-search-params";
 import { useHttpClient } from "titanium/common/context/http.context";
 
-const useContacts = () => {
+const useGetContacts = () => {
     const http = useHttpClient()
 
     const { page, search, sort } = useAppUrlParams()
-
+    console.log('useGetContacts-search-', search)
     return useQuery(['contacts', 'list', { page, sort, search }], () => fetchContacts({
         page,
         sort,
@@ -19,7 +19,7 @@ const useContacts = () => {
 
 type Select = (any) => Contact
 
-const useContactsWithSelect = (select: Select) => {
+const useGetContactsWithSelect = (select: Select) => {
     const http = useHttpClient()
 
     const { page, search, sort } = useAppUrlParams()
@@ -29,10 +29,14 @@ const useContactsWithSelect = (select: Select) => {
         sort,
         search,
         http
-    }))
+    }), { select })
 }
 
-export const useContact = (contactId: string) => useContactsWithSelect(data => data.contacts.find(item => item.id === contactId))
+export const useContact = (contactId: string) => useGetContactsWithSelect(data => data.contacts.find(item => item.id === contactId))
 
+export const useInvalidateGetContacts = () => {
+    const queryClient = useQueryClient();
+    return () => queryClient.invalidateQueries(['contacts', 'list']);
+  };
 
-export default useContacts
+export default useGetContacts

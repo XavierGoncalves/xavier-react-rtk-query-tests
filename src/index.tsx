@@ -14,8 +14,21 @@ createAtlasApp(AtlasSdk, {
     getUserAppsList: true,
     navigationEnabled: true,
   }
-}, (props) => (<React.StrictMode><App {...props} /></React.StrictMode>))
-// }, (props) => (<App {...props} />))
+/*
+react-dom.development.js:86 Warning: Legacy context API has been detected within a strict-mode tree.
+
+The old API will be supported in all 16.x releases, but applications using it should migrate to the new version.
+
+Please update the following components: Transition
+
+Learn more about this warning here: https://reactjs.org/link/legacy-context
+    at Transition (http://localhost:3000/static/js/bundle.js:156819:30)
+    at Modal (http://localhost:3000/static/js/bundle.js:33300:23)
+    at ContactDeleteModal
+
+*/
+// }, (props) => (<React.StrictMode><App {...props} /></React.StrictMode>))
+}, (props) => (<App {...props} />))
   .then((app) => {
     // console.log('createAtlasApp - called root.render -app-', app)
     // console.log('createAtlasApp - account-', app.account)

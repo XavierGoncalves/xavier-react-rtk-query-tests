@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { SortType } from 'types';
 
 interface Props {
-    sort: SortType;
+    sort: SortType | undefined;
     onItemClick: (field: string, direction: string) => void
 }
 
@@ -26,7 +26,7 @@ export const OrderByButton = ({ sort, onItemClick }: Props) => {
     ]
 
     const isItemActive = item =>
-        item.field === sort.field && item.direction === sort.direction
+        item.field === sort?.field && item.direction === sort?.direction
 
     return (
         <Popup.Wrapper>

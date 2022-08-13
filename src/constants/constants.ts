@@ -26,6 +26,8 @@ export const policies = [
 
 export const perPage = 10
 export const CREATE_CONTACT_URL = '/create'
+export const VIEW_CONTACT_URL = '/view/:id'
+export const EDIT_CONTACT_URL = '/edit/:id'
 
 export const LOADING = 'LOADING'
 export const EMPTY = 'EMPTY'

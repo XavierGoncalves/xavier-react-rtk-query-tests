@@ -7,12 +7,22 @@ import {
   Paragraph
 } from '@cobalt/cobalt-react-components'
 import { Link } from 'react-router-dom'
-import { PhoneNumber } from '../phone-number'
+import PhoneNumber from '../phone-number/phone-number.component'
 import './contact.component.scss'
-import { VIEW_CONTACT_PAGE } from '../../../../../constants/routes'
+import { VIEW_CONTACT_URL } from 'constants/constants'
 
 const AVATAR_BACKGROUND_COLOR = Color.background.primary[300]
 const AVATAR_CONTENT_COLOR = Color.primary[600]
+
+interface Props {
+  name: string;
+  id: string;
+  initials: string;
+  phoneNumber: string[];
+  faxNumbers: string[];
+  title?: string;
+  small?: boolean;
+}
 
 const Contact = ({
   name,
@@ -20,7 +30,7 @@ const Contact = ({
   initials,
   phoneNumbers,
   faxNumbers,
-  title,
+  title = null,
   small = false
 }) => {
   const displayName =
@@ -40,7 +50,7 @@ const Contact = ({
       <H5 title={displayName} truncated>
         <Link
           className="co--truncate"
-          to={VIEW_CONTACT_PAGE.replace(':id', id)}
+          to={VIEW_CONTACT_URL.replace(':id', id)}
         >
           {displayName}
         </Link>

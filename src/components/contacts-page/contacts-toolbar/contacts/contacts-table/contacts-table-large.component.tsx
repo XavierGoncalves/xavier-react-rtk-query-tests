@@ -1,10 +1,10 @@
 import { useTranslation } from 'react-i18next'
 import { Table, Text } from '@cobalt/cobalt-react-components'
-import { Actions } from './actions'
-import { Contact } from './contact'
-import { PhoneNumber } from './phone-number'
-import { EmailAddress } from './email-address'
-import { LoadingRows } from './loading-rows'
+import Actions from './actions/actions.component'
+import Contact from './contact/contact.component'
+import PhoneNumber from './phone-number/phone-number.component'
+import EmailAddress from './email-address/email-address.component'
+import LoadingRows from './loading-rows/loading-rows.component'
 
 const WIDTHS = {
   NAME: Table.Data.WIDTH[30],

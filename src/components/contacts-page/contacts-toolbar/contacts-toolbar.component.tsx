@@ -25,9 +25,9 @@ const SearchWrapper = styled.div`
 interface Props {
     total?: number;
     loading: boolean;
-    sort: SortType;
-    search: string;
-    onSortBy: (field: string, direction: string) => void;
+    sort: SortType | undefined;
+    search: string | null;
+    onSort: (field: string, direction: string) => void;
     onSearchContact: (query: string) => void;
 }
 
@@ -35,8 +35,8 @@ const ContactsToolbar = ({
     total,
     loading,
     sort,
-    search,
-    onSortBy,
+    search = '',
+    onSort,
     onSearchContact
 }: Props) => {
     const [t] = useTranslation()
@@ -62,7 +62,7 @@ const ContactsToolbar = ({
                             <SearchWrapper>
                                 <SearchInput
                                     data-testid="search-input"
-                                    value={search}
+                                    value={search || ''}
                                     onSearch={onSearchContact}
                                     placeholder={t('pages.index.toolbar.searchPlaceholder')}
                                     small
@@ -79,7 +79,7 @@ const ContactsToolbar = ({
                             </Button>
                         </Viewport>
                         <Viewport small>
-                            <OrderByButton sort={sort} onItemClick={onSortBy} />
+                            <OrderByButton sort={sort} onItemClick={onSort} />
                         </Viewport>
                     </Grid.Column>
                 </Grid.Group>
@@ -91,7 +91,7 @@ const ContactsToolbar = ({
                             <SearchWrapper small>
                                 <SearchInput
                                     data-testid="search-input__small"
-                                    value={search}
+                                    value={search || ''}
                                     onSearch={onSearchContact}
                                     placeholder={t('pages.index.toolbar.searchPlaceholder')}
                                     autoFocus

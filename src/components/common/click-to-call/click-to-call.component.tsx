@@ -5,7 +5,12 @@ import { LinkButton } from '@cobalt/react-button'
 import { useAtlasSdk } from 'titanium/common/context/atlas.context'
 import { useVoiceConversation } from 'titanium/common/hooks/use-voice-conversation'
 
-const ClickToCall = ({ id, phones = [] }) => {
+interface Props {
+  id: string;
+  phones: string[]
+}
+
+const ClickToCall = ({ id, phones = [] }: Props) => {
   const [t] = useTranslation()
   const atlasSdk = useAtlasSdk()
   const [hasConversationApp, triggerVoiceCall] = useVoiceConversation(atlasSdk)

@@ -6,7 +6,7 @@ import {
 import { Icon } from '@cobalt/cobalt-react-components'
 import * as states from 'constants/constants'
 
-const CDN_URL = process.env.CDN_URL
+const CDN_URL = process.env.REACT_APP_CDN_URL
 const EMPTY_STATE_URL = `${CDN_URL}/cdn-assets/latest/talkdesk/product/empty_states`
 const EMPTY_URL = `${EMPTY_STATE_URL}/empty_no_contacts.svg`
 const NO_RESULTS_URL = `${EMPTY_STATE_URL}/empty_no_search_results.svg`

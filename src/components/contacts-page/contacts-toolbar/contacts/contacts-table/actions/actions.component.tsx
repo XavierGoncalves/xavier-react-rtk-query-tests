@@ -4,8 +4,8 @@ import { ButtonGroup } from '@titanium/components'
 import Button from '@cobalt/react-button'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { ClickToCall } from '../../../../common/click-to-call'
-import { EDIT_CONTACT_PAGE } from '../../../../../constants/routes'
+import ClickToCall from 'components/common/click-to-call/click-to-call.component'
+import { EDIT_CONTACT_URL } from 'constants/constants'
 
 const ActionsWrapper = styled.div`
   button {
@@ -18,6 +18,15 @@ const ActionsWrapper = styled.div`
   }
 `
 
+interface Props {
+  id: string;
+  maxVisibleButtons: number; 
+  onContactDelete: (contactId: string) => void;
+  phones: string[];
+  canUpdateContact?: boolean;
+  canDeleteContact?: boolean;
+}
+
 const Actions = ({
   id,
   maxVisibleButtons,
@@ -25,7 +34,7 @@ const Actions = ({
   phones,
   canUpdateContact,
   canDeleteContact
-}) => {
+}: Props) => {
   const [t] = useTranslation()
 
   return (
@@ -36,7 +45,7 @@ const Actions = ({
         </ButtonGroup.Viewport>
         {canUpdateContact && (
           <Link
-            to={`${EDIT_CONTACT_PAGE.replace(':id', id)}?from=table`}
+            to={`${EDIT_CONTACT_URL.replace(':id', id)}?from=table`}
             aria-label={t('pages.index.table.actions.edit')}
           >
             <Tooltip inverted text={t('pages.index.table.actions.edit')}>

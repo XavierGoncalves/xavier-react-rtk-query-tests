@@ -5,12 +5,13 @@ import get from 'lodash/get'
 import { getInitials } from 'titanium/common/utils/get-initials'
 import { AxiosInstance } from 'axios'
 import { perPage } from 'constants/constants'
+import { SortType } from 'types'
 
 interface Inputs {
-    page: number,
-    sort: string,
-    search: string | null,
-    http: AxiosInstance
+    page: number;
+    sort: SortType;
+    search: string | null;
+    http: AxiosInstance;
 }
 
 interface CustomField {
@@ -21,17 +22,17 @@ interface CustomField {
 export interface Contact {
     address: string;
     company: string;
-    customFields: CustomField[]
-    emails: string[]
-    faxes: string[]
+    customFields: CustomField[];
+    emails: string[];
+    faxes: string[];
     id: string;
     industry: string;
     initials: string;
     location: string;
     name: string;
-    phones: string[]
+    phones: string[];
     photoUrl: string;
-    tags: string[]
+    tags: string[];
     title: string;
     websites: string[]
 }
@@ -46,14 +47,15 @@ export interface ReturnInterface {
 
 export const fetchContacts = async ({
     page = 1,
-    sort = 'name',
+    sort,
     search = null,
     http
 }: Inputs): Promise<ReturnInterface> => {
+    const {direction, field} = sort
+    const sortString =  `${direction === 'desc' ? '-' : ''}${field}`;
     const params = new URLSearchParams(
-        omitBy({ page, per_page: perPage, sort }, isNil)
+        omitBy({ page, per_page: perPage, sort: sortString }, isNil)
     )
-
     let result
 
     if (search) {
@@ -71,6 +73,8 @@ export const fetchContacts = async ({
         const companyFilter = `contains(company, '${searchQueryEncoded}')`
         const faxFilter = `contains(fax, '${searchNumberEncoded}')`
 
+        const filterPartialUrl = [nameFilter, emailFilter, phoneFilter, companyFilter, faxFilter].join(' or ')
+        console.log('filterPartialUrl-', filterPartialUrl)
         result = await http.get(
             `/callbar/contacts?$filter=contains(name, '${searchQueryEncoded}') or contains(email, '${searchQueryEncoded}') or contains(phone, '${searchNumberEncoded}') or contains(company, '${searchQueryEncoded}') or contains(fax, '${searchNumberEncoded}')&${params}`
         )
@@ -80,6 +84,7 @@ export const fetchContacts = async ({
         )
     }
 
+    await new Promise(r => setTimeout(r, 8000));
     const contacts: Contact[] = get(result, 'data._embedded.contacts', []).map(contact =>
         presentContact(contact)
     )

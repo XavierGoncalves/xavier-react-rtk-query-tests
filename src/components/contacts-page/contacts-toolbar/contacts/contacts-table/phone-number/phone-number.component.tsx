@@ -1,6 +1,6 @@
 import { Text, Paragraph } from '@cobalt/cobalt-react-components'
 import { useFormattedPhoneNumber } from '@titanium/components'
-import { CountChip } from '../../../../common/count-chip'
+import CountChip from 'components/common/count-chip/count-chip.component'
 
 const PhoneNumber = ({ numbers, small = false }) => {
   const hasNumbers = numbers && numbers.length > 0

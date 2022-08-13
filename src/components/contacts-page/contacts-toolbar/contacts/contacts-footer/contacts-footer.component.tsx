@@ -1,10 +1,9 @@
 import { useTranslation } from 'react-i18next'
 import { PaginationToolbar } from '@titanium/components'
 import {
-  ALL_TABLE_STATES,
   EMPTY_STATES,
   LOADING
-} from '../../../../constants/states'
+} from 'constants/constants'
 
 const MAX_PAGES_COUNT = 9
 const MAX_PAGES_COUNT_RESPONSIVE = 3

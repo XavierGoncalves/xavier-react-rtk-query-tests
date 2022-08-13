@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { LoadingPlaceholder, Table } from '@cobalt/cobalt-react-components'
-import { ContactLoading } from '../contact'
+import ContactLoading from '../contact/contact-loading.component'
 
 const SmallLoadingRow = () => (
   <Table.Row>

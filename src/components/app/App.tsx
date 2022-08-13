@@ -23,7 +23,7 @@ import { useState } from 'react';
 import ContactsPage from 'components/contacts-page/contacts-page.component';
 import FavoritesPage from 'components/favorites/favorites-page.component';
 import { QueryClientProvider } from '@tanstack/react-query';
-import { queryClient } from 'react-query/client';
+import { queryClient } from 'react-query/query-client';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import CobaltRoot from '@cobalt/cobalt-react-components'
 

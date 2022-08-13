@@ -1,7 +1,8 @@
 import { Viewport } from '@cobalt/cobalt-react-components'
-import { LOADING, ALL_TABLE_STATES } from '../../../constants/states'
-import { ContactsTableLarge, ContactsTableSmall } from './contacts-table'
-import { ContactsFooter } from './contacts-footer'
+import { LOADING } from 'constants/constants'
+import ContactsTableSmall from './contacts-table/contacts-table-small.component'
+import ContactsTableLarge from './contacts-table/contacts-table-large.component'
+import ContactsFooter from './contacts-footer/contacts-footer.component'
 
 const Contacts = ({
   contacts,

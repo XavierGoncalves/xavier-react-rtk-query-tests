@@ -1,15 +1,22 @@
 import { Table } from '@cobalt/cobalt-react-components'
-import { Actions } from './actions'
-import { Contact } from './contact'
-import { LoadingRows } from './loading-rows'
+import { Contact as ContactType } from 'api/fetch-contacts.api'
+import Actions from './actions/actions.component'
+import Contact from './contact/contact.component'
+import LoadingRows from './loading-rows/loading-rows.component'
 
 const NUMBER_OF_LOADING_ROWS = 10
+
+interface Props {
+  contacts: ContactType[];
+  isLoading: boolean;
+  onContactDelete: (contactId: string) => void
+}
 
 const ContactsTableSmall = ({
   contacts,
   isLoading,
   onContactDelete
-}) => (
+}: Props) => (
   <Table data-table="main">
     <Table.Body>
       {isLoading ? (
