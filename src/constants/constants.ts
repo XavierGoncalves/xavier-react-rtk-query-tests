@@ -21,3 +21,4 @@ export const policies = [
 ]
 
 export const perPage = 10
+export const CREATE_CONTACT_URL = '/create'

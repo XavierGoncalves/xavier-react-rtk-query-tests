@@ -24,33 +24,38 @@ import ContactsPage from 'components/contacts-page/contacts-page.component';
 import FavoritesPage from 'components/favorites/favorites-page.component';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from 'react-query/client';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import CobaltRoot from '@cobalt/cobalt-react-components'
 
 const App = (app) => {
   return (
     <ThemeProvider loader={() => AtlasSdk.theme.getConfig()}>
       <ViewportProvider>
-        <AtlasSdkProvider value={app?.atlasSdk}>
-          <CurrentUserProvider value={app?.user}>
-            <AccountDataProvider value={app?.account}>
-              <PoliciesProvider value={app?.policies}>
-                <HttpClientProvider value={app?.http}>
-                  <QueryClientProvider client={queryClient}>
-                    <CurrentUserInstalledAppsProvider value={app?.userInstalledApps}>
-                      <HistoryRouter history={app?.history}>
-                        <Routes>
-                          <Route path={"/"} element={<ContactsPage />} />
-                          <Route path={"/"} element={<ContactsPage />} />
-                          <Route path={"/view/:contactId"} element={<ContactsPage />} />
-                          <Route path="*" element={<Navigate to="/" replace={true} />} />
-                        </ Routes>
-                      </HistoryRouter>
-                    </CurrentUserInstalledAppsProvider>
-                  </QueryClientProvider>
-                </HttpClientProvider>
-              </PoliciesProvider>
-            </AccountDataProvider>
-          </CurrentUserProvider>
-        </AtlasSdkProvider>
+        <CobaltRoot>
+          <AtlasSdkProvider value={app?.atlasSdk}>
+            <CurrentUserProvider value={app?.user}>
+              <AccountDataProvider value={app?.account}>
+                <PoliciesProvider value={app?.policies}>
+                  <HttpClientProvider value={app?.http}>
+                    <QueryClientProvider client={queryClient}>
+                      <CurrentUserInstalledAppsProvider value={app?.userInstalledApps}>
+                        <HistoryRouter history={app?.history}>
+                          <Routes>
+                            <Route path={"/"} element={<ContactsPage />} />
+                            <Route path={"/"} element={<ContactsPage />} />
+                            <Route path={"/view/:contactId"} element={<ContactsPage />} />
+                            <Route path="*" element={<Navigate to="/" replace={true} />} />
+                          </ Routes>
+                        </HistoryRouter>
+                      </CurrentUserInstalledAppsProvider>
+                      <ReactQueryDevtools initialIsOpen={false} />
+                    </QueryClientProvider>
+                  </HttpClientProvider>
+                </PoliciesProvider>
+              </AccountDataProvider>
+            </CurrentUserProvider>
+          </AtlasSdkProvider>
+        </CobaltRoot>
       </ViewportProvider>
     </ThemeProvider>
   );
