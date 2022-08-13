@@ -6,10 +6,18 @@ const PoliciesContext = createContext<Policies | undefined>(undefined)
 
 const usePolicies = () => {
     const context = useContext(PoliciesContext)
-    if(!context) {
+    if (!context) {
         throw new Error('usePolicies must be used within a PoliciesProvider')
     }
     return context
+}
+
+const usePolicy = (policy: string) => {
+    const context = useContext(PoliciesContext)
+    if (!context) {
+        throw new Error('usePolicies must be used within a PoliciesProvider')
+    }
+    return context[policy] || false
 }
 
 
@@ -18,9 +26,9 @@ interface Props {
     children: JSX.Element;
 }
 
-const PoliciesProvider = ({value, children}: Props) => {
+const PoliciesProvider = ({ value, children }: Props) => {
     return <PoliciesContext.Provider value={value}>{children}</PoliciesContext.Provider>
 }
 
 
-export { usePolicies, PoliciesProvider}
+export { usePolicies, usePolicy, PoliciesProvider }

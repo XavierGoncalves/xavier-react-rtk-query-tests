@@ -23,12 +23,12 @@ const SearchWrapper = styled.div`
 `
 
 interface Props {
-    total: number;
-    loading: boolean,
-    sort: SortType,
-    search: string,
-    onSortBy: (field: string, direction: string) => {},
-    onSearchContact: (query: string) => {}
+    total?: number;
+    loading: boolean;
+    sort: SortType;
+    search: string;
+    onSortBy: (field: string, direction: string) => void;
+    onSearchContact: (query: string) => void;
 }
 
 const ContactsToolbar = ({

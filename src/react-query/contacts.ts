@@ -1,27 +1,38 @@
 import { useQuery } from "@tanstack/react-query";
 import { Contact, fetchContacts } from "api/fetch-contacts.api";
-import { useSearchParams } from "react-router-dom";
+import useAppUrlParams from "hooks/use-search-params";
 import { useHttpClient } from "titanium/common/context/http.context";
+
+const useContacts = () => {
+    const http = useHttpClient()
+
+    const { page, search, sort } = useAppUrlParams()
+
+    return useQuery(['contacts', 'list', { page, sort, search }], () => fetchContacts({
+        page,
+        sort,
+        search,
+        http
+    }))
+}
+
 
 type Select = (any) => Contact
 
-const useContacts = (select?: Select) => {
+const useContactsWithSelect = (select: Select) => {
     const http = useHttpClient()
-    const [params] = useSearchParams()
 
-    const pageParam = Number(params.get('page') || 1)
-    const sortParam = params.get('sort') || "name"
-    const searchParam = params.get('search')
+    const { page, search, sort } = useAppUrlParams()
 
-    return useQuery(['contacts', 'list', { page: pageParam, sort: sortParam, searchParam }], () => fetchContacts({
-        page: pageParam,
-        sort: sortParam,
-        search: searchParam,
+    return useQuery(['contacts', 'list', { page, sort, search }], () => fetchContacts({
+        page,
+        sort,
+        search,
         http
-    }), { select })
+    }))
 }
 
-export const useContact = (contactId: string) => useContacts(data => data.contacts.find(item => item.id === contactId))
+export const useContact = (contactId: string) => useContactsWithSelect(data => data.contacts.find(item => item.id === contactId))
 
 
 export default useContacts

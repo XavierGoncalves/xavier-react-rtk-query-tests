@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
     Icon,
@@ -11,7 +11,7 @@ import { useLocalStorage } from 'titanium/common/hooks/use-local-storage'
 
 interface Props {
     value: string;
-    onSearch: (search: string) => {};
+    onSearch: (search: string) => void;
     placeholder: string;
     triggerDelay?: number;
     small: boolean;

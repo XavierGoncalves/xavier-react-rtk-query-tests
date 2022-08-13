@@ -1,0 +1,21 @@
+.contact-loading {
+  .co-media__images .co-avatar {
+    position: relative;
+    background: var(--gray-200);
+    background: linear-gradient(to right,var(--gray-200) 8%,var(--gray-300) 18%,var(--gray-200) 33%);
+    background-size: 610px 104px;
+    animation: 1s placeHolderShimmer linear infinite;
+    -webkit-animation: 1s placeHolderShimmer linear infinite;
+  }
+
+  .co-media__content {
+    .co-placeholder:first-child {
+      height: 18px;
+      margin-bottom: 4px;
+    }
+
+    .co-placeholder:last-child {
+      height: 14px;
+    }
+  }
+}

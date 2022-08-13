@@ -5,7 +5,7 @@ import { SortType } from 'types';
 
 interface Props {
     sort: SortType;
-    onItemClick: (field: string, direction: string) => {}
+    onItemClick: (field: string, direction: string) => void
 }
 
 export const OrderByButton = ({ sort, onItemClick }: Props) => {

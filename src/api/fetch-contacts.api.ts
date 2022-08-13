@@ -36,13 +36,20 @@ export interface Contact {
     websites: string[]
 }
 
+export interface ReturnInterface { 
+    contacts: Contact[];
+    count: number;
+    total: number; 
+    totalPages: number;
+}
+
 
 export const fetchContacts = async ({
     page = 1,
     sort = 'name',
     search = null,
     http
-}: Inputs) => {
+}: Inputs): Promise<ReturnInterface> => {
     const params = new URLSearchParams(
         omitBy({ page, per_page: perPage, sort }, isNil)
     )

@@ -1,0 +1,7 @@
+#app {
+  // Makes the contact name truncate correctly and only occupy the
+  // necessary space on the table.
+  div[data-class="contact"] h5 {
+    display: inline-flex;
+  }
+}
