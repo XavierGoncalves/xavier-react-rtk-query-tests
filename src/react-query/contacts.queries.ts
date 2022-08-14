@@ -19,8 +19,8 @@ export const usePrefetchGetContacts = () => {
     const http = useHttpClient()
     const queryClient = useQueryClient();
 
-    const { page, search, sort } = useAppUrlParams()
-    return queryClient.prefetchQuery(['contacts', 'list', { page, sort, search }], () => fetchContacts({
+    const { search, sort } = useAppUrlParams()
+    return (page: number) => queryClient.prefetchQuery(['contacts', 'list', { page, sort, search }], () => fetchContacts({
         page,
         sort,
         search,

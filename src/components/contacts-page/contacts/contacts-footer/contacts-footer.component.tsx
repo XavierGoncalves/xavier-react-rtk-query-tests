@@ -1,12 +1,12 @@
 import { useTranslation } from 'react-i18next'
-import { PaginationToolbar } from '@titanium/components'
 import {
   EMPTY_STATES,
   LOADING
 } from 'constants/constants'
+import PaginationToolbar from 'titanium/components/pagination-toolbar/pagination-toolbar.component'
+import { usePrefetchGetContacts } from 'react-query/contacts.queries'
 
 const MAX_PAGES_COUNT = 9
-const MAX_PAGES_COUNT_RESPONSIVE = 3
 
 const ContactsFooter = ({
   state,
@@ -15,6 +15,7 @@ const ContactsFooter = ({
   onPageChange
 }) => {
   const [t] = useTranslation()
+  const triggerPrefetchGetContacts = usePrefetchGetContacts()
 
   const isVisible = !(
     totalPages <= 1 || [...EMPTY_STATES, LOADING].includes(state)
@@ -25,7 +26,6 @@ const ContactsFooter = ({
       currentPage={currentPage}
       totalPages={totalPages}
       maxPagesCount={MAX_PAGES_COUNT}
-      maxPagesCountResponsive={MAX_PAGES_COUNT_RESPONSIVE}
       customLabels={{
         paginationPrevious: t('common.pagination.previous'),
         paginationNext: t('common.pagination.next'),
@@ -33,7 +33,7 @@ const ContactsFooter = ({
       }}
       onPageClick={onPageChange}
       onPageChange={onPageChange}
-      
+      onPageMouseEnter={triggerPrefetchGetContacts}
     />
   ) : null
 }

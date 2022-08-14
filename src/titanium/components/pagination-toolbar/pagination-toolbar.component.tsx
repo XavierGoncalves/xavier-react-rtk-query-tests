@@ -1,5 +1,3 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import Box from '@cobalt/react-box'
 import Button, { LinkButton } from '@cobalt/react-button'
 import Divider from '@cobalt/react-divider'
@@ -9,8 +7,22 @@ import Icon from '@cobalt/react-icon'
 import { Text } from '@cobalt/react-typography'
 import { useViewport } from '@cobalt/react-viewport-provider'
 import { useTheme } from '@cobalt/react-theme-provider'
-import { JumpToPage } from './jump-to-page'
-import { pagesGenerator } from './utils'
+import JumpToPage from './jump-to-page/jump-to-page.component'
+import { pagesGenerator } from './utils/pagination-utils'
+
+type CustomLabels = {
+  [key:string]: string
+}
+interface Props {
+  totalPages: number;
+  maxPagesCount: number;
+  currentPage: number;
+  onPageClick: (page: number) => void;
+  onPageChange: (page: number) => void;
+  customLabels: CustomLabels;
+  onPageMouseEnter: (page: number) => void;
+}
+
 
 export const PaginationToolbar = ({
   totalPages,
@@ -22,8 +34,9 @@ export const PaginationToolbar = ({
     paginationPrevious: 'Previous',
     paginationNext: 'Next',
     jumpTo: 'Jump to:'
-  }
-}) => {
+  },
+  onPageMouseEnter
+}: Props) => {
   const theme = useTheme()
   const viewport = useViewport()
   const smallViewport = viewport === 'small'
@@ -51,13 +64,13 @@ export const PaginationToolbar = ({
               gap="1"
               alignY="center"
               data-testid="ti-pagination-toolbar__pagination"
+
             >
               <LinkButton
-                shape="compact"
                 type="secondary"
                 size="small"
-                tabIndex="0"
-                onClick={!isPreviousDisabled ? onPreviousPageClick : null}
+                tabIndex={0}
+                onClick={!isPreviousDisabled ? onPreviousPageClick : () => {}}
                 disabled={isPreviousDisabled}
               >
                 <Icon name="chevron_left" size="tiny" />
@@ -66,14 +79,13 @@ export const PaginationToolbar = ({
                 )}
               </LinkButton>
 
-              {!smallViewport && renderPages(pages, currentPage, onPageClick)}
+              {!smallViewport && renderPages(pages, currentPage, onPageClick, theme, onPageMouseEnter)}
 
               <LinkButton
-                shape="compact"
                 type="secondary"
                 size="small"
-                tabIndex="0"
-                onClick={!isNextDisabled ? onNextPageClick : null}
+                tabIndex={0}
+                onClick={!isNextDisabled ? onNextPageClick : () => {}}
                 disabled={isNextDisabled}
               >
                 {!smallViewport && (
@@ -101,9 +113,8 @@ export const PaginationToolbar = ({
   )
 }
 
-const renderPages = (pages, currentPage, onClick) => {
-  const theme = useTheme()
-
+const renderPages = (pages, currentPage, onClick, theme, onPageMouseEnter) => {
+  console.log('renderPages-', pages)
   return pages.map((page, index) => {
     const isPageNumber = Number.isInteger(page)
     const selected = currentPage === page
@@ -128,8 +139,9 @@ const renderPages = (pages, currentPage, onClick) => {
         shape="compact"
         type="secondary"
         size="small"
-        tabIndex="0"
+        tabIndex={0}
         onClick={() => onClick(page)}
+        onMouseEnter={() => onPageMouseEnter(page)}
       >
         <Text>{page}</Text>
       </LinkButton>
@@ -143,11 +155,4 @@ const renderPages = (pages, currentPage, onClick) => {
   })
 }
 
-PaginationToolbar.propTypes = {
-  totalPages: PropTypes.number.isRequired,
-  maxPagesCount: PropTypes.number.isRequired,
-  currentPage: PropTypes.number.isRequired,
-  onPageClick: PropTypes.func.isRequired,
-  onPageChange: PropTypes.func.isRequired,
-  customLabels: PropTypes.object
-}
+export default PaginationToolbar

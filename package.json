@@ -12,6 +12,8 @@
     "@cobalt/react-card": "^1.1.0",
     "@cobalt/react-divider": "^1.1.0",
     "@cobalt/react-flex": "^1.4.0",
+    "@cobalt/react-grid": "^1.1.13",
+    "@cobalt/react-icon": "^1.31.0",
     "@cobalt/react-spinner": "^1.1.0",
     "@cobalt/react-theme-provider": "^2.1.0",
     "@cobalt/react-typography": "^1.5.0",

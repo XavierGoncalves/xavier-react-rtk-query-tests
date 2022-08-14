@@ -1,16 +1,22 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { DropdownStateful } from '@cobalt/cobalt-react-components'
 import { Text } from '@cobalt/react-typography'
 import range from 'lodash/range'
 
-export const JumpToPage = ({
+interface Props {
+  id: string;
+  totalPages: number;
+  value: number;
+  onPageChange: (page: number) => void,
+  jumpToLabel: string;
+}
+
+const JumpToPage = ({
   id,
   totalPages,
   value,
   onPageChange,
   jumpToLabel = 'Jump to:'
-}) => {
+}: Props) => {
   const onPageChangeHandler = e => onPageChange(parseInt(e.target.value, 10))
 
   return (
@@ -46,10 +52,4 @@ export const JumpToPage = ({
   )
 }
 
-JumpToPage.propTypes = {
-  id: PropTypes.string.isRequired,
-  totalPages: PropTypes.number.isRequired,
-  value: PropTypes.number,
-  onPageChange: PropTypes.func.isRequired,
-  jumpToLabel: PropTypes.string
-}
+export default JumpToPage;

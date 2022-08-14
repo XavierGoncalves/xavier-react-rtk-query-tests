@@ -1277,7 +1277,7 @@
     "@cobalt/react-responsive-value-hook" "^2.0.2"
     classcat "^4.0.2"
 
-"@cobalt/react-icon@^1.2.0":
+"@cobalt/react-icon@^1.2.0", "@cobalt/react-icon@^1.31.0":
   version "1.31.0"
   resolved "https://hub.talkdeskapp.com:8443/repository/talkdesk-npm/@cobalt/react-icon/-/react-icon-1.31.0.tgz#2e32524ba5424ac306857bddebd01b5b3b91fa5e"
   integrity sha512-TV39TStSD9O0vVrdmU2J5nJ0gr8XgJz7NoIm3kv/z7L+bulQ+YHTGM+dSc0SzZ7L/5OCYKvnVjHzhN1yNwFMaw==

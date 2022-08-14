@@ -1,4 +1,4 @@
-import useGetContacts, { useInvalidateGetContacts } from "react-query/contacts"
+import useGetContacts, { useInvalidateGetContacts } from "react-query/contacts.queries"
 import { useTranslation } from 'react-i18next'
 import {
     PanelsLayout,
@@ -12,8 +12,8 @@ import { CONTACTS_CREATE_POLICY, CREATE_CONTACT_URL, EMPTY_STATES } from "consta
 import { NavHeader, LinkButton } from '@titanium/components'
 import { usePolicy } from "titanium/common/context/policies.context"
 import ContactsToolbar from "./contacts-toolbar/contacts-toolbar.component"
-import Contacts from "./contacts-toolbar/contacts/contacts.component"
-import EmptyState from "./contacts-toolbar/contacts/contacts-table/empty-state/empty-state.component"
+import Contacts from "./contacts/contacts.component"
+import EmptyState from "./contacts/contacts-table/empty-state/empty-state.component"
 import ContactDeleteModal from "components/contact-delete-modal/contact-delete-modal.component"
 import { useState } from "react"
 import useAppUrlParams from "hooks/use-search-params"

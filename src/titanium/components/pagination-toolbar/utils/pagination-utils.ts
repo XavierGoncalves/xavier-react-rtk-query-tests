@@ -1,4 +1,4 @@
-export const pagesGenerator = (totalPages, currentPage, maxVisiblePages) => {
+export const pagesGenerator = (totalPages: number, currentPage: number, maxVisiblePages: number) => {
   const safeTotalPages = Math.max(totalPages, 1)
   const totalPageArr = Array.from(
     Array(safeTotalPages),
@@ -16,7 +16,7 @@ export const pagesGenerator = (totalPages, currentPage, maxVisiblePages) => {
   return fixedEdgesArray(visiblePages, safeTotalPages)
 }
 
-const fixedEdgesArray = (array, fixedEnd) => {
+const fixedEdgesArray = (array: (string|number)[], fixedEnd: number) => {
   const result = [...array]
   const lastPosition = array.length - 1
 
@@ -33,7 +33,7 @@ const fixedEdgesArray = (array, fixedEnd) => {
   return result
 }
 
-const windowSlice = (array, unsafeStart, unsafeEnd) => {
+const windowSlice = (array: number[], unsafeStart: number, unsafeEnd: number) => {
   const maxEnd = array.length - 1
 
   const suffix = unsafeStart < 0 ? Math.abs(unsafeStart) : 0
