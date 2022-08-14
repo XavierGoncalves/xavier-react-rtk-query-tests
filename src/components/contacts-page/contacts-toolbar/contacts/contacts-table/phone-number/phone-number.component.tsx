@@ -2,7 +2,13 @@ import { Text, Paragraph } from '@cobalt/cobalt-react-components'
 import { useFormattedPhoneNumber } from '@titanium/components'
 import CountChip from 'components/common/count-chip/count-chip.component'
 
-const PhoneNumber = ({ numbers, small = false }) => {
+interface Props {
+  numbers: string[];
+  small?: boolean
+}
+
+
+const PhoneNumber = ({ numbers, small = false }: Props) => {
   const hasNumbers = numbers && numbers.length > 0
   const firstNumber = hasNumbers && numbers[0]
   const [formattedPhoneNumber] = useFormattedPhoneNumber(firstNumber)

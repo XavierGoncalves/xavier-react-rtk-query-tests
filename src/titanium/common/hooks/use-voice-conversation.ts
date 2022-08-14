@@ -1,7 +1,8 @@
-import { Atlas } from '@atlas/sdk/lib/src/atlas/atlas'
+
 import omitBy from 'lodash/omitBy'
 import isNil from 'lodash/isNil'
 import { useAtlasProtocol } from './use-atlas-protocol'
+import { Atlas } from '@atlas/sdk'
 
 const TRIGGER_VOICE_CONVERSATION = 'trigger-voice-conversation'
 

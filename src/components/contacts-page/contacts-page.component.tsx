@@ -49,9 +49,9 @@ const ContactsPage = () => {
         navigate(createUrl(params))
     }
 
-    const onSort = (sort: string) => {
+    const onSort = (field: string, direction: string) => {
         const params = {
-            ...sortToQuery({ sort })
+            ...sortToQuery({ field, direction })
           }
           
         navigate(createUrl(params))

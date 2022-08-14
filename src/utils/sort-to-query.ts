@@ -1,5 +1,9 @@
-const sortToQuery = ({ sort }) => {
-    const { field, direction } = sort
+interface Input {
+    field: string;
+    direction: string;
+}
+
+const sortToQuery = ({ field, direction }: Input) => {
     const query = {
         sort: `${direction === 'desc' ? '-' : ''}${field}`
     }

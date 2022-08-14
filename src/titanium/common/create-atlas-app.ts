@@ -4,7 +4,7 @@ import { configureOnLaunch } from "./utils/configure-on-launch"
 import { DEFAULT_OPTIONS } from "./constants/constants"
 import { createToken } from "./utils/create-token"
 import { configureI18n } from "./utils/i18n"
-import { Atlas } from "@atlas/sdk/lib/src/atlas/atlas"
+import { Atlas } from "@atlas/sdk"
 
 const createAtlasApp= async (atlasSdk: Atlas, opts = {}, component) => {
     try {

@@ -7,7 +7,7 @@ import LoadingRows from './loading-rows/loading-rows.component'
 const NUMBER_OF_LOADING_ROWS = 10
 
 interface Props {
-  contacts: ContactType[];
+  contacts?: ContactType[];
   isLoading: boolean;
   onContactDelete: (contactId: string) => void
 }
@@ -22,7 +22,7 @@ const ContactsTableSmall = ({
       {isLoading ? (
         <LoadingRows numberOfRows={NUMBER_OF_LOADING_ROWS} small />
       ) : (
-        contacts.map(contact => (
+        contacts?.map(contact => (
           <Table.Row
             key={contact.id}
             data-testid={`contacts-table__row-${contact.id}`}

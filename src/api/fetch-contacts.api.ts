@@ -69,14 +69,13 @@ export const fetchContacts = async ({
 
         const nameFilter = `contains(name, '${searchQueryEncoded}')`
         const emailFilter = `contains(email, '${searchQueryEncoded}')`
-        const phoneFilter = `contains(phone, '${searchNumberEncoded}')`
         const companyFilter = `contains(company, '${searchQueryEncoded}')`
+        const phoneFilter = `contains(phone, '${searchNumberEncoded}')`
         const faxFilter = `contains(fax, '${searchNumberEncoded}')`
 
         const filterPartialUrl = [nameFilter, emailFilter, phoneFilter, companyFilter, faxFilter].join(' or ')
-        console.log('filterPartialUrl-', filterPartialUrl)
         result = await http.get(
-            `/callbar/contacts?$filter=contains(name, '${searchQueryEncoded}') or contains(email, '${searchQueryEncoded}') or contains(phone, '${searchNumberEncoded}') or contains(company, '${searchQueryEncoded}') or contains(fax, '${searchNumberEncoded}')&${params}`
+            `/callbar/contacts?$filter=${filterPartialUrl}&${params}`
         )
     } else {
         result = await http.get(

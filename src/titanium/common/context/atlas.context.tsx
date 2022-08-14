@@ -1,4 +1,4 @@
-import { Atlas } from "@atlas/sdk/lib/src/atlas/atlas";
+import { Atlas } from "@atlas/sdk";
 import { createContext, useContext } from "react";
 
 const AtlasSdkContext = createContext<Atlas | undefined>(undefined)
