@@ -13,7 +13,7 @@ import {
 import styled from 'styled-components'
 import { SearchInput } from "./search-input/search-input.component"
 import { OrderByButton } from "./order-by-button/order-by-button.component"
-import { SortType } from "types"
+import { onSearchFn, onSortFn, SortType } from "types"
 
 const SearchWrapper = styled.div`
   width: ${props => (props.small ? '100%' : '21.5rem')};
@@ -27,18 +27,19 @@ interface Props {
     loading: boolean;
     sort: SortType | undefined;
     search: string | null;
-    onSort: (field: string, direction: string) => void;
-    onSearchContact: (query: string) => void;
+    onSort: onSortFn
+    onSearchContact: onSearchFn
 }
 
 const ContactsToolbar = ({
-    total,
+    total = 0,
     loading,
     sort,
     search = '',
     onSort,
     onSearchContact
 }: Props) => {
+    console.log('total-', total)
     const [t] = useTranslation()
     const [isSearchToolbarOpen, setSearchToolbarOpen] = useState(false)
     return (

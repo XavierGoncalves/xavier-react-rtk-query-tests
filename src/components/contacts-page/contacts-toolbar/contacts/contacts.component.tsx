@@ -4,7 +4,7 @@ import ContactsTableSmall from './contacts-table/contacts-table-small.component'
 import ContactsTableLarge from './contacts-table/contacts-table-large.component'
 import ContactsFooter from './contacts-footer/contacts-footer.component'
 import { Contact } from 'api/fetch-contacts.api'
-import { SortType } from 'types'
+import { onSortFn, SortType } from 'types'
 
 interface Props {
   contacts?: Contact[];
@@ -13,8 +13,8 @@ interface Props {
   currentPage: number;
   sort: SortType;
   onContactDelete: (contactId: string) => void;
-  onPageChange: (page: string) => void,
-  onSortBy: (field: string, direction: string) => void,
+  onPageChange: (page: string) => void;
+  onSortBy: onSortFn
 }
 
 

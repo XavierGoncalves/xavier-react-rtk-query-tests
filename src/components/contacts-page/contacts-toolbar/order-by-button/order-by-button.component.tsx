@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { Icon, Button, Popup, List } from '@cobalt/cobalt-react-components'
 import { useTranslation } from 'react-i18next'
-import { SortType } from 'types';
+import { onSortFn, SortType } from 'types';
 
 interface Props {
     sort: SortType | undefined;
-    onItemClick: (field: string, direction: string) => void
+    onItemClick: onSortFn
 }
 
 export const OrderByButton = ({ sort, onItemClick }: Props) => {

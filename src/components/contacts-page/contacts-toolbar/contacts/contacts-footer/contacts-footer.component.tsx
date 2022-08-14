@@ -33,6 +33,7 @@ const ContactsFooter = ({
       }}
       onPageClick={onPageChange}
       onPageChange={onPageChange}
+      
     />
   ) : null
 }

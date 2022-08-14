@@ -33,3 +33,6 @@ export interface SortType {
   field: string;
   direction: string;
 }
+
+export type onSortFn = (field: string, direction: string) => void
+export type onSearchFn = (query: string) => void;

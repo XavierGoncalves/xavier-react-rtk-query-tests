@@ -7,8 +7,20 @@ const useGetContacts = () => {
     const http = useHttpClient()
 
     const { page, search, sort } = useAppUrlParams()
-    console.log('useGetContacts-search-', search)
     return useQuery(['contacts', 'list', { page, sort, search }], () => fetchContacts({
+        page,
+        sort,
+        search,
+        http
+    }))
+}
+
+export const usePrefetchGetContacts = () => {
+    const http = useHttpClient()
+    const queryClient = useQueryClient();
+
+    const { page, search, sort } = useAppUrlParams()
+    return queryClient.prefetchQuery(['contacts', 'list', { page, sort, search }], () => fetchContacts({
         page,
         sort,
         search,
@@ -37,6 +49,6 @@ export const useContact = (contactId: string) => useGetContactsWithSelect(data =
 export const useInvalidateGetContacts = () => {
     const queryClient = useQueryClient();
     return () => queryClient.invalidateQueries(['contacts', 'list']);
-  };
+};
 
 export default useGetContacts
