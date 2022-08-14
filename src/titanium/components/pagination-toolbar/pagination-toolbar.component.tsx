@@ -114,7 +114,6 @@ export const PaginationToolbar = ({
 }
 
 const renderPages = (pages, currentPage, onClick, theme, onPageMouseEnter) => {
-  console.log('renderPages-', pages)
   return pages.map((page, index) => {
     const isPageNumber = Number.isInteger(page)
     const selected = currentPage === page

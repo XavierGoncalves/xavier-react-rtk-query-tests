@@ -39,7 +39,6 @@ const ContactsToolbar = ({
     onSort,
     onSearchContact
 }: Props) => {
-    console.log('total-', total)
     const [t] = useTranslation()
     const [isSearchToolbarOpen, setSearchToolbarOpen] = useState(false)
     return (

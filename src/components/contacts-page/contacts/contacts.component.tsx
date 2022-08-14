@@ -1,10 +1,10 @@
 import { Viewport } from '@cobalt/cobalt-react-components'
-import { LOADING } from 'constants/constants'
 import ContactsTableSmall from './contacts-table/contacts-table-small.component'
 import ContactsTableLarge from './contacts-table/contacts-table-large.component'
 import ContactsFooter from './contacts-footer/contacts-footer.component'
 import { Contact } from 'api/fetch-contacts.api'
 import { onSortFn, SortType } from 'types'
+import { LOADING } from 'constants/state.constants'
 
 interface Props {
   contacts?: Contact[];

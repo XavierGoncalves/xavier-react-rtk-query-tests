@@ -6,10 +6,10 @@ import {
   H5,
   Paragraph
 } from '@cobalt/cobalt-react-components'
+import { VIEW_CONTACT_URL } from 'constants/url.constants'
 import { Link } from 'react-router-dom'
 import PhoneNumber from '../phone-number/phone-number.component'
 import './contact.component.scss'
-import { VIEW_CONTACT_URL } from 'constants/constants'
 
 const AVATAR_BACKGROUND_COLOR = Color.background.primary[300]
 const AVATAR_CONTENT_COLOR = Color.primary[600]
@@ -18,9 +18,9 @@ interface Props {
   name: string;
   id: string;
   initials: string;
-  phoneNumber: string[];
+  phoneNumbers: string[];
   faxNumbers: string[];
-  title?: string;
+  title?: string | null;
   small?: boolean;
 }
 
@@ -32,7 +32,7 @@ const Contact = ({
   faxNumbers,
   title = null,
   small = false
-}) => {
+}:Props) => {
   const displayName =
     name || (phoneNumbers && phoneNumbers[0]) || (faxNumbers && faxNumbers[0])
   const displayPhoneNumbers =
@@ -50,7 +50,7 @@ const Contact = ({
       <H5 title={displayName} truncated>
         <Link
           className="co--truncate"
-          to={VIEW_CONTACT_URL.replace(':id', id)}
+          to={VIEW_CONTACT_URL.replace(':contactId', id)}
         >
           {displayName}
         </Link>

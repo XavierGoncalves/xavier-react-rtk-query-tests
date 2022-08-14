@@ -4,12 +4,9 @@ import {
     PanelsLayout,
     H1,
     Page,
-    Icon,
-    Viewport
 } from '@cobalt/cobalt-react-components'
 import { Wrapper } from "./contacts-page.styles"
-import { CONTACTS_CREATE_POLICY, CREATE_CONTACT_URL, EMPTY_STATES } from "constants/constants"
-import { NavHeader, LinkButton } from '@titanium/components'
+import { NavHeader } from '@titanium/components'
 import { usePolicy } from "titanium/common/context/policies.context"
 import ContactsToolbar from "./contacts-toolbar/contacts-toolbar.component"
 import Contacts from "./contacts/contacts.component"
@@ -21,8 +18,11 @@ import { useNavigate } from "react-router-dom"
 import useCreateSearchParams from "hooks/use-create-search-params"
 import sortToQuery from "utils/sort-to-query"
 import searchToQuery from "utils/search-to-query"
-import * as states from 'constants/constants'
 import paginationToQuery from "utils/pagination-to-query"
+import computeState from "utils/compute-state"
+import { CONTACTS_CREATE_POLICY } from "constants/policies.constants"
+import { EMPTY_STATES } from "constants/state.constants"
+import useGetAccountCustomFields from "react-query/custom-fields.queries"
 
 const ContactsPage = () => {
     const [t] = useTranslation()
@@ -35,25 +35,12 @@ const ContactsPage = () => {
     const closeContactDeleteModal = () => setContactDeleteModalOpen(false)
     const { contacts, count, total, totalPages } = data || {}
     const invalidateGetContactQueries = useInvalidateGetContacts()
+    useGetAccountCustomFields()
 
     // const state = (isFetching, isError, isFetched, contacts): string => {
     //     return Number(total) > 0 ? states.READY : search ? states.NO_RESULTS : states.EMPTY
     // }
-    const state = () => {
-        if(isError) {
-            return states.ERROR
-        }
-        if (isFetching) {
-            return states.LOADING
-        }
-        if(Number(total) > 0) {
-            return states.READY
-        }
-        if(search) {
-            return states.NO_RESULTS
-        }
-        return states.EMPTY
-    }
+    const state = computeState(isError, isFetching,search, total)
 
     const onSearchContact = (search: string) => {
         const params = {
@@ -106,13 +93,13 @@ const ContactsPage = () => {
                     <Page>
                         <ContactDeleteModal open={contactDeleteModalOpen} onClose={closeContactDeleteModal} />
                         <Page.Content>
-                            {EMPTY_STATES.includes(state()) ? (
-                                <EmptyState status={state()} onRetryClick={invalidateGetContactQueries} />
+                            {EMPTY_STATES.includes(state) ? (
+                                <EmptyState status={state} onRetryClick={invalidateGetContactQueries} />
                             ) : (
                                 <Contacts
                                     contacts={contacts}
                                     totalPages={totalPages}
-                                    state={state()}
+                                    state={state}
                                     currentPage={page}
                                     sort={sort}
                                     onPageChange={onPageChange}

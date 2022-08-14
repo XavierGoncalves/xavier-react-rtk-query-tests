@@ -1,0 +1,18 @@
+export const LOADING = 'LOADING'
+export const EMPTY = 'EMPTY'
+export const EMPTY_FAVORITES = 'EMPTY_FAVORITES'
+export const ERROR = 'ERROR'
+export const ERROR_FAVORITES = 'ERROR_FAVORITES'
+export const READY = 'READY'
+export const NO_RESULTS = 'NO_RESULTS'
+export const NO_FILTERED_RESULTS = 'NO_FILTERED_RESULTS'
+
+export const EMPTY_STATES = [
+  EMPTY,
+  EMPTY_FAVORITES,
+  ERROR,
+  ERROR_FAVORITES,
+  NO_RESULTS,
+  NO_FILTERED_RESULTS
+]
+export const ALL_TABLE_STATES = [...EMPTY_STATES, READY, LOADING]

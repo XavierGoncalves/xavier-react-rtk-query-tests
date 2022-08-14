@@ -5,7 +5,7 @@ import Button from '@cobalt/react-button'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import ClickToCall from 'components/common/click-to-call/click-to-call.component'
-import { EDIT_CONTACT_URL } from 'constants/constants'
+import { EDIT_CONTACT_URL } from 'constants/url.constants'
 
 const ActionsWrapper = styled.div`
   button {
@@ -45,7 +45,7 @@ const Actions = ({
         </ButtonGroup.Viewport>
         {canUpdateContact && (
           <Link
-            to={`${EDIT_CONTACT_URL.replace(':id', id)}?from=table`}
+            to={`${EDIT_CONTACT_URL.replace(':contactId', id)}?from=table`}
             aria-label={t('pages.index.table.actions.edit')}
           >
             <Tooltip inverted text={t('pages.index.table.actions.edit')}>

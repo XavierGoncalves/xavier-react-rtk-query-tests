@@ -4,7 +4,7 @@ import {
   EmptyStateSelector
 } from '@titanium/components'
 import { Icon } from '@cobalt/cobalt-react-components'
-import * as states from 'constants/constants'
+import * as states from 'constants/state.constants'
 
 const CDN_URL = process.env.REACT_APP_CDN_URL
 const EMPTY_STATE_URL = `${CDN_URL}/cdn-assets/latest/talkdesk/product/empty_states`

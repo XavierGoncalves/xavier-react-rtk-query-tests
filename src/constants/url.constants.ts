@@ -1,0 +1,5 @@
+export const ROOT_URL = '/'
+export const CREATE_CONTACT_URL = '/create'
+export const VIEW_CONTACT_URL = '/view/:contactId'
+export const VIEW_CONTACT_ACTIVITY_URL = '/view/:contactId/activity'
+export const EDIT_CONTACT_URL = '/edit/:contactId'

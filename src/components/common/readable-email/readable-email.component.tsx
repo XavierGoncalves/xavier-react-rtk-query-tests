@@ -9,7 +9,7 @@ const LinkWrapper = styled.div`
 
 interface Props {
   truncated?: boolean;
-  value: string | false
+  value?: string | false
 }
 
 export const ReadableEmail = ({ truncated = false, value }: Props) =>

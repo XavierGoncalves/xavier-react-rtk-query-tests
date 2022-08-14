@@ -36,3 +36,13 @@ export interface SortType {
 
 export type onSortFn = (field: string, direction: string) => void
 export type onSearchFn = (query: string) => void;
+
+export interface CustomField {
+  key: string;
+  type: string;
+}
+
+export interface ContactCustomField {
+  key: string;
+  value: string;
+}

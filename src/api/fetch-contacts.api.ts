@@ -83,7 +83,7 @@ export const fetchContacts = async ({
         )
     }
 
-    // await new Promise(r => setTimeout(r, 8000));
+    // await new Promise(r => setTimeout(r, 3000));
     const contacts: Contact[] = get(result, 'data._embedded.contacts', []).map(contact =>
         presentContact(contact)
     )

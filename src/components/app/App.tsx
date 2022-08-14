@@ -26,6 +26,8 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from 'react-query/query-client';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import CobaltRoot from '@cobalt/cobalt-react-components'
+import DetailsPage from 'components/details-page/details-page.component';
+import { ROOT_URL, VIEW_CONTACT_ACTIVITY_URL, VIEW_CONTACT_URL } from 'constants/url.constants';
 
 const App = (app) => {
   return (
@@ -41,9 +43,9 @@ const App = (app) => {
                       <CurrentUserInstalledAppsProvider value={app?.userInstalledApps}>
                         <HistoryRouter history={app?.history}>
                           <Routes>
-                            <Route path={"/"} element={<ContactsPage />} />
-                            <Route path={"/"} element={<ContactsPage />} />
-                            <Route path={"/view/:contactId"} element={<ContactsPage />} />
+                            <Route path={ROOT_URL} element={<ContactsPage />} />
+                            <Route path={VIEW_CONTACT_ACTIVITY_URL} element={<DetailsPage />} />
+                            <Route path={VIEW_CONTACT_URL} element={<DetailsPage />} />
                             <Route path="*" element={<Navigate to="/" replace={true} />} />
                           </ Routes>
                         </HistoryRouter>

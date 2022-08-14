@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom/client';
 import AtlasSdk from '@atlas/sdk';
 import App from './components/app/App';
 import createAtlasApp from 'titanium/common/create-atlas-app';
-import { apiScopes, policies } from 'constants/constants';
+import { apiScopes } from 'constants/scopes.constants';
+import { policies } from 'constants/policies.constants';
 
 createAtlasApp(AtlasSdk, {
   apiScopes,
@@ -14,20 +15,20 @@ createAtlasApp(AtlasSdk, {
     getUserAppsList: true,
     navigationEnabled: true,
   }
-/*
-react-dom.development.js:86 Warning: Legacy context API has been detected within a strict-mode tree.
-
-The old API will be supported in all 16.x releases, but applications using it should migrate to the new version.
-
-Please update the following components: Transition
-
-Learn more about this warning here: https://reactjs.org/link/legacy-context
-    at Transition (http://localhost:3000/static/js/bundle.js:156819:30)
-    at Modal (http://localhost:3000/static/js/bundle.js:33300:23)
-    at ContactDeleteModal
-
-*/
-// }, (props) => (<React.StrictMode><App {...props} /></React.StrictMode>))
+  /*
+  react-dom.development.js:86 Warning: Legacy context API has been detected within a strict-mode tree.
+  
+  The old API will be supported in all 16.x releases, but applications using it should migrate to the new version.
+  
+  Please update the following components: Transition
+  
+  Learn more about this warning here: https://reactjs.org/link/legacy-context
+      at Transition (http://localhost:3000/static/js/bundle.js:156819:30)
+      at Modal (http://localhost:3000/static/js/bundle.js:33300:23)
+      at ContactDeleteModal
+  
+  */
+  // }, (props) => (<React.StrictMode><App {...props} /></React.StrictMode>))
 }, (props) => (<App {...props} />))
   .then((app) => {
     // console.log('createAtlasApp - called root.render -app-', app)

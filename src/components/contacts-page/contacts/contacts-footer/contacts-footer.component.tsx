@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next'
 import {
   EMPTY_STATES,
   LOADING
-} from 'constants/constants'
+} from 'constants/state.constants'
 import PaginationToolbar from 'titanium/components/pagination-toolbar/pagination-toolbar.component'
 import { usePrefetchGetContacts } from 'react-query/contacts.queries'
 

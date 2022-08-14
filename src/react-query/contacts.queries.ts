@@ -36,7 +36,7 @@ const useGetContactsWithSelect = (select: Select) => {
 
     const { page, search, sort } = useAppUrlParams()
 
-    return useQuery(['contacts', 'list', { page, sort, search }], () => fetchContacts({
+    return useQuery(['contact', 'list', { page, sort, search }], () => fetchContacts({
         page,
         sort,
         search,
@@ -44,7 +44,7 @@ const useGetContactsWithSelect = (select: Select) => {
     }), { select })
 }
 
-export const useContact = (contactId: string) => useGetContactsWithSelect(data => data.contacts.find(item => item.id === contactId))
+export const useContac2 = (contactId?: string) => useGetContactsWithSelect(data => data.contacts.find(item => item.id === contactId))
 
 export const useInvalidateGetContacts = () => {
     const queryClient = useQueryClient();

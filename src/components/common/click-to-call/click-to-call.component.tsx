@@ -6,7 +6,7 @@ import { useAtlasSdk } from 'titanium/common/context/atlas.context'
 import { useVoiceConversation } from 'titanium/common/hooks/use-voice-conversation'
 
 interface Props {
-  id: string;
+  id?: string;
   phones: string[]
 }
 
@@ -17,7 +17,7 @@ const ClickToCall = ({ id, phones = [] }: Props) => {
 
   const onClickToCall = (e, phoneNumber) => {
     e.stopPropagation()
-    if (hasConversationApp) {
+    if (hasConversationApp && id) {
       triggerVoiceCall(phoneNumber, id)
       e.preventDefault()
     }
