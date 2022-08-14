@@ -34,42 +34,56 @@ const ContactsPage = () => {
     const [contactDeleteModalOpen, setContactDeleteModalOpen] = useState(false)
     const closeContactDeleteModal = () => setContactDeleteModalOpen(false)
     const { contacts, count, total, totalPages } = data || {}
-
+    const invalidateGetContactQueries = useInvalidateGetContacts()
 
     // const state = (isFetching, isError, isFetched, contacts): string => {
     //     return Number(total) > 0 ? states.READY : search ? states.NO_RESULTS : states.EMPTY
     // }
-    const state = Number(total) > 0 ? states.READY : search ? states.NO_RESULTS : states.EMPTY
+    const state = () => {
+        if(isError) {
+            return states.ERROR
+        }
+        if (isFetching) {
+            return states.LOADING
+        }
+        if(Number(total) > 0) {
+            return states.READY
+        }
+        if(search) {
+            return states.NO_RESULTS
+        }
+        return states.EMPTY
+    }
 
     const onSearchContact = (search: string) => {
         const params = {
             ...searchToQuery(search)
-          }
-          
+        }
+
         navigate(createUrl(params))
     }
 
     const onSort = (field: string, direction: string) => {
         const params = {
             ...sortToQuery({ field, direction })
-          }
-          
+        }
+
         navigate(createUrl(params))
     }
 
     const onPageChange = (page: string) => {
         const params = {
             ...paginationToQuery({ page })
-          }
-          
+        }
+
         navigate(createUrl(params))
     }
 
-    
+
     const onContactDelete = () => {
 
     }
-    
+
     return (
         <PanelsLayout>
             <PanelsLayout.Content>
@@ -92,13 +106,13 @@ const ContactsPage = () => {
                     <Page>
                         <ContactDeleteModal open={contactDeleteModalOpen} onClose={closeContactDeleteModal} />
                         <Page.Content>
-                            {EMPTY_STATES.includes(state) ? (
-                                <EmptyState status={state} onRetryClick={useInvalidateGetContacts} />
+                            {EMPTY_STATES.includes(state()) ? (
+                                <EmptyState status={state()} onRetryClick={invalidateGetContactQueries} />
                             ) : (
                                 <Contacts
                                     contacts={contacts}
                                     totalPages={totalPages}
-                                    state={state}
+                                    state={state()}
                                     currentPage={page}
                                     sort={sort}
                                     onPageChange={onPageChange}
