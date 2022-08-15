@@ -4,6 +4,8 @@ import {
     PanelsLayout,
     H1,
     Page,
+    Icon,
+    Viewport
 } from '@cobalt/cobalt-react-components'
 import { Wrapper } from "./contacts-page.styles"
 import { NavHeader } from '@titanium/components'
@@ -23,6 +25,8 @@ import computeState from "contacts-app/utils/compute-state"
 import { CONTACTS_CREATE_POLICY } from "contacts-app/constants/policies.constants"
 import { EMPTY_STATES } from "contacts-app/constants/state.constants"
 import useGetAccountCustomFields from "contacts-app/react-query/custom-fields.queries"
+import { CREATE_CONTACT_URL } from "contacts-app/constants/url.constants"
+import LinkButton from "titanium/components/link-button/link-button.component"
 
 const ContactsPage = () => {
     const [t] = useTranslation()
@@ -40,7 +44,7 @@ const ContactsPage = () => {
     // const state = (isFetching, isError, isFetched, contacts): string => {
     //     return Number(total) > 0 ? states.READY : search ? states.NO_RESULTS : states.EMPTY
     // }
-    const state = computeState(isError, isFetching,search, total)
+    const state = computeState(isError, isFetching, search, total)
 
     const onSearchContact = (search: string) => {
         const params = {
@@ -81,7 +85,24 @@ const ContactsPage = () => {
                         // onTabChange={onTabChangeHandler}
                         // selectedTab={selectedTab}
                         truncated
-                    />
+                    >
+                        <NavHeader.Action>
+                            <LinkButton
+                                data-testid="contacts__add-contact-button"
+                                to={CREATE_CONTACT_URL}
+                                asButton
+                                primary
+                            >
+                                <Icon small name={Icon.PERSON_ADD} />
+                                <Viewport small>
+                                    <span>{t('pages.index.actions.newSmall')}</span>
+                                </Viewport>
+                                <Viewport medium large>
+                                    <span>{t('pages.index.actions.new')}</span>
+                                </Viewport>
+                            </LinkButton>
+                        </NavHeader.Action>
+                    </NavHeader>
                     <ContactsToolbar
                         total={total}
                         loading={isFetching}

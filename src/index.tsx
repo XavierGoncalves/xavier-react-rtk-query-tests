@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import AtlasSdk from '@atlas/sdk';
-import App from './contacts-app/app/App';
+import ContactsApp from './contacts-app/app/ContactsApp';
 import createAtlasApp from 'titanium/common/create-atlas-app';
 import { apiScopes } from 'contacts-app/constants/scopes.constants';
 import { policies } from 'contacts-app/constants/policies.constants';
@@ -29,7 +29,7 @@ createAtlasApp(AtlasSdk, {
   
   */
   // }, (props) => (<React.StrictMode><App {...props} /></React.StrictMode>))
-}, (props) => (<App {...props} />))
+}, (props) => (<ContactsApp {...props} />))
   .then((app) => {
     // console.log('createAtlasApp - called root.render -app-', app)
     // console.log('createAtlasApp - account-', app.account)
