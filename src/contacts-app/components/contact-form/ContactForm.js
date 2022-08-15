@@ -12,12 +12,12 @@ import styled from 'styled-components'
 import { MultiFormField, Input, PhoneNumberInput } from '@titanium/components'
 import { getPhoneInfo } from '@talkdesk/phone-info'
 import uniq from 'lodash/uniq'
-import { ContactCustomField } from 'types'
 import maxLength from 'contacts-app/utils/max-length'
 import encodeCustomFieldKey from 'contacts-app/utils/encode-custom-field'
 import useGetAccountCustomFields from 'contacts-app/react-query/custom-fields.queries'
 import WebsiteInput from './website-input/website-input.component'
 import LoadingForm from './loading-form/loading-form.component'
+import { Buffer } from 'buffer';
 
 const FormWrapper = styled.div`
   .co-form > div {
@@ -42,38 +42,15 @@ const EMAIL_REGEX = /^(?!.{256})(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)
 const WEBSITE_REGEX = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w.-]+)+[\w\-._~:/?#[\]@!$&'()*+,;=.]+$/i
 
 
-interface DefaultValues {
-    name: string;
-    phoneNumber: string[];
-    faxNumber: string[];
-    email: string[];
-    title: string,
-    company: string,
-    industry: string,
-    website: string[];
-    address: string,
-    custom_fields: ContactCustomField[]
-}
-
-interface Props {
-    collapsible?: boolean;
-    id: string;
-    isLoading?: boolean;
-    defaultValues?: DefaultValues | {};
-    maxMultiFields?: number;
-    onSubmit: () => void;
-    onValidationChange: Dispatch<SetStateAction<boolean>>;
-  }
-
 export const ContactForm = ({
   collapsible = false,
-  defaultValues = {},
+  defaultValues,
   id,
   isLoading,
   maxMultiFields = 5,
   onSubmit,
   onValidationChange,
-}: Props) => {
+}) => {
   const [t] = useTranslation()
   const [isCollapsed, setCollapsed] = useState(collapsible)
   const [customFieldsMap, setCustomFieldsMap] = useState([])
@@ -103,7 +80,7 @@ export const ContactForm = ({
     websites,
     address,
     customFields: customerCustomFields
-  } = defaultValues
+  } = defaultValues || {}
 
   useEffect(() => {
     if (!isValid) {
@@ -136,7 +113,7 @@ export const ContactForm = ({
 
   const getCustomFieldValue = key => {
     const matches = customerCustomFields?.filter(c => c.key === key)
-    return matches?.length > 0 ? matches[0].value : null
+    return matches && matches?.length > 0 ? matches[0].value : null
   }
 
   const getCustomFieldError = key => {
@@ -291,6 +268,7 @@ export const ContactForm = ({
                 ref={register(maxLength(t('fields.industry.maxLength')))}
                 error={errors.industry && errors.industry.message}
               />
+              
               <Controller
                 as={WebsiteInput}
                 control={control}

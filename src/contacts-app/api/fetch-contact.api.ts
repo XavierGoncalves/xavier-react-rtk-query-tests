@@ -6,8 +6,10 @@ import { Contact } from "./fetch-contacts.api"
 
 const fetchContact = async (contactID: string, http: AxiosInstance): Promise<Contact> => {
     const result = await http.get(`/callbar/contacts/${contactID}`)
+    
+    const contactResponse = get(result, 'data.contact')
 
-    const contact = presentContact(get(result, 'data.contact'))
+    const contact = presentContact(contactResponse)
   
     return contact
 }

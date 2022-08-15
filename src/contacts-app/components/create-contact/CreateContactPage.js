@@ -14,8 +14,8 @@ import { usePolicy } from 'titanium/common/context/policies.context'
 import { CONTACTS_CREATE_POLICY } from 'contacts-app/constants/policies.constants'
 import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
-import { useHttpClient } from 'titanium/common/context/http.context'
 import ContactForm from '../contact-form/ContactForm'
+import { useCreateContact } from 'contacts-app/react-query/contact.queries'
 
 const FormWrapper = styled.div`
 padding: 1.5rem 0;
@@ -40,10 +40,10 @@ const FooterButtonsWrapper = styled.div`
 
 const CreateContactPage = () => {
     const [t] = useTranslation()
-    const http = useHttpClient()
     const [isFormValid, setIsFormValid] = useState(false)
     const canCreateContact = usePolicy(CONTACTS_CREATE_POLICY)
-    const onSubmit = () => {}
+    const { createContactSync } = useCreateContact()
+    const onSubmit = (data) => createContactSync(data)
     return (
         <>
             <NavHeader title={<H1>{t('pages.create.title')}</H1>}>

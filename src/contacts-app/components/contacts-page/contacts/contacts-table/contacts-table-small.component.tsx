@@ -1,5 +1,6 @@
 import { Table } from '@cobalt/cobalt-react-components'
 import { Contact as ContactType } from 'contacts-app/api/fetch-contacts.api'
+import { Dispatch, SetStateAction } from 'react'
 import Actions from './actions/actions.component'
 import Contact from './contact/contact.component'
 import LoadingRows from './loading-rows/loading-rows.component'
@@ -9,13 +10,15 @@ const NUMBER_OF_LOADING_ROWS = 10
 interface Props {
   contacts?: ContactType[];
   isLoading: boolean;
-  onContactDelete: (contactId: string) => void
+  onContactDelete: (contactId: string) => void;
+  setCurrentContact: Dispatch<SetStateAction<string>>;
 }
 
 const ContactsTableSmall = ({
   contacts,
   isLoading,
-  onContactDelete
+  onContactDelete,
+  setCurrentContact
 }: Props) => (
   <Table data-table="main">
     <Table.Body>
@@ -43,6 +46,7 @@ const ContactsTableSmall = ({
                 maxVisibleButtons={2}
                 phones={contact.phones}
                 onContactDelete={onContactDelete}
+                setCurrentContact={setCurrentContact}
               />
             </Table.ActionData>
           </Table.Row>

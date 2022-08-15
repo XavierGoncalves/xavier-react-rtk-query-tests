@@ -15,9 +15,10 @@ import { queryClient } from 'react-query/query-client';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import CobaltRoot from '@cobalt/cobalt-react-components'
 import DetailsPage from 'contacts-app/components/details-page/details-page.component';
-import { CREATE_CONTACT_URL, ROOT_URL, VIEW_CONTACT_ACTIVITY_URL, VIEW_CONTACT_URL } from 'contacts-app/constants/url.constants';
+import { CREATE_CONTACT_URL, EDIT_CONTACT_URL, ROOT_URL, VIEW_CONTACT_ACTIVITY_URL, VIEW_CONTACT_URL } from 'contacts-app/constants/url.constants';
 import '../../styles.css';
 import CreateContactPage from 'contacts-app/components/create-contact/CreateContactPage';
+import EditContactPage from 'contacts-app/components/edit-contact/edit-contact-page.component';
 
 const ContactsApp = (app) => {
   return (
@@ -37,6 +38,10 @@ const ContactsApp = (app) => {
                             <Route
                               path={CREATE_CONTACT_URL}
                               element={<CreateContactPage />}
+                            />
+                            <Route
+                              path={EDIT_CONTACT_URL}
+                              element={<EditContactPage />}
                             />
                             <Route path={VIEW_CONTACT_ACTIVITY_URL} element={<DetailsPage />} />
                             <Route path={VIEW_CONTACT_URL} element={<DetailsPage />} />

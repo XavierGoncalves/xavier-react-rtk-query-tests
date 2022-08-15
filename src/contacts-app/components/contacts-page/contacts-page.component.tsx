@@ -39,6 +39,7 @@ const ContactsPage = () => {
     const closeContactDeleteModal = () => setContactDeleteModalOpen(false)
     const { contacts, count, total, totalPages } = data || {}
     const invalidateGetContactQueries = useInvalidateGetContacts()
+    const [contactId, setContactId] = useState('')
     useGetAccountCustomFields()
 
     // const state = (isFetching, isError, isFetched, contacts): string => {
@@ -112,7 +113,7 @@ const ContactsPage = () => {
                         onSearchContact={onSearchContact}
                     />
                     <Page>
-                        <ContactDeleteModal open={contactDeleteModalOpen} onClose={closeContactDeleteModal} />
+                        <ContactDeleteModal open={contactDeleteModalOpen} onClose={closeContactDeleteModal} contactId={contactId} />
                         <Page.Content>
                             {EMPTY_STATES.includes(state) ? (
                                 <EmptyState status={state} onRetryClick={invalidateGetContactQueries} />
@@ -126,6 +127,7 @@ const ContactsPage = () => {
                                     onPageChange={onPageChange}
                                     onSortBy={onSort}
                                     onContactDelete={onContactDelete}
+                                    setCurrentContact={setContactId}
                                 />
                             )}
                         </Page.Content>

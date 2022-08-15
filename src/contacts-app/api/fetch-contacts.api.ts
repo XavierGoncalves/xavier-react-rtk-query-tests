@@ -5,7 +5,7 @@ import get from 'lodash/get'
 import { getInitials } from 'titanium/common/utils/get-initials'
 import { AxiosInstance } from 'axios'
 import { perPage } from 'contacts-app/constants/constants'
-import { SortType } from 'types'
+import { SortType, _Links } from 'types'
 
 interface Inputs {
     page: number;
@@ -35,6 +35,52 @@ export interface Contact {
     tags: string[];
     title: string;
     websites: string[]
+}
+
+interface ServerEmail {
+    label: string;
+    email: string
+}
+type ServerFax = ServerPhone
+interface ServerPhone {
+    label: string;
+    number: string
+}
+
+interface ServerWebsite {
+    url: string
+}
+
+interface ServerIntegration {
+    contact_type: string;
+    external_id: string;
+    external_sync_state: string;
+    external_url: string;
+    integration_id: string;
+}
+
+export interface GetContactServerResponse {
+    account_id: string;
+    address: string;
+    company: string;
+    created_at: string;
+    custom_fields: CustomField[];
+    deleted_at: string | null;
+    emails: ServerEmail[];
+    faxes: ServerFax[];
+    id: string;
+    industry: string;
+    integrations: ServerIntegration[];
+    location: string;
+    name: string;
+    phones: ServerPhone[];
+    photo_url: string;
+    scope: string[];
+    social: string[];
+    tags: string[];
+    title: string;
+    websites: ServerWebsite[];
+    _links: _Links
 }
 
 export interface ReturnInterface { 

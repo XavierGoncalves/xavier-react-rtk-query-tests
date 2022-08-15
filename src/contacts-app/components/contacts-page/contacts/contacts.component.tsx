@@ -5,6 +5,7 @@ import ContactsFooter from './contacts-footer/contacts-footer.component'
 import { Contact } from 'contacts-app/api/fetch-contacts.api'
 import { onSortFn, SortType } from 'types'
 import { LOADING } from 'contacts-app/constants/state.constants'
+import { Dispatch, SetStateAction } from 'react'
 
 interface Props {
   contacts?: Contact[];
@@ -14,7 +15,8 @@ interface Props {
   sort: SortType;
   onContactDelete: (contactId: string) => void;
   onPageChange: (page: string) => void;
-  onSortBy: onSortFn
+  onSortBy: onSortFn;
+  setCurrentContact: Dispatch<SetStateAction<string>>
 }
 
 
@@ -26,7 +28,8 @@ const Contacts = ({
   sort,
   onContactDelete,
   onPageChange,
-  onSortBy
+  onSortBy,
+  setCurrentContact
 }: Props) => (
   <div>
     <Viewport small>
@@ -34,6 +37,7 @@ const Contacts = ({
         contacts={contacts}
         isLoading={state === LOADING}
         onContactDelete={onContactDelete}
+        setCurrentContact={setCurrentContact}
       />
     </Viewport>
     <Viewport medium large>
@@ -43,6 +47,7 @@ const Contacts = ({
         sort={sort}
         onContactDelete={onContactDelete}
         onSortBy={onSortBy}
+        setCurrentContact={setCurrentContact}
       />
     </Viewport>
     <ContactsFooter

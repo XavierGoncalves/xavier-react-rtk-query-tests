@@ -22,7 +22,7 @@ import ContactDeleteModal from 'contacts-app/components/contact-delete-modal/con
 import getDescription from 'contacts-app/utils/get-description'
 import getNavHeaderTitle from 'contacts-app/utils/get-navheader-title'
 import Profile from './profile/profile.component'
-import useGetContact from 'contacts-app/react-query/contact.queries'
+import { useGetContact } from 'contacts-app/react-query/contact.queries'
 
 const Wrapper = styled.div`
   display: flex;
@@ -134,7 +134,7 @@ const DetailsPage = () => {
   return (
     <PanelsLayout>
       <PanelsLayout.Content>
-        <ContactDeleteModal open={contactDeleteModalOpen} onClose={closeContactDeleteModal} />
+        <ContactDeleteModal open={contactDeleteModalOpen} onClose={closeContactDeleteModal} contactId={contactId || ''} />
         <Wrapper>
           <NavHeader
             borderless

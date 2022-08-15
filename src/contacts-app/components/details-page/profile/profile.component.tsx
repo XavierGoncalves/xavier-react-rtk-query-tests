@@ -47,7 +47,7 @@ const Profile = ({
         onDelete={onDeleteHandler}
       />
       <Page>
-        <ContactDeleteModal open={contactDeleteModalOpen} onClose={closeContactDeleteModal}/>
+        <ContactDeleteModal open={contactDeleteModalOpen} onClose={closeContactDeleteModal} contactId={contact?.id || ''} />
         <Page.Content>
           <GridWrapper>
             <Viewport small>

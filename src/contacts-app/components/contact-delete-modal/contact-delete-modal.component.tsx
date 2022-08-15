@@ -1,21 +1,22 @@
 import { useTranslation } from 'react-i18next'
 import { Button, Dialog, Icon, Modal } from '@cobalt/cobalt-react-components'
+import { useDeleteContact } from 'contacts-app/react-query/contact.queries';
 
 interface Props {
   open: boolean;
   onClose: () => void;
-  onDeleteContact?: (contactId: string) => void
+  contactId: string;
 }
 
 const ContactDeleteModal = ({
   open,
   onClose,
-  onDeleteContact
+  contactId
 }: Props) => {
   const [t] = useTranslation()
-
-  const onDeleteContactHandler = () => {
-    // onDeleteContact(openContactId)
+  const { deleteContactAsync } = useDeleteContact()
+  const onDeleteContactHandler = async () => {
+    await deleteContactAsync(contactId)
     onClose()
   }
 

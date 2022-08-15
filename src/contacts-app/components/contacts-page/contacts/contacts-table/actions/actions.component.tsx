@@ -6,6 +6,9 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import ClickToCall from 'contacts-app/components/common/click-to-call/click-to-call.component'
 import { EDIT_CONTACT_URL } from 'contacts-app/constants/url.constants'
+import { Dispatch, SetStateAction } from 'react'
+import { usePolicy } from 'titanium/common/context/policies.context'
+import { CONTACTS_DELETE_POLICY, CONTACTS_UPDATE_POLICY } from 'contacts-app/constants/policies.constants'
 
 const ActionsWrapper = styled.div`
   button {
@@ -23,8 +26,7 @@ interface Props {
   maxVisibleButtons: number; 
   onContactDelete: (contactId: string) => void;
   phones: string[];
-  canUpdateContact?: boolean;
-  canDeleteContact?: boolean;
+  setCurrentContact: Dispatch<SetStateAction<string>>;
 }
 
 const Actions = ({
@@ -32,11 +34,10 @@ const Actions = ({
   maxVisibleButtons,
   onContactDelete,
   phones,
-  canUpdateContact,
-  canDeleteContact
 }: Props) => {
   const [t] = useTranslation()
-
+  const canUpdateContact = usePolicy(CONTACTS_UPDATE_POLICY)
+  const canDeleteContact = usePolicy(CONTACTS_DELETE_POLICY)
   return (
     <ActionsWrapper>
       <ButtonGroup maxVisibleButtons={maxVisibleButtons}>
