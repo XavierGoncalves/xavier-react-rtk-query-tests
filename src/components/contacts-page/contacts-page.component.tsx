@@ -14,7 +14,7 @@ import EmptyState from "./contacts/contacts-table/empty-state/empty-state.compon
 import ContactDeleteModal from "components/contact-delete-modal/contact-delete-modal.component"
 import { useState } from "react"
 import useAppUrlParams from "hooks/use-search-params"
-import { useHistory, useLocation } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 import useCreateSearchParams from "hooks/use-create-search-params"
 import sortToQuery from "utils/sort-to-query"
 import searchToQuery from "utils/search-to-query"

@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 import { NavHeader } from '@titanium/components'
 import { H1, PanelsLayout } from '@cobalt/cobalt-react-components'
-import { useParams, useMatch, useNavigate, useLocation } from 'react-router-dom'
+import { useParams, useRouteMatch, useHistory } from 'react-router-dom'
 import { useTheme } from '@cobalt/react-theme-provider'
 import { Text } from '@cobalt/react-typography'
 import { useGetContactActivities } from '@contact-activities/contact-activities-sdk'
@@ -37,8 +37,7 @@ const DetailsPage = () => {
   const [contactDeleteModalOpen, setContactDeleteModalOpen] = useState(false)
   const theme = useTheme()
   const { contactId } = useParams()
-  const location = useLocation()
-  const navigate = useNavigate()
+  const history = useHistory()
   const { page: currentPage, selectedActivityId } = useAppUrlParams()
   const { data: contact, isFetching, isError } = useGetContact()
   const { data: customFieldsList, isFetching: customFieldsLoadingState } = useGetAccountCustomFields()
@@ -47,34 +46,38 @@ const DetailsPage = () => {
   const closeContactDeleteModal = () => setContactDeleteModalOpen(false)
   const openContactDeleteModal = () => setContactDeleteModalOpen(true)
   const onDelete = () => openContactDeleteModal()
+  const { push, location } = history
+  const onBack = () => push(ROOT_URL)
 
-  const onBack = () => navigate(ROOT_URL)
-
-  const onTabChange = (url: string) => navigate(url)
+  const onTabChange = (url: string) => push(url)
 
   const onPageChange = (page: string) => {
     const params = {
       ...paginationToQuery({ page })
     }
-
-    navigate(createUrl(params))
+    const result = createUrl(params)
+    console.log('DetailsPage - onPageChange-', result)
+    push(result)
   }
 
   const state = computeState(isError, isFetching)
-  console.log('currentPage -', currentPage)
+  // console.log('currentPage -', currentPage)
   const onActivitySelected = (activityId?: string) => {
-    debugger
-    console.log('paginationToQuery - activityId-', activityId)
-    console.log('paginationToQuery - currentPage-', currentPage)
-    console.log('paginationToQuery - location-', location)
+    // debugger
+    // console.log('DetailsPage - onActivitySelected - activityId-', activityId)
+    //  console.log('DetailsPage - onActivitySelected - location-', location)
+    console.log('DetailsPage - onActivitySelected - history -', history)
+    // const currentPage = new URLSearchParams(history.location.search).get('page')
+    console.log('DetailsPage - onActivitySelected - currentPage-', currentPage)
     const params = {
-      ...paginationToQuery({ page: currentPage }),
+      // ...paginationToQuery({ page: currentPage }),
       open: activityId
     }
-    debugger
-    console.log('paginationToQuery - params-', params)
-    createUrl(params)
-    // navigate(createUrl(params))
+    // debugger
+    // console.log('paginationToQuery - params-', params)
+    const result = createUrl(params)
+    console.log('DetailsPage - onActivitySelected-', result)
+    push(createUrl(params))
   }
 
   const handleSelectedActivity = selectedActivityId => {
@@ -101,7 +104,7 @@ const DetailsPage = () => {
     }
   }, [customFieldsList, contact])
 
-  const selectedTab = useMatch(VIEW_CONTACT_ACTIVITY_URL)
+  const selectedTab = useRouteMatch(VIEW_CONTACT_ACTIVITY_URL)
     ? ACTIVITY_TAB
     : PROFILE_TAB
 

@@ -34,9 +34,9 @@ const App = (app) => {
                             <Route exact path={ROOT_URL}>
                               <ContactsPage />
                             </Route>
-                            {/* <Route path={[VIEW_CONTACT_URL, VIEW_CONTACT_ACTIVITY_URL]}>
+                            <Route path={[VIEW_CONTACT_URL, VIEW_CONTACT_ACTIVITY_URL]}>
                               <DetailsPage />
-                            </Route> */}
+                            </Route>
                             <Route path="*">
                               <Redirect to="/" replace={true} />
                             </Route>
