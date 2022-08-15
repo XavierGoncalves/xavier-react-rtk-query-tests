@@ -77,7 +77,7 @@ const DetailsPage = () => {
     }
   }
 
-  const { element, open, close } = useGetContactActivities(
+  const { element, open, visible, close } = useGetContactActivities(
     process.env.REACT_APP_CONTACT_ACTIVITIES_APP_ID,
     atlasSdk,
     onPageChange,
@@ -168,11 +168,32 @@ const DetailsPage = () => {
               heading={t('pages.details.activity.title')}
               value={ACTIVITY_TAB}
             >
-              <div
+              {visible && <div
                 data-testid="contact-activities-portal-app"
                 style={{ display: 'flex', height: '100%', width: '100%' }}
                 ref={element}
-              ></div>
+              ></div>}
+              <div>
+                <button onClick={() => {
+                  if (currentPage === 1) {
+                    handleSelectedActivity("01f375ca-0e4f-454f-ae4a-8fdfdc8eb4eb")
+                  }
+                  if (currentPage === 5) { handleSelectedActivity("ojGo-oABYiA00H7okNrh") }
+                }}>OPEN SIDEPANEL</button>
+                {Array.from(Array(5))
+                  .map((_, i) => i + 1)
+                  .map((item) => (
+                    <button
+                      key={`page-${item}`}
+                      style={{
+                        color: currentPage === item ? "red" : "blue"
+                      }}
+                      onClick={() => onPageChange(String(item))}
+                    >
+                      Page: {item}
+                    </button>
+                  ))}
+              </div>
             </NavHeader.Tab>
           </NavHeader>
         </Wrapper>
