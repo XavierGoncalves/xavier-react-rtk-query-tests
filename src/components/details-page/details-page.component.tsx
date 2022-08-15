@@ -23,7 +23,6 @@ import getDescription from 'utils/get-description'
 import getNavHeaderTitle from 'utils/get-navheader-title'
 import Profile from './profile/profile.component'
 import useGetContact from 'react-query/contact.queries'
-import history from "history/browser";
 
 const Wrapper = styled.div`
   display: flex;
@@ -68,7 +67,6 @@ const DetailsPage = () => {
     console.log('paginationToQuery - activityId-', activityId)
     console.log('paginationToQuery - currentPage-', currentPage)
     console.log('paginationToQuery - location-', location)
-    console.log('paginationToQuery - history.location-', history.location)
     const params = {
       ...paginationToQuery({ page: currentPage }),
       open: activityId

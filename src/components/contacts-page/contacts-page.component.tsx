@@ -14,7 +14,7 @@ import EmptyState from "./contacts/contacts-table/empty-state/empty-state.compon
 import ContactDeleteModal from "components/contact-delete-modal/contact-delete-modal.component"
 import { useState } from "react"
 import useAppUrlParams from "hooks/use-search-params"
-import { useNavigate } from "react-router-dom"
+import { useHistory, useLocation } from "react-router-dom"
 import useCreateSearchParams from "hooks/use-create-search-params"
 import sortToQuery from "utils/sort-to-query"
 import searchToQuery from "utils/search-to-query"
@@ -26,7 +26,7 @@ import useGetAccountCustomFields from "react-query/custom-fields.queries"
 
 const ContactsPage = () => {
     const [t] = useTranslation()
-    const navigate = useNavigate()
+    const { push } = useHistory()
     const createUrl = useCreateSearchParams()
     const { page, search, sort } = useAppUrlParams()
     const { data, isFetching, isError, isFetched } = useGetContacts()
@@ -40,30 +40,33 @@ const ContactsPage = () => {
     // const state = (isFetching, isError, isFetched, contacts): string => {
     //     return Number(total) > 0 ? states.READY : search ? states.NO_RESULTS : states.EMPTY
     // }
-    const state = computeState(isError, isFetching,search, total)
+    const state = computeState(isError, isFetching, search, total)
 
     const onSearchContact = (search: string) => {
         const params = {
             ...searchToQuery(search)
         }
-
-        navigate(createUrl(params))
+        const result = createUrl(params)
+        console.log('onSearchContact-', result)
+        push(result)
     }
 
     const onSort = (field: string, direction: string) => {
         const params = {
             ...sortToQuery({ field, direction })
         }
-
-        navigate(createUrl(params))
+        const result = createUrl(params)
+        console.log('onSort-', result)
+        push(result)
     }
 
     const onPageChange = (page: string) => {
         const params = {
             ...paginationToQuery({ page })
         }
-
-        navigate(createUrl(params))
+        const result = createUrl(params)
+        console.log('onPageChange-', result)
+        push(result)
     }
 
 
