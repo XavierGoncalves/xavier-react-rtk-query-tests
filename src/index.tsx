@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import AtlasSdk from '@atlas/sdk';
-import App from './components/app/App';
+import App from './apps/contacts-app/app/App';
 import createAtlasApp from 'titanium/common/create-atlas-app';
-import { apiScopes } from 'constants/scopes.constants';
-import { policies } from 'constants/policies.constants';
+import { apiScopes } from 'apps/contacts-app/constants/scopes.constants';
+import { policies } from 'apps/contacts-app/constants/policies.constants';
 
 createAtlasApp(AtlasSdk, {
   apiScopes,

@@ -10,7 +10,8 @@
     "popup",
     "toast",
     "portal",
-    "clipboard"
+    "clipboard",
+    "download"
   ],
   "scopes": [
     "openid",
@@ -19,6 +20,8 @@
     "account:read",
     "contacts-activities:read",
     "numbers:read",
+    "contacts:read",
+    "ring-groups:read",
     "graph-users:read",
     "policies:evaluate",
     "recordings:read",
@@ -26,7 +29,9 @@
     "account-favorites:read",
     "account-custom-fields:read",
     "presence-hub:read",
-    "apps:graphql"
+    "apps:graphql",
+    "activity-subscriptions:write",
+    "interaction-contacts:read"
   ],
   "assets": {
     "icon": "https://cdn1.iconfinder.com/data/icons/miscicons/500/globe-512.png"
