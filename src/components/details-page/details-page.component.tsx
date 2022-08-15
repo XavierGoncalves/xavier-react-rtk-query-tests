@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 import { NavHeader } from '@titanium/components'
 import { H1, PanelsLayout } from '@cobalt/cobalt-react-components'
-import { useParams, useMatch, useNavigate, useLocation } from 'react-router-dom'
+import { useParams, useMatch, useNavigate } from 'react-router-dom'
 import { useTheme } from '@cobalt/react-theme-provider'
 import { Text } from '@cobalt/react-typography'
 import { useGetContactActivities } from '@contact-activities/contact-activities-sdk'
@@ -23,7 +23,6 @@ import getDescription from 'utils/get-description'
 import getNavHeaderTitle from 'utils/get-navheader-title'
 import Profile from './profile/profile.component'
 import useGetContact from 'react-query/contact.queries'
-import history from "history/browser";
 
 const Wrapper = styled.div`
   display: flex;
@@ -33,12 +32,12 @@ const Wrapper = styled.div`
 
 const DetailsPage = () => {
   const [t] = useTranslation()
+  const pageRef = useRef<string>("1")
   const createUrl = useCreateSearchParams()
   const [newContactCustomFields, setNewContactCustomFields] = useState<ContactCustomField[]>([])
   const [contactDeleteModalOpen, setContactDeleteModalOpen] = useState(false)
   const theme = useTheme()
   const { contactId } = useParams()
-  const location = useLocation()
   const navigate = useNavigate()
   const { page: currentPage, selectedActivityId } = useAppUrlParams()
   const { data: contact, isFetching, isError } = useGetContact()
@@ -57,26 +56,17 @@ const DetailsPage = () => {
     const params = {
       ...paginationToQuery({ page })
     }
-
+    pageRef.current = page
     navigate(createUrl(params))
   }
 
   const state = computeState(isError, isFetching)
-  console.log('currentPage -', currentPage)
   const onActivitySelected = (activityId?: string) => {
-    debugger
-    console.log('paginationToQuery - activityId-', activityId)
-    console.log('paginationToQuery - currentPage-', currentPage)
-    console.log('paginationToQuery - location-', location)
-    console.log('paginationToQuery - history.location-', history.location)
     const params = {
-      ...paginationToQuery({ page: currentPage }),
+      ...paginationToQuery({ page: pageRef.current }),
       open: activityId
     }
-    debugger
-    console.log('paginationToQuery - params-', params)
-    createUrl(params)
-    // navigate(createUrl(params))
+    navigate(createUrl(params))
   }
 
   const handleSelectedActivity = selectedActivityId => {
@@ -109,12 +99,8 @@ const DetailsPage = () => {
 
   useEffect(() => {
     async function togglePortal() {
-      console.log('togglePortal - selectedTab-', selectedTab)
-      console.log('togglePortal - contactId-', contactId)
-      console.log('togglePortal - currentPage-', currentPage)
-      console.log('togglePortal - selectedActivityId-', selectedActivityId)
       if (selectedTab === ACTIVITY_TAB && Boolean(contactId)) {
-        console.log('togglePortal - called open')
+        console.log('togglePortal - called open - contactId-> ', contactId, '<-currentPage->', currentPage, '<-selectedActivityId->', selectedActivityId)
         try {
           await open(contactId, currentPage, selectedActivityId)
 

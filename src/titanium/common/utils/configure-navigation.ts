@@ -16,6 +16,6 @@ const registerOnPathChanged = (atlasSdk, history: MemoryHistory) => {
     const historyUri = history
       ? history.location.pathname + history.location.search
       : '/'
-    history.replace(atlasUri === '/' ? historyUri : atlasUri)
+    history.push(atlasUri === '/' ? historyUri : atlasUri)
   })
 }
