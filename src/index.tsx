@@ -5,6 +5,7 @@ import ContactsApp from './contacts-app/app/ContactsApp';
 import createAtlasApp from 'titanium/common/create-atlas-app';
 import { apiScopes } from 'contacts-app/constants/scopes.constants';
 import { policies } from 'contacts-app/constants/policies.constants';
+import ActivityApp from 'activity-app/app/ActivityApp';
 
 createAtlasApp(AtlasSdk, {
   apiScopes,
@@ -28,8 +29,12 @@ createAtlasApp(AtlasSdk, {
       at ContactDeleteModal
   
   */
-  // }, (props) => (<React.StrictMode><App {...props} /></React.StrictMode>))
-}, (props) => (<ContactsApp {...props} />))
+ /* CONTACTS APP */
+  // }, (props) => (<React.StrictMode><ContactsApp {...props} /></React.StrictMode>))
+// }, (props) => (<ContactsApp {...props} />))
+/* ACTIVITY APP */
+// }, (props) => (<React.StrictMode><ActivityApp {...props} /></React.StrictMode>))
+}, (props) => (<ActivityApp {...props} />))
   .then((app) => {
     // console.log('createAtlasApp - called root.render -app-', app)
     // console.log('createAtlasApp - account-', app.account)

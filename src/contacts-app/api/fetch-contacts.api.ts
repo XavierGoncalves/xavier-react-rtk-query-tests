@@ -91,7 +91,7 @@ export interface ReturnInterface {
 }
 
 
-export const fetchContacts = async ({
+const fetchContactsApi = async ({
     page = 1,
     sort,
     search = null,
@@ -159,3 +159,5 @@ const presentContact = contact => ({
     websites: get(contact, 'websites', []).map(website => website.url),
     customFields: contact.custom_fields
 })
+
+export default fetchContactsApi

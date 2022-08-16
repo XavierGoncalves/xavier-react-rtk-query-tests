@@ -46,3 +46,44 @@ export interface ContactCustomField {
   key: string;
   value: string;
 }
+
+export interface Activity {
+    id: string;
+    interactionId: string;
+    type: string;
+    agent: {
+      id: string | null;
+      name: string | null;
+    },
+    contact: {
+      id: string;
+      name: string;
+      number: string;
+      initials: string;
+    },
+    number: {
+      id: string;
+      name: string | null;
+      number: string;
+    };
+    date: string;
+    ringGroups: string[];
+    duration: number;
+    account_id: string;
+    channel_type?: string;
+}
+
+export interface OrderBy {
+  field: string;
+  direction: string;
+}
+
+export interface AgentFilter {
+  id: string;
+  name: string | null;
+}
+
+export interface ContactFilter {
+  id: string;
+  label: string | null;
+}

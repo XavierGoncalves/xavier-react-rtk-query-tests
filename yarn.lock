@@ -1385,6 +1385,11 @@
   resolved "https://hub.talkdeskapp.com:8443/repository/talkdesk-npm/@contact-activities/contact-activities-sdk/-/contact-activities-sdk-1.0.2.tgz#63554ecce82854b42e0f9be863cb97d97563f3f2"
   integrity sha512-8C3lwTDsqAySOpxd48fwUnXkSByMvbtTd6BzAT4hfKS1dAjvBgmUwoYQH1u7QVDa2Mmxr3IYor6w8S1fOsCfyg==
 
+"@contacts/creation-app-sdk@^0.0.1":
+  version "0.0.1"
+  resolved "https://hub.talkdeskapp.com:8443/repository/talkdesk-npm/@contacts/creation-app-sdk/-/creation-app-sdk-0.0.1.tgz#bedcca2b3b1e2fee79350598d62e1bc4683339ba"
+  integrity sha512-AxrfV84E7YvMs/vWuA4JFfGoHsYw+7lrC5OfEaCHCgdFPmb/uL1Boal/9J+TShYblGZsQaxSRAN3ah/BLIVf6w==
+
 "@csstools/normalize.css@*":
   version "12.0.0"
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-12.0.0.tgz#a9583a75c3f150667771f30b60d9f059473e62c4"
@@ -6918,10 +6923,17 @@ mkdirp@~0.5.1:
   dependencies:
     minimist "^1.2.6"
 
-moment-duration-format@^2.2.2:
+moment-duration-format@2.3.2, moment-duration-format@^2.2.2:
   version "2.3.2"
   resolved "https://hub.talkdeskapp.com:8443/repository/talkdesk-npm/moment-duration-format/-/moment-duration-format-2.3.2.tgz#5fa2b19b941b8d277122ff3f87a12895ec0d6212"
   integrity sha512-cBMXjSW+fjOb4tyaVHuaVE/A5TqkukDWiOfxxAjY+PEqmmBQlLwn+8OzwPiG3brouXKY5Un4pBjAeB6UToXHaQ==
+
+moment-timezone@0.5.28:
+  version "0.5.28"
+  resolved "https://hub.talkdeskapp.com:8443/repository/talkdesk-npm/moment-timezone/-/moment-timezone-0.5.28.tgz#f093d789d091ed7b055d82aa81a82467f72e4338"
+  integrity sha512-TDJkZvAyKIVWg5EtVqRzU97w0Rb0YVbfpqyjgu6GwXCAohVRqwZjf4fOzDE6p1Ch98Sro/8hQQi65WDXW5STPw==
+  dependencies:
+    moment ">= 2.9.0"
 
 moment-timezone@^0.5.25:
   version "0.5.34"
@@ -6929,6 +6941,11 @@ moment-timezone@^0.5.25:
   integrity sha512-3zAEHh2hKUs3EXLESx/wsgw6IQdusOT8Bxm3D9UrHPQR7zlMmzwybC8zHEM1tQ4LJwP7fcxrWr8tuBg05fFCbg==
   dependencies:
     moment ">= 2.9.0"
+
+moment@2.24.0:
+  version "2.24.0"
+  resolved "https://hub.talkdeskapp.com:8443/repository/talkdesk-npm/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
+  integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
 
 "moment@>= 2.9.0", moment@^2.24.0:
   version "2.29.4"
