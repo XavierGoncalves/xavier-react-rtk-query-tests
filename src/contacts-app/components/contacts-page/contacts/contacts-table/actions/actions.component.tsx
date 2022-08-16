@@ -23,17 +23,16 @@ const ActionsWrapper = styled.div`
 
 interface Props {
   id: string;
-  maxVisibleButtons: number; 
+  maxVisibleButtons: number;
   onContactDelete: (contactId: string) => void;
   phones: string[];
-  setCurrentContact: Dispatch<SetStateAction<string>>;
 }
 
 const Actions = ({
   id,
   maxVisibleButtons,
   onContactDelete,
-  phones,
+  phones
 }: Props) => {
   const [t] = useTranslation()
   const canUpdateContact = usePolicy(CONTACTS_UPDATE_POLICY)

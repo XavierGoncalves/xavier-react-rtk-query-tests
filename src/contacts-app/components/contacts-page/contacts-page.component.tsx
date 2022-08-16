@@ -36,17 +36,17 @@ const ContactsPage = () => {
     const { data, isFetching, isError, isFetched } = useGetContacts()
     const canCreateContact = usePolicy(CONTACTS_CREATE_POLICY)
     const [contactDeleteModalOpen, setContactDeleteModalOpen] = useState(false)
-    const closeContactDeleteModal = () => setContactDeleteModalOpen(false)
     const { contacts, count, total, totalPages } = data || {}
     const invalidateGetContactQueries = useInvalidateGetContacts()
     const [contactId, setContactId] = useState('')
     useGetAccountCustomFields()
-
+    
     // const state = (isFetching, isError, isFetched, contacts): string => {
-    //     return Number(total) > 0 ? states.READY : search ? states.NO_RESULTS : states.EMPTY
-    // }
-    const state = computeState(isError, isFetching, search, total)
-
+        //     return Number(total) > 0 ? states.READY : search ? states.NO_RESULTS : states.EMPTY
+        // }
+        const state = computeState(isError, isFetching, search, total)
+    const openContactDeleteModal = () => setContactDeleteModalOpen(true)
+    const closeContactDeleteModal = () => setContactDeleteModalOpen(false)
     const onSearchContact = (search: string) => {
         const params = {
             ...searchToQuery(search)
@@ -65,15 +65,16 @@ const ContactsPage = () => {
 
     const onPageChange = (page: string) => {
         const params = {
-            ...paginationToQuery({ page })
+            ...paginationToQuery({ page: Number(page) })
         }
 
         navigate(createUrl(params))
     }
 
 
-    const onContactDelete = () => {
-
+    const onContactDelete = (contactId: string) => {
+        setContactId(contactId)
+        openContactDeleteModal()
     }
 
     return (
@@ -127,7 +128,6 @@ const ContactsPage = () => {
                                     onPageChange={onPageChange}
                                     onSortBy={onSort}
                                     onContactDelete={onContactDelete}
-                                    setCurrentContact={setContactId}
                                 />
                             )}
                         </Page.Content>

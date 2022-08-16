@@ -24,7 +24,6 @@ const ContactsTableLarge = ({
   sort,
   onContactDelete,
   onSortBy,
-  setCurrentContact
 }) => {
   const [t] = useTranslation()
 
@@ -93,7 +92,6 @@ const ContactsTableLarge = ({
                   maxVisibleButtons={3}
                   phones={contact.phones}
                   onContactDelete={onContactDelete}
-                  setCurrentContact={setCurrentContact}
                 />
               </Table.ActionData>
             </Table.Row>

@@ -11,14 +11,12 @@ interface Props {
   contacts?: ContactType[];
   isLoading: boolean;
   onContactDelete: (contactId: string) => void;
-  setCurrentContact: Dispatch<SetStateAction<string>>;
 }
 
 const ContactsTableSmall = ({
   contacts,
   isLoading,
-  onContactDelete,
-  setCurrentContact
+  onContactDelete
 }: Props) => (
   <Table data-table="main">
     <Table.Body>
@@ -46,7 +44,6 @@ const ContactsTableSmall = ({
                 maxVisibleButtons={2}
                 phones={contact.phones}
                 onContactDelete={onContactDelete}
-                setCurrentContact={setCurrentContact}
               />
             </Table.ActionData>
           </Table.Row>

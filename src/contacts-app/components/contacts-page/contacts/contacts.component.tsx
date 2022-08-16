@@ -16,7 +16,6 @@ interface Props {
   onContactDelete: (contactId: string) => void;
   onPageChange: (page: string) => void;
   onSortBy: onSortFn;
-  setCurrentContact: Dispatch<SetStateAction<string>>
 }
 
 
@@ -28,8 +27,7 @@ const Contacts = ({
   sort,
   onContactDelete,
   onPageChange,
-  onSortBy,
-  setCurrentContact
+  onSortBy
 }: Props) => (
   <div>
     <Viewport small>
@@ -37,7 +35,6 @@ const Contacts = ({
         contacts={contacts}
         isLoading={state === LOADING}
         onContactDelete={onContactDelete}
-        setCurrentContact={setCurrentContact}
       />
     </Viewport>
     <Viewport medium large>
@@ -47,7 +44,6 @@ const Contacts = ({
         sort={sort}
         onContactDelete={onContactDelete}
         onSortBy={onSortBy}
-        setCurrentContact={setCurrentContact}
       />
     </Viewport>
     <ContactsFooter

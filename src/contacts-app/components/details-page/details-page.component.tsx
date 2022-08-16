@@ -32,7 +32,6 @@ const Wrapper = styled.div`
 
 const DetailsPage = () => {
   const [t] = useTranslation()
-  const pageRef = useRef<string>("1")
   const createUrl = useCreateSearchParams()
   const [newContactCustomFields, setNewContactCustomFields] = useState<ContactCustomField[]>([])
   const [contactDeleteModalOpen, setContactDeleteModalOpen] = useState(false)
@@ -40,6 +39,7 @@ const DetailsPage = () => {
   const { contactId } = useParams()
   const navigate = useNavigate()
   const { page: currentPage, selectedActivityId } = useAppUrlParams()
+  const pageRef = useRef<number>(Number(currentPage))
   const { data: contact, isFetching, isError } = useGetContact()
   const { data: customFieldsList, isFetching: customFieldsLoadingState } = useGetAccountCustomFields()
   const atlasSdk = useAtlasSdk()
@@ -54,9 +54,9 @@ const DetailsPage = () => {
 
   const onPageChange = (page: string) => {
     const params = {
-      ...paginationToQuery({ page })
+      ...paginationToQuery({ page: Number(page) })
     }
-    pageRef.current = page
+    pageRef.current = Number(page)
     navigate(createUrl(params))
   }
 
@@ -66,7 +66,8 @@ const DetailsPage = () => {
       ...paginationToQuery({ page: pageRef.current }),
       open: activityId
     }
-    navigate(createUrl(params))
+    const result = createUrl(params)
+    navigate(result)
   }
 
   const handleSelectedActivity = selectedActivityId => {
@@ -97,12 +98,13 @@ const DetailsPage = () => {
     ? ACTIVITY_TAB
     : PROFILE_TAB
 
+    useEffect(()=> console.log('mounted'), [])
   useEffect(() => {
     async function togglePortal() {
       if (selectedTab === ACTIVITY_TAB && Boolean(contactId)) {
-        console.log('togglePortal - called open - contactId-> ', contactId, '<-currentPage->', currentPage, '<-selectedActivityId->', selectedActivityId)
+        console.log('togglePortal - called open - contactId-> ', contactId, '<-currentPage->', pageRef.current, '<-selectedActivityId->', selectedActivityId)
         try {
-          await open(contactId, currentPage, selectedActivityId)
+          await open(contactId, pageRef.current, selectedActivityId)
 
         } catch (error) {
           console.log('togglePortal- error-', error)
@@ -113,7 +115,7 @@ const DetailsPage = () => {
     }
     togglePortal()
     // }, [selectedTab, contactId, currentPage, selectedActivityId])
-  }, [selectedTab, contactId, currentPage, selectedActivityId])
+  }, [selectedTab, contactId, pageRef.current, selectedActivityId])
 
   const onBackHandler = () => onBack()
 
