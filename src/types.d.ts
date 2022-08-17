@@ -78,6 +78,7 @@ export interface Activity {
     duration: number;
     account_id: string;
     channel_type?: string;
+    ivr?: string[];
 }
 
 export interface OrderBy {
@@ -105,4 +106,10 @@ export interface AppliedFilterValue {
   value: string;
   label: string;
   translate?: boolean; 
+}
+
+export type onEditContactFn = ({id, number}: EditContactInput) => void;
+export interface EditContactInput {
+  id: string | null;
+  number: string | null;
 }

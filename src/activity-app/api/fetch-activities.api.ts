@@ -19,7 +19,7 @@ interface Input {
     contact: ContactFilter;
 }
 
-interface Output {
+export interface FetchActivitiesOutput {
     activities: Activity[],
     total: number;
     totalPages: number;
@@ -37,7 +37,7 @@ const fetchActivitiesApi = async ({
     when,
     agent,
     contact,
-}: Input): Promise<Output> => {
+}: Input): Promise<FetchActivitiesOutput> => {
     const response = await http.get('interaction-contacts', {
         params: {
             page,

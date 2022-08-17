@@ -2267,7 +2267,7 @@
   dependencies:
     lodash "^4.17.19"
 
-"@titanium/recording-player@^1.3.0":
+"@titanium/recording-player@^1.3.0", "@titanium/recording-player@^1.5.0":
   version "1.5.0"
   resolved "https://hub.talkdeskapp.com:8443/repository/talkdesk-npm/@titanium/recording-player/-/recording-player-1.5.0.tgz#435d338f5d773b4426b4244703039ebf7a8cd7e7"
   integrity sha512-u8KZ1PjS25nyCoxskVbBqkgHkukBsiOS5p2HKCN88ssLlqguet7TOEFex7gQqtA5pWMLMTDKkl6uGwpJ0Kt2PA==

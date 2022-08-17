@@ -17,7 +17,7 @@ const usePolicy = (policy: string) => {
     if (!context) {
         throw new Error('usePolicies must be used within a PoliciesProvider')
     }
-    return context[policy] || false
+    return Boolean(context[policy]) || false
 }
 
 

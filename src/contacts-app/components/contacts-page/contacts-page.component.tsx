@@ -40,11 +40,11 @@ const ContactsPage = () => {
     const invalidateGetContactQueries = useInvalidateGetContacts()
     const [contactId, setContactId] = useState('')
     useGetAccountCustomFields()
-    
+
     // const state = (isFetching, isError, isFetched, contacts): string => {
-        //     return Number(total) > 0 ? states.READY : search ? states.NO_RESULTS : states.EMPTY
-        // }
-        const state = computeState(isError, isFetching, search, total)
+    //     return Number(total) > 0 ? states.READY : search ? states.NO_RESULTS : states.EMPTY
+    // }
+    const state = computeState(isError, isFetching, search, total)
     const openContactDeleteModal = () => setContactDeleteModalOpen(true)
     const closeContactDeleteModal = () => setContactDeleteModalOpen(false)
     const onSearchContact = (search: string) => {
@@ -88,22 +88,24 @@ const ContactsPage = () => {
                         // selectedTab={selectedTab}
                         truncated
                     >
-                        <NavHeader.Action>
-                            <LinkButton
-                                data-testid="contacts__add-contact-button"
-                                to={CREATE_CONTACT_URL}
-                                asButton
-                                primary
-                            >
-                                <Icon small name={Icon.PERSON_ADD} />
-                                <Viewport small>
-                                    <span>{t('pages.index.actions.newSmall')}</span>
-                                </Viewport>
-                                <Viewport medium large>
-                                    <span>{t('pages.index.actions.new')}</span>
-                                </Viewport>
-                            </LinkButton>
-                        </NavHeader.Action>
+                        {
+                            canCreateContact && <NavHeader.Action>
+                                <LinkButton
+                                    data-testid="contacts__add-contact-button"
+                                    to={CREATE_CONTACT_URL}
+                                    asButton
+                                    primary
+                                >
+                                    <Icon small name={Icon.PERSON_ADD} />
+                                    <Viewport small>
+                                        <span>{t('pages.index.actions.newSmall')}</span>
+                                    </Viewport>
+                                    <Viewport medium large>
+                                        <span>{t('pages.index.actions.new')}</span>
+                                    </Viewport>
+                                </LinkButton>
+                            </NavHeader.Action>
+                        }
                     </NavHeader>
                     <ContactsToolbar
                         total={total}
