@@ -29,12 +29,15 @@ createAtlasApp(AtlasSdk, {
       at ContactDeleteModal
   
   */
- /* CONTACTS APP */
+  /* CONTACTS APP */
   // }, (props) => (<React.StrictMode><ContactsApp {...props} /></React.StrictMode>))
-// }, (props) => (<ContactsApp {...props} />))
-/* ACTIVITY APP */
-// }, (props) => (<React.StrictMode><ActivityApp {...props} /></React.StrictMode>))
-}, (props) => (<ActivityApp {...props} />))
+  // }, (props) => (<ContactsApp {...props} />))
+  /* ACTIVITY APP */
+  // }, (props) => (<React.StrictMode><ActivityApp {...props} /></React.StrictMode>))
+}
+  // ,
+  //  (props) => (<ActivityApp {...props} />)
+)
   .then((app) => {
     // console.log('createAtlasApp - called root.render -app-', app)
     // console.log('createAtlasApp - account-', app.account)
@@ -45,21 +48,14 @@ createAtlasApp(AtlasSdk, {
     // console.log('createAtlasApp - policies-', app.policies)
     // console.log('createAtlasApp - userInstalledApps-', app.userInstalledApps)
 
-    // const root = ReactDOM.createRoot(
-    //   document.getElementById('root') as HTMLElement,
-    // );
-
-    // root.render(
-    //   <React.StrictMode>
-    // <App
-    //   account={app?.account}
-    //   atlasSdk={app?.atlasSdk}
-    //   history={app?.history}
-    //   http={app?.http}
-    //   policies={app?.policies}
-    //   user={app?.user}
-    //   userInstalledApps={app?.userInstalledApps}
-    // />
-    //   </React.StrictMode>
-    // );
+    const root = ReactDOM.createRoot(
+      document.getElementById('root') as HTMLElement,
+    );
+      console.log('Render ->', app)
+    root.render(
+      <React.StrictMode>
+        {/* <ContactsApp {...app} /> */}
+        <ActivityApp {...app} />
+      </React.StrictMode>
+    );
   }).catch((error) => console.log('XAVIER - Unexpected error', error));

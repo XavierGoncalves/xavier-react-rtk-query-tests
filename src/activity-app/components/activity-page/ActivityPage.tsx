@@ -37,7 +37,7 @@ const ActivityPage = () => {
                 >
                     <ActivityHeader />
                     <ActivityToolbar />
-                    <ActivityFiltersToolbar />
+                    {/* <ActivityFiltersToolbar /> */}
                     <Page>
                         <Page.Content>
                             <div>LOCATION--{JSON.stringify(location)}</div>

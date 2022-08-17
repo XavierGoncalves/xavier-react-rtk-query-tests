@@ -33,7 +33,7 @@ export const ActivityFiltersToolbar = ({
           <Text>{t('filtersToolbar.title')}</Text>
         </ActiveFiltersToolbar.Title>
       ) : null}
-      <ActiveFiltersToolbar.Filters>
+      {/* <ActiveFiltersToolbar.Filters>
         {appliedFilters.map(appliedFilter => (
           <ActiveFilter
             key={appliedFilter.name}
@@ -48,7 +48,7 @@ export const ActivityFiltersToolbar = ({
             }}
           />
         ))}
-      </ActiveFiltersToolbar.Filters>
+      </ActiveFiltersToolbar.Filters> */}
       {!isSmallSize(breakpoint) ? (
         <ActiveFiltersToolbar.Actions>
           <Button small secondary onClick={() => onClearClick()}>
