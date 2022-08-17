@@ -7,6 +7,7 @@ import { configureI18n } from "./utils/i18n"
 import { Atlas } from "@atlas/sdk"
 import { createHttpClient } from "./utils/create-http-client"
 import callGateWays from "./utils/call-gateways"
+import { createProtocolsConfig } from "./utils/create-protocols-config"
 
 const createAtlasApp = (atlasSdk: Atlas, opts = {}): Promise<any> => {
     return new Promise(async (resolve) => {
@@ -24,6 +25,7 @@ const createAtlasApp = (atlasSdk: Atlas, opts = {}): Promise<any> => {
                 app.http = await createHttpClient(app.atlasSdk)
                 app = await callGateWays(app, options)
                 await configureI18n(app)
+                await createProtocolsConfig(app.protocolList, app)
                 console.log('finished on launch - app-', app)
             
                 // const root = ReactDOM.createRoot(

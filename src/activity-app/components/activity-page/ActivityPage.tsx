@@ -4,12 +4,14 @@ import { PanelsLayout, Page } from '@cobalt/cobalt-react-components'
 import { useAtlasSdk } from 'titanium/common/context/atlas.context'
 import { useGetActivities } from 'activity-app/react-query/use-get-activities'
 import { useLocation, useSearchParams } from 'react-router-dom'
-import ActivityHeader from '../activity-header/ActivityHeader'
-import ActivityToolbar from '../activity-toolbar/ActivityToolbar'
+import ActivityHeader from 'activity-app/components/activity-header/ActivityHeader'
+import ActivityToolbar from 'activity-app/components/activity-toolbar/ActivityToolbar'
+import ActivityFiltersToolbar from 'activity-app/components/activity-filters-toolbar/activity-filters-toolbar'
+import ActivityTable from 'activity-app/components/activity-table/ActivityTable.component'
 
 const ActivityPage = () => {
-    const location = useLocation()
-    const [search] = useSearchParams()
+    // const location = useLocation()
+    // const [search] = useSearchParams()
     const atlasSdk = useAtlasSdk()
     useGetActivities()
     const { open, visible, element } = useAddToContacts(
@@ -37,14 +39,14 @@ const ActivityPage = () => {
                 >
                     <ActivityHeader />
                     <ActivityToolbar />
-                    {/* <ActivityFiltersToolbar /> */}
+                    <ActivityFiltersToolbar />
                     <Page>
                         <Page.Content>
-                            <div>LOCATION--{JSON.stringify(location)}</div>
-                            <div>SEARCH--{search}</div>
+                            {/* <div>LOCATION--{JSON.stringify(location)}</div>
+                            <div>SEARCH--{search}</div> */}
                             
-                            {/* <ActivityTable />
-                            <ActivityFooter /> */}
+                            <ActivityTable />
+                            {/*<ActivityFooter /> */}
                         </Page.Content>
                     </Page>
                 </div>

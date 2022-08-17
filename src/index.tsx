@@ -6,6 +6,7 @@ import createAtlasApp from 'titanium/common/create-atlas-app';
 import { apiScopes } from 'contacts-app/constants/scopes.constants';
 import { policies } from 'contacts-app/constants/policies.constants';
 import ActivityApp from 'activity-app/app/ActivityApp';
+import { getActivitiesProtocol } from '@titanium/activity-details'
 
 createAtlasApp(AtlasSdk, {
   apiScopes,
@@ -15,7 +16,8 @@ createAtlasApp(AtlasSdk, {
     policies,
     getUserAppsList: true,
     navigationEnabled: true,
-  }
+  },
+  protocolList: getActivitiesProtocol(),
   /*
   react-dom.development.js:86 Warning: Legacy context API has been detected within a strict-mode tree.
   

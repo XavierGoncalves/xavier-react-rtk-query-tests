@@ -1,4 +1,3 @@
-import React from 'react'
 import isNil from 'lodash/isNil'
 import { useTranslation } from 'react-i18next'
 import { AppToolbar } from '@titanium/components'
@@ -6,14 +5,6 @@ import { useGetActivities } from 'activity-app/react-query/use-get-activities'
 import useGetActiveFiltersCount from 'activity-app/hooks/use-get-activefilters-count'
 import { useNavigate } from 'react-router-dom'
 import useCreateSearchParams from 'activity-app/hooks/use-create-search-params'
-
-// {
-//   activeFiltersCount: number.isRequired,
-//   onClickFilters: func.isRequired,
-//   onOrderBy: func.isRequired,
-//   orderBy: object.isRequired,
-//   totalActivitiesCount: number
-// }
 
 const ActivityToolbar = () => {
   const navigate = useNavigate()
@@ -23,7 +14,7 @@ const ActivityToolbar = () => {
   const createUrl = useCreateSearchParams()
   const onClickFilters = () => {
     navigate(createUrl({
-      open: true
+      filtersVisible: true
     }))
   }
   const totalActivitiesCount = data?.total

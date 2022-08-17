@@ -15,12 +15,14 @@ const useAppUrlParams = () => {
     // console.log('useAppUrlParams-params.get-', params.get('search'))
 
     const type = params.get('activityType') || ALL
-    const page = validatePage(params.get('activityType'))
+    const page = validatePage(params.get('page'))
     // const sort = queryStringToSort(params.get('sort'))
     // // const search = queryStringToSearch(params.get('search'))
     // const search = params.get('search')
     // const selectedActivityId = params.get('open')
     const ringGroups: string[] = []
+    const selectedActivityId = params.get('selectedActivityId')
+    const filtersVisible = params.get('filtersVisible') || false
     return {
         page,
         type,
@@ -36,7 +38,8 @@ const useAppUrlParams = () => {
         },
         when: ALL,
         orderBy: {field: 'date', direction: 'desc'},
-        visible: false
+        filtersVisible,
+        selectedActivityId
         // sort, search, selectedActivityId, contactId: contactId || '' 
     }
 }

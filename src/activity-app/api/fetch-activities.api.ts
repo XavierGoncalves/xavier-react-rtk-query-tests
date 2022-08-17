@@ -20,7 +20,7 @@ interface Input {
 }
 
 interface Output {
-    activities,
+    activities: Activity[],
     total: number;
     totalPages: number;
     page: number;

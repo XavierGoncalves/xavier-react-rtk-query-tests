@@ -13,7 +13,8 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import CobaltRoot from '@cobalt/cobalt-react-components'
 import '../../styles.css';
 import ActivityPage from 'activity-app/components/activity-page/ActivityPage';
-import { MemoryRouter } from 'react-router-dom';
+import { BrowserRouter, MemoryRouter, unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
+import { ProtocolsConfigProvider } from 'titanium/common/context/protocols-config.context';
 
 const ActivityApp = (app) => {
     return (
@@ -25,14 +26,16 @@ const ActivityApp = (app) => {
                             <AccountDataProvider value={app?.account}>
                                 <PoliciesProvider value={app?.policies}>
                                     <HttpClientProvider value={app?.http}>
-                                        <QueryClientProvider client={queryClient}>
-                                            <CurrentUserInstalledAppsProvider value={app?.userInstalledApps}>
-                                                <MemoryRouter>
-                                                    <ActivityPage />
-                                                </MemoryRouter>
-                                            </CurrentUserInstalledAppsProvider>
-                                            <ReactQueryDevtools initialIsOpen={false} />
-                                        </QueryClientProvider>
+                                        <ProtocolsConfigProvider value={app?.protocolsConfig}>
+                                            <QueryClientProvider client={queryClient}>
+                                                <CurrentUserInstalledAppsProvider value={app?.userInstalledApps}>
+                                                    <HistoryRouter history={app?.history}>
+                                                        <ActivityPage />
+                                                    </HistoryRouter>
+                                                </CurrentUserInstalledAppsProvider>
+                                                <ReactQueryDevtools initialIsOpen={false} />
+                                            </QueryClientProvider>
+                                        </ProtocolsConfigProvider>
                                     </HttpClientProvider>
                                 </PoliciesProvider>
                             </AccountDataProvider>

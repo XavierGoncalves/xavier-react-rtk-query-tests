@@ -47,25 +47,32 @@ export interface ContactCustomField {
   value: string;
 }
 
+export interface ActivityContact {
+  id: string;
+  name: string;
+  number: string;
+  initials: string;
+  deleted?: boolean;
+}
+
+export interface ActivityAgent {
+  id: string | null;
+  name: string | null;
+}
+
+export interface ActivityNumber {
+  id: string;
+  name: string | null;
+  number: string;
+  friendlyName?: string;
+}
 export interface Activity {
     id: string;
     interactionId: string;
     type: string;
-    agent: {
-      id: string | null;
-      name: string | null;
-    },
-    contact: {
-      id: string;
-      name: string;
-      number: string;
-      initials: string;
-    },
-    number: {
-      id: string;
-      name: string | null;
-      number: string;
-    };
+    agent: ActivityAgent;
+    contact: ActivityContact;
+    number: ActivityNumber;
     date: string;
     ringGroups: string[];
     duration: number;
@@ -86,4 +93,16 @@ export interface AgentFilter {
 export interface ContactFilter {
   id: string;
   label: string | null;
+}
+
+export interface AppliedFilter {
+  name: string;
+  label: string;
+  values: AppliedFilterValue[]
+}
+
+export interface AppliedFilterValue { 
+  value: string;
+  label: string;
+  translate?: boolean; 
 }
