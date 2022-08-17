@@ -15,8 +15,9 @@ import '../../styles.css';
 import ActivityPage from 'activity-app/components/activity-page/ActivityPage';
 import { BrowserRouter, MemoryRouter, unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
 import { ProtocolsConfigProvider } from 'titanium/common/context/protocols-config.context';
+import './app.styles.scss'
 
-const ActivityApp = (app) => {
+const ActivityApp = ({app}: any) => {
     return (
         <ThemeProvider loader={() => AtlasSdk.theme.getConfig()}>
             <ViewportProvider>

@@ -9,7 +9,7 @@ import { perPage } from 'contacts-app/constants/constants'
 
 interface Input {
     http: AxiosInstance;
-    page?: string;
+    page?: number;
     orderBy: OrderBy;
     ringGroups: string[];
     type: string;
@@ -29,7 +29,7 @@ interface Output {
 
 const fetchActivitiesApi = async ({
     http,
-    page = "1",
+    page = 1,
     orderBy,
     ringGroups,
     type,

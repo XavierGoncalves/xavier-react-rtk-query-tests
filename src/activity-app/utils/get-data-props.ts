@@ -6,18 +6,16 @@ interface Output {
   'data-last-contact': string | undefined;
 }
 
-const getDataProps = (i: number, activity: Activity, activities: Activity[] ): Output => {
+const getDataProps = (i: number, activity: Activity, activities: Activity[]): Output => {
   const { id, interactionId } = activity
 
   const isFirstRow = i === 0
   const isLastRow = i === activities.length - 1
-  const previousRow = !isFirstRow ? activities[i - 1] : null
-  const nextRow = !isLastRow ? activities[i + 1] : null
-
+  const previousRow = isFirstRow ? null : activities[i - 1]
+  const nextRow = isLastRow ? null :activities[i + 1] 
   const isFirstContact =
     isFirstRow || previousRow?.interactionId !== interactionId
   const isLastContact = isLastRow || nextRow?.interactionId !== interactionId
-
   return {
     'data-testid': `activity-table__row-${id}`,
     'data-first-contact': isFirstContact ? '' : undefined,

@@ -10,7 +10,7 @@ export function useAtlasProtocol(protocol: string, atlasSdk: Atlas): [boolean, (
         const available = await atlasSdk.protocol.isAvailable(protocol)
         setAvailable(available)
       } catch (error) {
-        console.log('atlasSdk.protocol.isAvailable-error', atlasSdk.protocol)
+        // console.log('atlasSdk.protocol.isAvailable-error', atlasSdk.protocol)
       }
     }
 

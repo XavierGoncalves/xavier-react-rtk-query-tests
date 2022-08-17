@@ -1,0 +1,45 @@
+#root {
+    // height: 100%;
+  
+    // Draws the connections between the contacts inside the same interaction block.
+    // It also conditionally adds the borders to visually separate different interaction
+    // blocks.
+    .co-table[data-table='main'] {
+      tbody tr:not([data-loading]) {
+        border-top: none;
+        td:first-child:before {
+          position: absolute;
+          content: '';
+          top: 0;
+          bottom: 0;
+          width: 8px;
+          background: #f2f4f5;
+          left: 38px;
+        }
+        &[data-first-contact] {
+          border-top: 1px solid var(--gray-300);
+          td:first-child:before {
+            top: 50%;
+          }
+        }
+        &[data-last-contact] {
+          td:first-child:before {
+            bottom: 50%;
+          }
+        }
+        @media screen and (max-width: 960px) and (min-width: 641px) {
+          td:first-child:before {
+            left: 32px;
+          }
+        }
+        @media screen and (max-width: 640px) {
+          td:first-child:before {
+            left: 26px;
+          }
+        }
+      }
+    }
+  }
+  
+  @import 'cobalt-fixes';
+  

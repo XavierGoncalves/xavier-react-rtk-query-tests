@@ -1,6 +1,6 @@
 import * as states from 'activity-app/constants/state.constants'
 
-const computeState = (isError: boolean, isFetching: boolean, activeFiltersCount: number, total?: number) => {
+const computeState = (isError: boolean, isFetching: boolean, activeFiltersCount: number, total: number) => {
     if(isError) {
         return states.STATUS_ERROR
     }

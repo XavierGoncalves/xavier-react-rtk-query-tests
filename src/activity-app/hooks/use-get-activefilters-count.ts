@@ -21,7 +21,7 @@ const useGetActiveFiltersCount = () => {
     }
     return Object.keys(filters).reduce(
         (activeFiltersCount, key) => {
-            console.log('useGetActiveFiltersCount- key->', key , 'defaultFilters[key]->', defaultFilters[key], 'filters[key]->', filters[key])
+            // console.log('useGetActiveFiltersCount- key->', key , 'defaultFilters[key]->', defaultFilters[key], 'filters[key]->', filters[key])
             return isEqual(defaultFilters[key] === filters[key])
             ? activeFiltersCount + 1
             : activeFiltersCount

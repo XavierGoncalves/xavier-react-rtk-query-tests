@@ -54,10 +54,9 @@ createAtlasApp(AtlasSdk, {
       document.getElementById('root') as HTMLElement,
     );
       console.log('Render ->', app)
-    root.render(
-      <React.StrictMode>
-        {/* <ContactsApp {...app} /> */}
-        <ActivityApp {...app} />
-      </React.StrictMode>
-    );
+    root.render(<ActivityApp app={app} />)
+      {/* <React.StrictMode>
+         <ContactsApp {...app} /> */}
+        
+      {/*  </React.StrictMode> */}
   }).catch((error) => console.log('XAVIER - Unexpected error', error));

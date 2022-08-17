@@ -27,7 +27,7 @@ const ActivityWrapper = styled.div`
 const ActivityTableRows = () => {
     const { data } = useGetActivities()
     const navigate = useNavigate()
-    const activities = data?.activities || []
+    const activities = data?.activities
     const { selectedActivityId } = useAppUrlParams()
     const [t] = useTranslation()
     const userPolicies = usePolicies()
@@ -43,7 +43,7 @@ const ActivityTableRows = () => {
 
     return (<>
         {
-            activities.map((activity, i) => {
+            activities && activities.map((activity, i) => {
                 const {
                     id,
                     type,

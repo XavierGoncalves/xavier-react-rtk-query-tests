@@ -38,7 +38,7 @@ const ActivityTableLarge = ({
   const [t] = useTranslation()
   const { data, isError, isFetching, refetch } = useGetActivities()
   const activeFilterCount = useGetActiveFiltersCount()
-  const status = computeState(isError,isFetching, activeFilterCount, data?.total)
+  const status = computeState(isError,isFetching, activeFilterCount, data?.total || 0)
   const onRetryClick = () => {
     refetch()
   }

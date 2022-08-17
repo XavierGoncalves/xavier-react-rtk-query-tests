@@ -1,4 +1,7 @@
-export const getDataProps = (i, activity, activities) => {
+import { Activity } from "types"
+
+
+const getDataProps = (i: number, activity: Activity, activities: Activity[]) => {
   const { id, interactionId } = activity
 
   const isFirstRow = i === 0
@@ -7,8 +10,8 @@ export const getDataProps = (i, activity, activities) => {
   const nextRow = !isLastRow ? activities[i + 1] : null
 
   const isFirstContact =
-    isFirstRow || previousRow.interactionId !== interactionId
-  const isLastContact = isLastRow || nextRow.interactionId !== interactionId
+    isFirstRow || previousRow?.interactionId !== interactionId
+  const isLastContact = isLastRow || nextRow?.interactionId !== interactionId
 
   return {
     'data-testid': `activity-table__row-${id}`,
@@ -16,3 +19,5 @@ export const getDataProps = (i, activity, activities) => {
     'data-last-contact': isLastContact ? '' : undefined
   }
 }
+
+export default getDataProps
