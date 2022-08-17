@@ -13,7 +13,7 @@ export const useGetActivities = () => {
         ringGroups,
         contact,
         agent,
-        orderBy,
+        sortBy,
         when
     } = useAppUrlParams()
     return useQuery(['activities', 'list', { 
@@ -22,9 +22,10 @@ export const useGetActivities = () => {
         via,
         ringGroups,
         contact,
-        agent 
+        agent, 
+        sortBy
     }], () => fetchActivitiesApi({
-        orderBy,
+        sortBy,
         page,
         type,
         via,
@@ -46,7 +47,7 @@ export const usePrefetchGetActivities = () => {
         ringGroups,
         contact,
         agent,
-        orderBy,
+        sortBy,
         when
     } = useAppUrlParams()
     return (page: number) => queryClient.prefetchQuery(['activities', 'list', { 
@@ -57,7 +58,7 @@ export const usePrefetchGetActivities = () => {
         contact,
         agent 
     }], () => fetchActivitiesApi({
-        orderBy,
+        sortBy,
         page,
         type,
         via,

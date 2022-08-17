@@ -2,7 +2,8 @@ import { useContext } from 'react'
 import { Viewport } from '@cobalt/cobalt-react-components'
 // import { ActivityTableSmall } from './activity-table-small.component'
 import { useProtocolsConfig } from 'titanium/common/context/protocols-config.context'
-import ActivityTableLarge from 'activity-app/components/activity-table/ActivityTableLarge.component'
+import ActivityTableLarge from 'activity-app/components/activity-table/table-large/ActivityTableLarge.component'
+import ActivityTableSmall from './table-small/ActivityTableSmall.component'
 
 const SMALL = 'small'
 
@@ -18,17 +19,11 @@ const SMALL = 'small'
 // onRetryClick: fetchActivities,
 // onOrderByClick: orderBy
 
-const ActivityTable = ({ ...props }) => {
+const ActivityTable = () => {
   const breakpoint = useContext(Viewport.Context)
-  const protocolConfigList = useProtocolsConfig()
-  const updatedProps = {
-    ...props,
-    protocolConfigList
-  }
 
   return breakpoint === SMALL ? (
-    <div>TABLE SMALL</div>
-    // <ActivityTableSmall {...updatedProps} />
+    <ActivityTableSmall />
   ) : (
     <ActivityTableLarge />
   )

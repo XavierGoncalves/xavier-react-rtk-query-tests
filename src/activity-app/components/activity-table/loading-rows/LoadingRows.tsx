@@ -2,10 +2,11 @@ import LoadingRow from "activity-app/components/activity-table/loading-rows/load
 
 interface Props {
     numberOfRows: number;
+    small?: boolean;
 }
 
-const LoadingRows = ({ numberOfRows }: Props) =>
-    <>{[...Array(numberOfRows).keys()].map(i => <LoadingRow key={i} />)}</>
+const LoadingRows = ({ numberOfRows, small = false }: Props) =>
+    <>{[...Array(numberOfRows).keys()].map(i => <LoadingRow key={i} small={small} />)}</>
 
 
 export default LoadingRows

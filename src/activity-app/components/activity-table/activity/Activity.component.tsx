@@ -31,13 +31,12 @@ import { ActivityContact } from 'types'
 // }
 
 interface Props {
-  active: boolean;
   contact: ActivityContact
   date?: string;
   type: string;
 }
 
-const Activity = ({ active, contact, date, type }: Props) => {
+const Activity = ({ contact, date, type }: Props) => {
   const { timezone } = useAccountData()
   const atlasSdk = useAtlasSdk()
   const [hasContactsApp, triggerContactDetails] = useContactDetails(atlasSdk)

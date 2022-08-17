@@ -102,12 +102,12 @@ const DetailsPage = () => {
   useEffect(() => {
     async function togglePortal() {
       if (selectedTab === ACTIVITY_TAB && Boolean(contactId)) {
-        console.log('togglePortal - called open - contactId-> ', contactId, '<-currentPage->', pageRef.current, '<-selectedActivityId->', selectedActivityId)
+        // console.log('togglePortal - called open - contactId-> ', contactId, '<-currentPage->', pageRef.current, '<-selectedActivityId->', selectedActivityId)
         try {
           await open(contactId, pageRef.current, selectedActivityId)
 
         } catch (error) {
-          console.log('togglePortal- error-', error)
+          // console.log('togglePortal- error-', error)
         }
       } else {
         close()

@@ -1,14 +1,14 @@
 import { useTranslation } from "react-i18next"
 import { QuickActions } from '@titanium/activity-details'
 import { Duration, ReadableDate, RingGroupList } from '@titanium/components'
-import Activity from '../activity/Activity.component'
+import Activity from '../../activity/Activity.component'
 import styled from 'styled-components'
 import { Table } from '@cobalt/cobalt-react-components'
 import useAppUrlParams from "activity-app/hooks/use-app-url-params"
 import isDigitalInteraction from "activity-app/utils/is-digital-interaction"
 import isExternalActivity from "activity-app/utils/is-external-activity"
 import { useGetActivities } from "activity-app/react-query/use-get-activities"
-import Agent from "../agent/Agent.component"
+import Agent from "../../agent/Agent.component"
 import getDataProps from "activity-app/utils/get-data-props"
 import { usePolicies } from "titanium/common/context/policies.context"
 import { useCurrentUser } from "titanium/common/context/user.context"
@@ -24,7 +24,7 @@ const ActivityWrapper = styled.div`
   }
 `
 
-const ActivityTableRows = () => {
+const TableLargeRows = () => {
     const { data } = useGetActivities()
     const navigate = useNavigate()
     const activities = data?.activities
@@ -73,7 +73,6 @@ const ActivityTableRows = () => {
                         <Table.Data truncated>
                             <ActivityWrapper>
                                 <Activity
-                                    active={active}
                                     type={type}
                                     contact={contact}
                                 />
@@ -114,4 +113,4 @@ const ActivityTableRows = () => {
     </>)
 }
 
-export default ActivityTableRows
+export default TableLargeRows

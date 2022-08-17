@@ -1,7 +1,7 @@
 import { useLocation, useParams, useSearchParams } from "react-router-dom"
-import queryStringToPage from "contacts-app/utils/query-string-to-page"
-import queryStringToSearch from "contacts-app/utils/query-string-to-search"
-import queryStringToSort from "contacts-app/utils/query-string-to-sort"
+import queryStringToPage from "activity-app/utils/query-string-to-page"
+// import queryStringToSearch from "activity-app/utils/query-string-to-search"
+import queryStringToSort from "activity-app/utils/query-string-to-sort"
 import { ALL } from "activity-app/constants/filters.constants"
 import validatePage from "activity-app/utils/validate-page"
 
@@ -16,7 +16,7 @@ const useAppUrlParams = () => {
 
     const type = params.get('activityType') || ALL
     const page = validatePage(params.get('page'))
-    // const sort = queryStringToSort(params.get('sort'))
+    const sortBy = queryStringToSort(params.get('sortBy'))
     // // const search = queryStringToSearch(params.get('search'))
     // const search = params.get('search')
     // const selectedActivityId = params.get('open')
@@ -37,9 +37,9 @@ const useAppUrlParams = () => {
             name: null
         },
         when: ALL,
-        orderBy: {field: 'date', direction: 'desc'},
         filtersVisible,
-        selectedActivityId
+        selectedActivityId,
+        sortBy
         // sort, search, selectedActivityId, contactId: contactId || '' 
     }
 }

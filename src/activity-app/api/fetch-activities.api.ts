@@ -3,14 +3,14 @@ import getRequestParams from 'activity-app/utils/get-request-params'
 import presentActivity from 'activity-app/utils/present-activity'
 import get from 'lodash/get'
 import paramsSerializer from 'activity-app/utils/params-serializer'
-import { Activity, AgentFilter, ContactFilter, OrderBy } from 'types'
+import { Activity, AgentFilter, ContactFilter, SortType } from 'types'
 import { AxiosInstance } from 'axios'
 import { perPage } from 'contacts-app/constants/constants'
 
 interface Input {
     http: AxiosInstance;
     page?: number;
-    orderBy: OrderBy;
+    sortBy: SortType;
     ringGroups: string[];
     type: string;
     via: string;
@@ -30,7 +30,7 @@ interface Output {
 const fetchActivitiesApi = async ({
     http,
     page = 1,
-    orderBy,
+    sortBy,
     ringGroups,
     type,
     via,
@@ -42,7 +42,7 @@ const fetchActivitiesApi = async ({
         params: {
             page,
             per_page: perPage,
-            ...getRequestParams({ orderBy }),
+            ...getRequestParams(sortBy),
             ...getRequestFilters({
                 ringGroups,
                 type,

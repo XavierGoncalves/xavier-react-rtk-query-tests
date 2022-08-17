@@ -1,25 +1,17 @@
 import { Table } from '@cobalt/cobalt-react-components'
 import { useTranslation } from 'react-i18next'
-import * as statusTypes from '../../constants/state.constants'
-import EmptyState from './empty-state/EmptyState.component'
+import * as statusTypes from '../../../constants/state.constants'
+import EmptyState from '../empty-state/EmptyState.component'
 import LoadingRows from 'activity-app/components/activity-table/loading-rows/LoadingRows'
 import { useGetActivities } from 'activity-app/react-query/use-get-activities'
 import computeState from 'activity-app/utils/compute-state'
 import useGetActiveFiltersCount from 'activity-app/hooks/use-get-activefilters-count'
 import isEmptyStatus from 'activity-app/utils/is-empty-status'
-import ActivityTableRows from './table-rows/TableRows.component'
+import TableLargeRows from './table-rows/TableLargeRows.component'
+import sortToQuery from 'activity-app/utils/sort-to-query'
+import { useNavigate } from 'react-router-dom'
+import useCreateSearchParams from 'activity-app/hooks/use-create-search-params'
 
-
-// {
-//   activeRowId: PropTypes.string,
-//   numberOfRows: PropTypes.number,
-//   onOrderByClick: PropTypes.func.isRequired,
-//   onRetryClick: PropTypes.func.isRequired,
-//   onRowClick: PropTypes.func,
-//   status: PropTypes.oneOf(statusTypes.ALL_STATUS),
-//   whiteLabel: PropTypes.bool,
-//   accountTimezone: PropTypes.string.isRequired
-// }
 
 const UP = Table.Header.SORT_DIRECTION.UP
 const DOWN = Table.Header.SORT_DIRECTION.DOWN
@@ -32,21 +24,26 @@ const WIDTHS = {
   RING_GROUPS: Table.Data.WIDTH[30]
 }
 
-const ActivityTableLarge = ({
-  whiteLabel = false,
-}) => {
+const ActivityTableLarge = () => {
   const [t] = useTranslation()
+  const navigate = useNavigate()
+  const createUrl = useCreateSearchParams()
   const { data, isError, isFetching, refetch } = useGetActivities()
   const activeFilterCount = useGetActiveFiltersCount()
   const status = computeState(isError,isFetching, activeFilterCount, data?.total || 0)
   const onRetryClick = () => {
     refetch()
   }
+  const onOrderBy = (field: string, direction: string) => {
+    navigate(createUrl({
+      ...sortToQuery({ field, direction: direction === UP ? 'asc' : 'desc' }),
+      selectedActivityId: undefined,
+    }))
+  }
   return isEmptyStatus(status) ? (
     <EmptyState
       status={status}
       onRetryClick={onRetryClick}
-      whiteLabel={whiteLabel}
     />
   ) : (
     <Table sortable selectable data-table="main">
@@ -63,6 +60,9 @@ const ActivityTableLarge = ({
             defaultSortDirection={DOWN}
             sortable
             sortSequence={[UP, DOWN]}
+            onSortDirectionChange={sortDirection =>
+              onOrderBy('date', sortDirection)
+            }
           >
             {t('fields.date.label')}
           </Table.Header>
@@ -76,7 +76,7 @@ const ActivityTableLarge = ({
       </Table.Head>
       <Table.Body>
         {status === statusTypes.STATUS_READY ? (
-          <ActivityTableRows />
+          <TableLargeRows />
         ) : (
           <LoadingRows numberOfRows={10} />
         )}
