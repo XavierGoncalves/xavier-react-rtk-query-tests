@@ -35,7 +35,7 @@ const TableLargeRows = () => {
     const { timezone } = useAccountData()
     const userInstalledApps = useCurrentUserInstalledApps()
     const protocolConfigList = useProtocolsConfig()
-    const createUrl = useCreateSearchParams()
+    const { createUrl } = useCreateSearchParams()
 
     const onRowClick = (activityId: string) => {
         navigate(createUrl({ selectedActivityId: activityId }))

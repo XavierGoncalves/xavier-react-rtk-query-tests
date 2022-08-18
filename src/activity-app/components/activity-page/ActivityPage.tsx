@@ -1,5 +1,4 @@
 import { useAddToContacts } from '@contacts/creation-app-sdk'
-import { useState } from 'react'
 import { PanelsLayout, Page } from '@cobalt/cobalt-react-components'
 import { useAtlasSdk } from 'titanium/common/context/atlas.context'
 import { useGetActivities } from 'activity-app/react-query/use-get-activities'
@@ -14,18 +13,18 @@ import useAppUrlParams from 'activity-app/hooks/use-app-url-params'
 import useCreateSearchParams from 'activity-app/hooks/use-create-search-params'
 import { EditContactInput } from 'types'
 import ActivityDetails from '../activity-details/activity-details.component'
+import ActivityFilters from '../activity-filters/ActivityFilters.component'
 
 const ActivityPage = () => {
     const atlasSdk = useAtlasSdk()
     const navigate = useNavigate()
-    const createUrl = useCreateSearchParams()
+    const { createUrl } = useCreateSearchParams()
     useGetActivities()
     const { open, visible, element } = useAddToContacts(
         process.env.CONTACT_CREATION_APP_ID,
         atlasSdk
     )
     const { filtersVisible, selectedActivityId } = useAppUrlParams()
-    const [_, setFiltersVisible] = useState<boolean>(false)
 
     const onEditContact = async ({ id, number }: EditContactInput) => {
         await open(number, id)
@@ -67,12 +66,12 @@ const ActivityPage = () => {
             <PanelsLayout.Panel
                 id="filters-panel"
                 small
-                active={filtersVisible}
-                overlay={filtersVisible}
+                active={Boolean(filtersVisible)}
+                overlay={Boolean(filtersVisible)}
                 onClickOutside={() => onCloseFilters()}
                 over
             >
-                {/* <ActivityFilters onClose={onCloseFilters} /> */}
+                <ActivityFilters />
             </PanelsLayout.Panel>
             <PanelsLayout.Panel active={visible} id="contacts-panel" over>
                 <div

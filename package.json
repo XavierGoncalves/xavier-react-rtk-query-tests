@@ -19,6 +19,7 @@
     "@cobalt/react-typography": "^1.5.0",
     "@cobalt/react-viewport-provider": "^1.2.0",
     "@contact-activities/contact-activities-sdk": "^1.0.2",
+    "@contacts/contact-dropdown": "^0.2.3",
     "@contacts/creation-app-sdk": "^0.0.1",
     "@talkdesk/phone-info": "^0.3.0",
     "@tanstack/react-query": "^4.1.0",

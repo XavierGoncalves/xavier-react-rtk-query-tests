@@ -5,7 +5,7 @@ import EmptyState from '../empty-state/EmptyState.component'
 import LoadingRows from 'activity-app/components/activity-table/loading-rows/LoadingRows'
 import { useGetActivities } from 'activity-app/react-query/use-get-activities'
 import computeState from 'activity-app/utils/compute-state'
-import useGetActiveFiltersCount from 'activity-app/hooks/use-get-activefilters-count'
+import useGetAppliedFiltersCount from 'activity-app/hooks/use-get-applied-filters-count'
 import isEmptyStatus from 'activity-app/utils/is-empty-status'
 import TableLargeRows from './table-rows/TableLargeRows.component'
 import sortToQuery from 'activity-app/utils/sort-to-query'
@@ -27,10 +27,10 @@ const WIDTHS = {
 const ActivityTableLarge = () => {
   const [t] = useTranslation()
   const navigate = useNavigate()
-  const createUrl = useCreateSearchParams()
+  const { createUrl } = useCreateSearchParams()
   const { data, isError, isFetching, refetch } = useGetActivities()
-  const activeFilterCount = useGetActiveFiltersCount()
-  const status = computeState(isError,isFetching, activeFilterCount, data?.total || 0)
+  const activeFilterCount = useGetAppliedFiltersCount()
+  const status = computeState(isError, isFetching, activeFilterCount, data?.total || 0)
   const onRetryClick = () => {
     refetch()
   }

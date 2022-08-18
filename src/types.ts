@@ -1,7 +1,4 @@
-import { Atlas } from "@atlas/sdk/lib/src/atlas/atlas";
-
 export {};
-
 declare global {
   interface Window {
     env;
@@ -85,6 +82,29 @@ export interface OrderBy {
   field: string;
   direction: string;
 }
+
+export interface Filters {
+  agent: AgentFilter;
+  contact: ContactFilter;
+  ringGroups: string[];
+  type: string;
+  via: string;
+  when: string;
+}
+
+export enum ActionTypes {
+  RESET_FILTERS = "RESET_FILTERS",
+  SET_ACTIVITY_TYPE = "SET_ACTIVITY_TYPE"
+}
+
+export type SetFilterAction = {
+  type: ActionTypes.RESET_FILTERS;
+  payload: Filters;
+} | {
+  type: ActionTypes.SET_ACTIVITY_TYPE;
+  payload: string;
+}
+
 
 export interface AgentFilter {
   id: string;

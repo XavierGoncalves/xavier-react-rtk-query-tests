@@ -7,13 +7,13 @@ import TableSmallRows from 'activity-app/components/activity-table/table-small/t
 import isEmptyStatus from 'activity-app/utils/is-empty-status'
 import computeState from 'activity-app/utils/compute-state'
 import { useGetActivities } from 'activity-app/react-query/use-get-activities'
-import useGetActiveFiltersCount from 'activity-app/hooks/use-get-activefilters-count'
+import useGetAppliedFiltersCount from 'activity-app/hooks/use-get-applied-filters-count'
 
 const DEFAULT_PAGE_SIZE = 10
 
 const ActivityTableSmall = () => {
   const { data, isError, isFetching, refetch } = useGetActivities()
-  const activeFilterCount = useGetActiveFiltersCount()
+  const activeFilterCount = useGetAppliedFiltersCount()
   const status = computeState(isError,isFetching, activeFilterCount, data?.total || 0)
   const onRetryClick = () => {
     refetch()

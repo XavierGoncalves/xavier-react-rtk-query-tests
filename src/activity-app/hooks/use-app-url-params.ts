@@ -14,7 +14,7 @@ const useAppUrlParams = () => {
     // console.log('useAppUrlParams-useSearchParams-params- page-', params.get('page'))
     // console.log('useAppUrlParams-params.get-', params.get('search'))
 
-    const type = params.get('activityType') || ALL
+    const type = params.get('type') || ALL
     const page = validatePage(params.get('page'))
     const sortBy = queryStringToSort(params.get('sortBy'))
     // // const search = queryStringToSearch(params.get('search'))

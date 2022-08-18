@@ -25,7 +25,7 @@ const TableSmallRows = () => {
     const userInstalledApps = useCurrentUserInstalledApps()
     const protocolConfigList = useProtocolsConfig()
     const { id: userId } = useCurrentUser()
-    const createUrl = useCreateSearchParams()
+    const { createUrl } = useCreateSearchParams()
     const { data } = useGetActivities()
     const activities = data?.activities
 

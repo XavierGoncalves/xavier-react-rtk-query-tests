@@ -6,17 +6,19 @@ import isSmallSize from 'activity-app/utils/is-small-size'
 import { useNavigate } from 'react-router-dom'
 import { ROOT_URL } from 'activity-app/constants/url.constants'
 import useGetAppliedFilters from 'activity-app/hooks/use-get-applied-filters'
+import useCreateSearchParams from 'activity-app/hooks/use-create-search-params'
 
 export const ActivityFiltersToolbar = () => {
   const [t] = useTranslation()
   const navigate = useNavigate()
   const breakpoint = useContext(Viewport.Context)
-  const onDismissClick = (name: string, value: string) => {
-    console.log('onDismissClick-name->', name, '<-value->', value)
+  const { createUrl } = useCreateSearchParams()
+  const onDismissClick = (filterName: string, value: string) => {
+    console.log('onDismissClick-name->', filterName, '<-value->', value)
     // remove filter from URL and navigate to it
-    // navigate(createUrl({
-    //   open: true
-    // }))
+    navigate(createUrl({
+      [filterName]: undefined
+    }))
   }
   const appliedFilters = useGetAppliedFilters()
   const onClearClick = () => navigate(ROOT_URL)

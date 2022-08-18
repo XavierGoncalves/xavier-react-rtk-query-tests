@@ -1,6 +1,6 @@
 import useAppUrlParams from 'activity-app/hooks/use-app-url-params'
 import useCreateSearchParams from 'activity-app/hooks/use-create-search-params'
-import useGetActiveFiltersCount from 'activity-app/hooks/use-get-activefilters-count'
+import useGetAppliedFiltersCount from 'activity-app/hooks/use-get-applied-filters-count'
 import { useGetActivities, usePrefetchGetActivities } from 'activity-app/react-query/use-get-activities'
 import computeState from 'activity-app/utils/compute-state'
 import { useTranslation } from 'react-i18next'
@@ -27,9 +27,9 @@ const ActivityFooter = () => {
   const { page: currentPage } = useAppUrlParams()
   const totalPages = data?.totalPages || 0
   const total = data?.total || 0
-  const activeFiltersCount = useGetActiveFiltersCount()
-  const status = computeState(isError,isFetching,activeFiltersCount, total)
-  const createUrl = useCreateSearchParams()
+  const activeFiltersCount = useGetAppliedFiltersCount()
+  const status = computeState(isError, isFetching, activeFiltersCount, total)
+  const { createUrl } = useCreateSearchParams()
   const navigate = useNavigate()
   const prefetchGetActivities = usePrefetchGetActivities()
   const onPageClick = (page: number) => {

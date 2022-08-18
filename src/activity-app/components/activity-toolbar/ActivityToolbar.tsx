@@ -2,7 +2,7 @@ import isNil from 'lodash/isNil'
 import { useTranslation } from 'react-i18next'
 import { AppToolbar } from '@titanium/components'
 import { useGetActivities } from 'activity-app/react-query/use-get-activities'
-import useGetActiveFiltersCount from 'activity-app/hooks/use-get-activefilters-count'
+import useGetAppliedFiltersCount from 'activity-app/hooks/use-get-applied-filters-count'
 import { useNavigate } from 'react-router-dom'
 import useCreateSearchParams from 'activity-app/hooks/use-create-search-params'
 import useAppUrlParams from 'activity-app/hooks/use-app-url-params'
@@ -12,9 +12,9 @@ const ActivityToolbar = () => {
   const navigate = useNavigate()
   const [t] = useTranslation()
   const { data, isFetching } = useGetActivities()
-  const activeFiltersCount = useGetActiveFiltersCount()
+  const activeFiltersCount = useGetAppliedFiltersCount()
   const { sortBy } = useAppUrlParams()
-  const createUrl = useCreateSearchParams()
+  const { createUrl } = useCreateSearchParams()
   const onClickFilters = () => {
     navigate(createUrl({
       filtersVisible: true
