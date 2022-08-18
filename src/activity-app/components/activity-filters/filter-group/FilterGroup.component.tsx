@@ -24,6 +24,7 @@ import useGetScopePermission from 'activity-app/hooks/use-get-scope-permission'
 import { ROOT_URL } from 'activity-app/constants/url.constants'
 import diffBetweenObjects from 'activity-app/utils/diff-between-objects'
 import useGetCurrentFilters from 'activity-app/hooks/use-get-current-filters'
+import ContactFilter from '../contact-filter/ContactFilter.component'
 
 
 // FilterGroup.propTypes = {
@@ -50,13 +51,17 @@ const Title = styled.h2`
 
 const filterReducer = (state: Filters, action: SetFilterAction) => {
   switch (action.type) {
-    case ActionTypes.SET_ACTIVITY_TYPE:
+    case ActionTypes.SET_ACTIVITY_TYPE: {
       return {
         ...state,
         type: action.payload
       }
+    }     
     case ActionTypes.RESET_FILTERS: {
-      return { ...action.payload }
+      return { ...state, ...action.payload }
+    }
+    case ActionTypes.SET_CONTACT: {
+      return { ...state, ...action.payload }
     }
     default:
       return state
@@ -67,8 +72,8 @@ interface Props {
 }
 
 const FilterGroup = (
-    // {
-      // currentFilters
+  // {
+  // currentFilters
   //   activeFilters,
   //   onAgentFilterInit,
   //   onApplyClick,
@@ -108,8 +113,8 @@ const FilterGroup = (
     //apply filters different than default to the url
     //close the filters sidepanel
     const teste = diffBetweenObjects(defaultFilters, filters)
-    console.log('onApplyClickHandler - teste->', teste)
-    navigate(createUrl({
+    // console.log('onApplyClickHandler - teste->', teste)
+    navigate(createUrlFromRoot({
       ...teste,
       filtersVisible: undefined
     }))
@@ -159,19 +164,19 @@ const FilterGroup = (
                     />
                   </Grid.Column>
                 </Grid.Group>
-                {/* <Grid.Group gutters={Grid.Group.HALF_GUTTERS}>
+                <Grid.Group gutters={Grid.Group.HALF_GUTTERS}>
                   <Grid.Column>
                     <ContactFilter
-                      onChange={value =>
-                        setSelectedFilters({
-                          ...selectedFilters,
-                          contact: value
+                      onChange={(value) => {
+                        setFilters({
+                          type: ActionTypes.SET_CONTACT,
+                          payload: { contact: value }
                         })
-                      }
-                      selectedContact={selectedFilters.contact}
+                      }}
+                      value={filters.contact.id}
                     />
                   </Grid.Column>
-                </Grid.Group> */}
+                </Grid.Group>
                 {/* {!isAgentScope && (
                   <Grid.Group gutters={Grid.Group.HALF_GUTTERS}>
                     <Grid.Column>

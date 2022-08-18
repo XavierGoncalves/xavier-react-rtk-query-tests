@@ -23,14 +23,17 @@ const useAppUrlParams = () => {
     const ringGroups: string[] = []
     const selectedActivityId = params.get('selectedActivityId')
     const filtersVisible = params.get('filtersVisible') || false
+    const contactId = params.get('contact[id]') || ALL
+    const contactLabel = params.get('contact[label]') || null
+    debugger
     return {
         page,
         type,
         via: ALL,
         ringGroups,
         contact: {
-            id: ALL,
-            label: null
+            id: contactId,
+            label: contactLabel
         },
         agent: {
             id: ALL,

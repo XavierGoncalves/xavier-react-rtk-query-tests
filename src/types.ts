@@ -1,4 +1,4 @@
-export {};
+export { };
 declare global {
   interface Window {
     env;
@@ -64,18 +64,18 @@ export interface ActivityNumber {
   friendlyName?: string;
 }
 export interface Activity {
-    id: string;
-    interactionId: string;
-    type: string;
-    agent: ActivityAgent;
-    contact: ActivityContact;
-    number: ActivityNumber;
-    date: string;
-    ringGroups: string[];
-    duration: number;
-    account_id: string;
-    channel_type?: string;
-    ivr?: string[];
+  id: string;
+  interactionId: string;
+  type: string;
+  agent: ActivityAgent;
+  contact: ActivityContact;
+  number: ActivityNumber;
+  date: string;
+  ringGroups: string[];
+  duration: number;
+  account_id: string;
+  channel_type?: string;
+  ivr?: string[];
 }
 
 export interface OrderBy {
@@ -94,7 +94,8 @@ export interface Filters {
 
 export enum ActionTypes {
   RESET_FILTERS = "RESET_FILTERS",
-  SET_ACTIVITY_TYPE = "SET_ACTIVITY_TYPE"
+  SET_ACTIVITY_TYPE = "SET_ACTIVITY_TYPE",
+  SET_CONTACT = "SET_CONTACT"
 }
 
 export type SetFilterAction = {
@@ -103,6 +104,9 @@ export type SetFilterAction = {
 } | {
   type: ActionTypes.SET_ACTIVITY_TYPE;
   payload: string;
+} | {
+  type: ActionTypes.SET_CONTACT;
+  payload: { contact: ContactFilter };
 }
 
 
@@ -122,13 +126,13 @@ export interface AppliedFilter {
   values: AppliedFilterValue[]
 }
 
-export interface AppliedFilterValue { 
+export interface AppliedFilterValue {
   value: string;
   label: string;
-  translate?: boolean; 
+  translate?: boolean;
 }
 
-export type onEditContactFn = ({id, number}: EditContactInput) => void;
+export type onEditContactFn = ({ id, number }: EditContactInput) => void;
 export interface EditContactInput {
   id: string | null;
   number: string | null;

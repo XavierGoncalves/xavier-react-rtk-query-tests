@@ -64,10 +64,11 @@ const merdas = [
 
 const FILTERS_SORT_ORDER = {
     type: 1,
-    agent: 2,
-    when: 3,
-    ringGroups: 4,
-    via: 5
+    contact: 2,
+    agent: 3,
+    when: 4,
+    ringGroups: 5,
+    via: 6
 }
 
 const FILTER_LABELS = {
@@ -118,7 +119,7 @@ const getFilterValueLabel = (name, value, props) =>
     //         label: via ? via.name || via.number : null
     //     }
     // },
-    // contact: value => ({ label: value.label })
+    contact: value => ({ label: value.label })
 }[name](value, props))
 
 const useGetAppliedFilters = (): AppliedFilter[] => {
@@ -140,6 +141,7 @@ const useGetAppliedFilters = (): AppliedFilter[] => {
     }
     const { id: userId } = useCurrentUser()
     const appliedFilters = diffBetweenObjects(defaultFilters, filters)
+    console.log('useGetAppliedFilters - appliedFilters->', Object.keys(appliedFilters).sort(compareFilters))
     const teste = Object.keys(appliedFilters).sort(compareFilters).map(filterName => ({
         name: filterName,
         label: FILTER_LABELS[filterName],
