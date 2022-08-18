@@ -86,7 +86,7 @@ const ActivityDetails = ({
       </PanelsLayout.Content>
       <Divider noMargin />
       {!isDigitalInteractionFlag && !isUnknownType && (
-        // <div className='titanium'>
+        <div className="titanium">
           <RecordingPlayer
             key={id}
             interactionId={interactionId}
@@ -100,7 +100,7 @@ const ActivityDetails = ({
               <RecordingPlayer.DownloadBtn proxyUrl={process.env.PROXY_URL} />
             )}
           </RecordingPlayer>
-        // </div>
+        </div>
       )}
     </>
   )
