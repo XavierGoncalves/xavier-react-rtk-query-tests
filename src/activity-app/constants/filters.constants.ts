@@ -13,3 +13,4 @@ export const defaultFilters: Filters = {
     via: ALL,
     when: ALL,
 }
+export const ALL_USER = { id: ALL, name: null }

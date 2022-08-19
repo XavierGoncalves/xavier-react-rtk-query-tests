@@ -31,7 +31,6 @@
     "presence-hub:read",
     "apps:graphql",
     "activity-subscriptions:write",
-    "interaction-contacts:read",
     "interaction-contacts:read"
   ],
   "assets": {

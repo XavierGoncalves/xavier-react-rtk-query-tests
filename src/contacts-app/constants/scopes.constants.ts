@@ -11,5 +11,6 @@ export const apiScopes = [
     'account-favorites:read',
     'account-custom-fields:read',
     'apps:graphql',
-    'interaction-contacts:read'
+    'interaction-contacts:read',
+    "ring-groups:read"
 ]

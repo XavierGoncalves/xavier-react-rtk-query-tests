@@ -95,7 +95,10 @@ export interface Filters {
 export enum ActionTypes {
   RESET_FILTERS = "RESET_FILTERS",
   SET_ACTIVITY_TYPE = "SET_ACTIVITY_TYPE",
-  SET_CONTACT = "SET_CONTACT"
+  SET_CONTACT = "SET_CONTACT",
+  SET_AGENT = "SET_AGENT",
+  SET_WHEN = "SET_WHEN",
+  SET_RING_GROUP = "SET_RING_GROUP"
 }
 
 export type SetFilterAction = {
@@ -103,10 +106,19 @@ export type SetFilterAction = {
   payload: Filters;
 } | {
   type: ActionTypes.SET_ACTIVITY_TYPE;
-  payload: string;
+  payload: { type: string };
 } | {
   type: ActionTypes.SET_CONTACT;
   payload: { contact: ContactFilter };
+} | {
+  type: ActionTypes.SET_AGENT;
+  payload: { agent: AgentFilter };
+} | {
+  type: ActionTypes.SET_WHEN;
+  payload: { when: string };
+} | {
+  type: ActionTypes.SET_RING_GROUP;
+  payload: { ringGroups: string[] };
 }
 
 
@@ -136,4 +148,13 @@ export type onEditContactFn = ({ id, number }: EditContactInput) => void;
 export interface EditContactInput {
   id: string | null;
   number: string | null;
+}
+
+export interface User {
+  id: string;
+  name: string;
+}
+
+export interface RingGroup {
+  name: string
 }

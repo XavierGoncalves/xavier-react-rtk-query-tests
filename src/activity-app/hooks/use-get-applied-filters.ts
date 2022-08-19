@@ -99,20 +99,20 @@ const getFilterValueLabel = (name, value, props) =>
         label: getActivityType(value).name,
         translate: true
     }),
-    // agent: (value, { userId }) => {
-    //     if (value.id === userId) {
-    //         return {
-    //             label: 'fields.agent.me',
-    //             translate: true
-    //         }
-    //     } else {
-    //         return {
-    //             label: value ? value.name : null
-    //         }
-    //     }
-    // },
-    // when: value => ({ label: WHEN_LABELS[value], translate: true }),
-    // ringGroups: value => ({ label: value }),
+    agent: (value, { userId }) => {
+        if (value.id === userId) {
+            return {
+                label: 'fields.agent.me',
+                translate: true
+            }
+        } else {
+            return {
+                label: value ? value.name : null
+            }
+        }
+    },
+    when: value => ({ label: WHEN_LABELS[value], translate: true }),
+    ringGroups: value => ({ label: value }),
     // via: (value, { phoneNumbers }) => {
     //     const via = phoneNumbers.find(number => number.id === value)
     //     return {

@@ -2,8 +2,9 @@ import { useLocation, useParams, useSearchParams } from "react-router-dom"
 import queryStringToPage from "activity-app/utils/query-string-to-page"
 // import queryStringToSearch from "activity-app/utils/query-string-to-search"
 import queryStringToSort from "activity-app/utils/query-string-to-sort"
-import { ALL } from "activity-app/constants/filters.constants"
+import { ALL, ALL_USER } from "activity-app/constants/filters.constants"
 import validatePage from "activity-app/utils/validate-page"
+import * as qs from 'qs'
 
 const useAppUrlParams = () => {
     const [params] = useSearchParams()
@@ -20,11 +21,19 @@ const useAppUrlParams = () => {
     // // const search = queryStringToSearch(params.get('search'))
     // const search = params.get('search')
     // const selectedActivityId = params.get('open')
-    const ringGroups: string[] = []
+    let teste
+    let ringGroups: string[] = []
+    if(Array.isArray(qs.parse(params.toString())?.ringGroups)) {
+        teste = qs.parse(params.toString())?.ringGroups as string[]
+        ringGroups = teste.map(item => item) 
+    }
     const selectedActivityId = params.get('selectedActivityId')
     const filtersVisible = params.get('filtersVisible') || false
     const contactId = params.get('contact[id]') || ALL
     const contactLabel = params.get('contact[label]') || null
+    const agentId = params.get('agent[id]') || ALL
+    const agentName = params.get('agent[name]') || null
+    const when = params.get('when') || ALL
     debugger
     return {
         page,
@@ -36,10 +45,10 @@ const useAppUrlParams = () => {
             label: contactLabel
         },
         agent: {
-            id: ALL,
-            name: null
+            id: agentId,
+            name: agentName
         },
-        when: ALL,
+        when,
         filtersVisible,
         selectedActivityId,
         sortBy

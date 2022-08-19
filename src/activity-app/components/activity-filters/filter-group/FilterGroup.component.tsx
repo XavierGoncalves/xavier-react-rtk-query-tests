@@ -25,6 +25,9 @@ import { ROOT_URL } from 'activity-app/constants/url.constants'
 import diffBetweenObjects from 'activity-app/utils/diff-between-objects'
 import useGetCurrentFilters from 'activity-app/hooks/use-get-current-filters'
 import ContactFilter from '../contact-filter/ContactFilter.component'
+import AgentFilter from '../agent-filter/AgentFilter.component'
+import WhenFilter from '../when-filter/WhenFilter.component'
+import RingGroupFilter from '../ring-group-filter/RingGroupFilter.component'
 
 
 // FilterGroup.propTypes = {
@@ -51,42 +54,20 @@ const Title = styled.h2`
 
 const filterReducer = (state: Filters, action: SetFilterAction) => {
   switch (action.type) {
-    case ActionTypes.SET_ACTIVITY_TYPE: {
-      return {
-        ...state,
-        type: action.payload
-      }
-    }     
-    case ActionTypes.RESET_FILTERS: {
-      return { ...state, ...action.payload }
-    }
-    case ActionTypes.SET_CONTACT: {
+    case ActionTypes.SET_ACTIVITY_TYPE:
+    case ActionTypes.RESET_FILTERS:
+    case ActionTypes.SET_AGENT:
+    case ActionTypes.SET_CONTACT:
+    case ActionTypes.SET_WHEN:
+    case ActionTypes.SET_RING_GROUP: {
       return { ...state, ...action.payload }
     }
     default:
       return state
   }
 }
-interface Props {
-  currentFilters: Filters
-}
 
-const FilterGroup = (
-  // {
-  // currentFilters
-  //   activeFilters,
-  //   onAgentFilterInit,
-  //   onApplyClick,
-  //   onClearClick,
-  //   onRingGroupsFilterInit,
-  //   onRingGroupsSearch,
-  //   onUserSearch,
-  //   ringGroups,
-  //   totalRingGroups,
-  //   users,
-  //   totalUsers, 
-  // } : Props
-) => {
+const FilterGroup = () => {
   const [t] = useTranslation()
   const currentUser = useCurrentUser()
   const navigate = useNavigate()
@@ -113,7 +94,7 @@ const FilterGroup = (
     //apply filters different than default to the url
     //close the filters sidepanel
     const teste = diffBetweenObjects(defaultFilters, filters)
-    // console.log('onApplyClickHandler - teste->', teste)
+    console.log('onApplyClickHandler - teste->', teste)
     navigate(createUrlFromRoot({
       ...teste,
       filtersVisible: undefined
@@ -138,7 +119,7 @@ const FilterGroup = (
       filtersVisible: undefined
     }))
   }
-
+  console.log('FilterGroup - currentFilters ->', filters)
   return (
     <>
       <NavHeader
@@ -158,7 +139,7 @@ const FilterGroup = (
                       onChange={value =>
                         setFilters({
                           type: ActionTypes.SET_ACTIVITY_TYPE,
-                          payload: value
+                          payload: { type: value }
                         })
                       }
                     />
@@ -177,53 +158,47 @@ const FilterGroup = (
                     />
                   </Grid.Column>
                 </Grid.Group>
-                {/* {!isAgentScope && (
+                {!isAgentScope && (
                   <Grid.Group gutters={Grid.Group.HALF_GUTTERS}>
                     <Grid.Column>
                       <AgentFilter
-                        users={users}
-                        totalUsers={totalUsers}
-                        currentUser={currentUser}
-                        selectedUser={selectedFilters.agent}
+                        value={filters.agent}
                         onChange={value =>
-                          setSelectedFilters({
-                            ...selectedFilters,
-                            agent: value
+                          setFilters({
+                            type: ActionTypes.SET_AGENT,
+                            payload: { agent: value }
                           })
                         }
-                        onUserSearch={onUserSearch}
-                        onAgentFilterInit={onAgentFilterInit}
                       />
                     </Grid.Column>
                   </Grid.Group>
-                )} */}
-                {/* <Grid.Group gutters={Grid.Group.HALF_GUTTERS}>
+                )}
+                <Grid.Group gutters={Grid.Group.HALF_GUTTERS}>
                   <Grid.Column>
                     <WhenFilter
-                      selectedWhen={selectedFilters.when}
+                      value={filters.when}
                       onChange={value =>
-                        setSelectedFilters({ ...selectedFilters, when: value })
-                      }
-                    />
-                  </Grid.Column>
-                </Grid.Group> */}
-                {/* <Grid.Group gutters={Grid.Group.HALF_GUTTERS}>
-                  <Grid.Column>
-                    <RingGroupFilter
-                      ringGroups={ringGroups}
-                      totalRingGroups={totalRingGroups}
-                      selectedRingGroups={selectedFilters.ringGroups}
-                      onChange={value =>
-                        setSelectedFilters({
-                          ...selectedFilters,
-                          ringGroups: value
+                        setFilters({
+                          type: ActionTypes.SET_WHEN,
+                          payload: { when: value }
                         })
                       }
-                      onRingGroupsSearch={onRingGroupsSearch}
-                      onRingGroupsFilterInit={onRingGroupsFilterInit}
                     />
                   </Grid.Column>
-                </Grid.Group> */}
+                </Grid.Group>
+                <Grid.Group gutters={Grid.Group.HALF_GUTTERS}>
+                  <Grid.Column>
+                    <RingGroupFilter
+                      value={filters.ringGroups}
+                      onChange={value =>
+                        setFilters({
+                          type: ActionTypes.SET_RING_GROUP,
+                          payload: { ringGroups: value }
+                        })
+                      }
+                    />
+                  </Grid.Column>
+                </Grid.Group>
               </Grid>
             </Grid.Column>
           </Grid.Group>
