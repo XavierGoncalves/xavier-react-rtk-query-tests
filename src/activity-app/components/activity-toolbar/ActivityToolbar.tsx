@@ -7,11 +7,12 @@ import { useNavigate } from 'react-router-dom'
 import useCreateSearchParams from 'activity-app/hooks/use-create-search-params'
 import useAppUrlParams from 'activity-app/hooks/use-app-url-params'
 import sortToQuery from 'activity-app/utils/sort-to-query'
+import useGetHydratedActivities from 'activity-app/react-query/use-get-hydrated-activities'
 
 const ActivityToolbar = () => {
   const navigate = useNavigate()
   const [t] = useTranslation()
-  const { data, isFetching } = useGetActivities()
+  const { data, isFetching } = useGetHydratedActivities()
   const activeFiltersCount = useGetAppliedFiltersCount()
   const { sortBy } = useAppUrlParams()
   const { createUrl } = useCreateSearchParams()

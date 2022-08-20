@@ -11,11 +11,12 @@ import Box from '@cobalt/react-box'
 import { Text } from '@cobalt/react-typography'
 import { useTheme } from '@cobalt/react-theme-provider'
 import { useGetActivities } from 'activity-app/react-query/use-get-activities'
+import useGetHydratedActivities from 'activity-app/react-query/use-get-hydrated-activities'
 
 const ActivityHeader = () => {
   const [t] = useTranslation()
   const theme = useTheme()
-  const {data, refetch, isFetching} = useGetActivities()
+  const {data, refetch, isFetching} = useGetHydratedActivities()
   const lastUpdated = data?.lastUpdated
   return (
     <NavHeader

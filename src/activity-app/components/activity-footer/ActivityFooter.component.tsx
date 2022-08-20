@@ -2,6 +2,7 @@ import useAppUrlParams from 'activity-app/hooks/use-app-url-params'
 import useCreateSearchParams from 'activity-app/hooks/use-create-search-params'
 import useGetAppliedFiltersCount from 'activity-app/hooks/use-get-applied-filters-count'
 import { useGetActivities, usePrefetchGetActivities } from 'activity-app/react-query/use-get-activities'
+import useGetHydratedActivities, { usePrefetchGetHydratedActivities } from 'activity-app/react-query/use-get-hydrated-activities'
 import computeState from 'activity-app/utils/compute-state'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
@@ -23,7 +24,7 @@ const maxPagesCountResponsive = 3
 
 const ActivityFooter = () => {
   const [t] = useTranslation()
-  const { data, isError, isFetching } = useGetActivities()
+  const { data, isError, isFetching } = useGetHydratedActivities()
   const { page: currentPage } = useAppUrlParams()
   const totalPages = data?.totalPages || 0
   const total = data?.total || 0
@@ -52,7 +53,8 @@ const ActivityFooter = () => {
           maxPagesCount={maxPagesCount}
           onPageClick={onPageClick}
           onPageChange={onPageClick}
-          onPageMouseEnter={onPageMouseEnter}
+          onPageMouseEnter={(page) => {}}
+          // onPageMouseEnter={onPageMouseEnter}
         />
       )
     }

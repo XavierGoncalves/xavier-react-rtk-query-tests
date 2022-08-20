@@ -9,6 +9,14 @@ export const queryClient = new QueryClient({
             refetchOnWindowFocus: false,
             refetchOnReconnect: false,
             retry: false,
-        }
+            // onError(err) {
+                
+            // },
+        },
+        // mutations: {
+        //     onError(error, variables, context) {
+                
+        //     },
+        // }
     }
 })

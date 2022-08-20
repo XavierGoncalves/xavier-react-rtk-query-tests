@@ -25,7 +25,8 @@ export const useGetActivities = () => {
         ringGroups,
         contact,
         agent,
-        sortBy
+        sortBy,
+        when
     }], () => fetchHydratedActivitiesApi({
         sortBy,
         page,
@@ -58,7 +59,8 @@ export const usePrefetchGetActivities = () => {
         via,
         ringGroups,
         contact,
-        agent
+        agent,
+        when
     }], () => fetchActivitiesApi({
         sortBy,
         page,

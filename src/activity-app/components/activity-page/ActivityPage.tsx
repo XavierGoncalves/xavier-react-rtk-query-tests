@@ -14,12 +14,13 @@ import useCreateSearchParams from 'activity-app/hooks/use-create-search-params'
 import { EditContactInput } from 'types'
 import ActivityDetails from '../activity-details/activity-details.component'
 import ActivityFilters from '../activity-filters/ActivityFilters.component'
+import useGetHydratedActivities from 'activity-app/react-query/use-get-hydrated-activities'
 
 const ActivityPage = () => {
     const atlasSdk = useAtlasSdk()
     const navigate = useNavigate()
     const { createUrl } = useCreateSearchParams()
-    useGetActivities()
+    useGetHydratedActivities()
     const { open, visible, element } = useAddToContacts(
         process.env.REACT_APP_CONTACT_CREATION_APP_ID,
         atlasSdk

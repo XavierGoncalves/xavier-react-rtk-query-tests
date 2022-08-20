@@ -11,6 +11,7 @@ import TableLargeRows from './table-rows/TableLargeRows.component'
 import sortToQuery from 'activity-app/utils/sort-to-query'
 import { useNavigate } from 'react-router-dom'
 import useCreateSearchParams from 'activity-app/hooks/use-create-search-params'
+import useGetHydratedActivities from 'activity-app/react-query/use-get-hydrated-activities'
 
 
 const UP = Table.Header.SORT_DIRECTION.UP
@@ -28,7 +29,7 @@ const ActivityTableLarge = () => {
   const [t] = useTranslation()
   const navigate = useNavigate()
   const { createUrl } = useCreateSearchParams()
-  const { data, isError, isFetching, refetch } = useGetActivities()
+  const { data, isError, isFetching, refetch } = useGetHydratedActivities()
   const activeFilterCount = useGetAppliedFiltersCount()
   const status = computeState(isError, isFetching, activeFilterCount, data?.total || 0)
   const onRetryClick = () => {

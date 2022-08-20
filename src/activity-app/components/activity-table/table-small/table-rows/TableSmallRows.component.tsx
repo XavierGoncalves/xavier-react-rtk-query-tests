@@ -11,6 +11,7 @@ import { useProtocolsConfig } from "titanium/common/context/protocols-config.con
 import { useCurrentUser } from "titanium/common/context/user.context"
 import useCreateSearchParams from "activity-app/hooks/use-create-search-params"
 import { useNavigate } from "react-router-dom"
+import useGetHydratedActivities from "activity-app/react-query/use-get-hydrated-activities"
 
 const ActivityWrapper = styled.div`
   h5 {
@@ -26,7 +27,7 @@ const TableSmallRows = () => {
     const protocolConfigList = useProtocolsConfig()
     const { id: userId } = useCurrentUser()
     const { createUrl } = useCreateSearchParams()
-    const { data } = useGetActivities()
+    const { data } = useGetHydratedActivities()
     const activities = data?.activities
 
     const onRowClick = (activityId: string) => {

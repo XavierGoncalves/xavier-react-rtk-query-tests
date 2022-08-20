@@ -8,11 +8,12 @@ import isEmptyStatus from 'activity-app/utils/is-empty-status'
 import computeState from 'activity-app/utils/compute-state'
 import { useGetActivities } from 'activity-app/react-query/use-get-activities'
 import useGetAppliedFiltersCount from 'activity-app/hooks/use-get-applied-filters-count'
+import useGetHydratedActivities from 'activity-app/react-query/use-get-hydrated-activities'
 
 const DEFAULT_PAGE_SIZE = 10
 
 const ActivityTableSmall = () => {
-  const { data, isError, isFetching, refetch } = useGetActivities()
+  const { data, isError, isFetching, refetch } = useGetHydratedActivities()
   const activeFilterCount = useGetAppliedFiltersCount()
   const status = computeState(isError,isFetching, activeFilterCount, data?.total || 0)
   const onRetryClick = () => {

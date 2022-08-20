@@ -17,6 +17,7 @@ import { useCurrentUserInstalledApps } from "titanium/common/context/user-instal
 import { useProtocolsConfig } from "titanium/common/context/protocols-config.context"
 import { useNavigate } from "react-router-dom"
 import useCreateSearchParams from "activity-app/hooks/use-create-search-params"
+import useGetHydratedActivities from "activity-app/react-query/use-get-hydrated-activities"
 
 const ActivityWrapper = styled.div`
   h5 {
@@ -25,7 +26,7 @@ const ActivityWrapper = styled.div`
 `
 
 const TableLargeRows = () => {
-    const { data } = useGetActivities()
+    const { data } = useGetHydratedActivities()
     const navigate = useNavigate()
     const activities = data?.activities
     const { selectedActivityId } = useAppUrlParams()
