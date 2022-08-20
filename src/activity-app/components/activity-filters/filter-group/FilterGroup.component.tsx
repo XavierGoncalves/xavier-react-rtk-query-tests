@@ -24,10 +24,10 @@ import useGetScopePermission from 'activity-app/hooks/use-get-scope-permission'
 import { ROOT_URL } from 'activity-app/constants/url.constants'
 import diffBetweenObjects from 'activity-app/utils/diff-between-objects'
 import useGetCurrentFilters from 'activity-app/hooks/use-get-current-filters'
-import ContactFilter from '../contact-filter/ContactFilter.component'
-import AgentFilter from '../agent-filter/AgentFilter.component'
-import WhenFilter from '../when-filter/WhenFilter.component'
-import RingGroupFilter from '../ring-group-filter/RingGroupFilter.component'
+import ContactFilter from './contact-filter/ContactFilter.component'
+import AgentFilter from './agent-filter/AgentFilter.component'
+import WhenFilter from './when-filter/WhenFilter.component'
+import RingGroupFilter from './ring-group-filter/RingGroupFilter.component'
 
 
 // FilterGroup.propTypes = {
