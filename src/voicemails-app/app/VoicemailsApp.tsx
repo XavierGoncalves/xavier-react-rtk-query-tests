@@ -1,7 +1,7 @@
 import AtlasSdk from '@atlas/sdk';
 import ThemeProvider from '@cobalt/react-theme-provider';
 import ViewportProvider from '@cobalt/react-viewport-provider';
-import { Navigate, Route, Routes, unstable_HistoryRouter as Test } from "react-router-dom";
+import { Navigate, Route, Routes, unstable_HistoryRouter as HistoryRouter } from "react-router-dom";
 import { HttpClientProvider } from 'titanium/common/context/http.context';
 import { AtlasSdkProvider } from 'titanium/common/context/atlas.context';
 import { AccountDataProvider } from 'titanium/common/context/account.context';
@@ -17,19 +17,19 @@ import VoicemailsHome from 'voicemails-app/components/home/VoicemailsHome.compon
 import { ALL_VOICEMAILS_URL, ROOT_URL } from 'voicemails-app/constants/url.constants';
 import VoicemailsAll from 'voicemails-app/components/all-voicemails/VoicemailsAll.component';
 
-const VoicemailsApp = (app) => {
+const VoicemailsApp = (props) => {
   return (
     <ThemeProvider loader={() => AtlasSdk.theme.getConfig()}>
       <ViewportProvider>
         <CobaltRoot>
-          <AtlasSdkProvider value={app?.atlasSdk}>
-            <CurrentUserProvider value={app?.user}>
-              <AccountDataProvider value={app?.account}>
-                <PoliciesProvider value={app?.policies}>
-                  <HttpClientProvider value={app?.http}>
+          <AtlasSdkProvider value={props?.atlasSdk}>
+            <CurrentUserProvider value={props?.user}>
+              <AccountDataProvider value={props?.account}>
+                <PoliciesProvider value={props?.policies}>
+                  <HttpClientProvider value={props?.http}>
                     <QueryClientProvider client={queryClient}>
-                      <CurrentUserInstalledAppsProvider value={app?.userInstalledApps}>
-                        <Test history={app?.history}>
+                      <CurrentUserInstalledAppsProvider value={props?.userInstalledApps}>
+                        <HistoryRouter history={props?.history}>
                           <Routes>
                             <Route path={ROOT_URL} element={<VoicemailsHome />} />
                             <Route
@@ -38,7 +38,7 @@ const VoicemailsApp = (app) => {
                             />
                             <Route path="*" element={<Navigate to={ROOT_URL} replace={true} />} />
                           </ Routes>
-                        </Test>
+                        </HistoryRouter>
                       </CurrentUserInstalledAppsProvider>
                       <ReactQueryDevtools initialIsOpen={false} />
                     </QueryClientProvider>

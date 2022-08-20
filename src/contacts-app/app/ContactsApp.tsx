@@ -20,19 +20,19 @@ import '../../styles.css';
 import CreateContactPage from 'contacts-app/components/create-contact/CreateContactPage';
 import EditContactPage from 'contacts-app/components/edit-contact/edit-contact-page.component';
 
-const ContactsApp = (app) => {
+const ContactsApp = (props) => {
   return (
     <ThemeProvider loader={() => AtlasSdk.theme.getConfig()}>
       <ViewportProvider>
         <CobaltRoot>
-          <AtlasSdkProvider value={app?.atlasSdk}>
-            <CurrentUserProvider value={app?.user}>
-              <AccountDataProvider value={app?.account}>
-                <PoliciesProvider value={app?.policies}>
-                  <HttpClientProvider value={app?.http}>
+          <AtlasSdkProvider value={props?.atlasSdk}>
+            <CurrentUserProvider value={props?.user}>
+              <AccountDataProvider value={props?.account}>
+                <PoliciesProvider value={props?.policies}>
+                  <HttpClientProvider value={props?.http}>
                     <QueryClientProvider client={queryClient}>
-                      <CurrentUserInstalledAppsProvider value={app?.userInstalledApps}>
-                        <HistoryRouter history={app?.history}>
+                      <CurrentUserInstalledAppsProvider value={props?.userInstalledApps}>
+                        <HistoryRouter history={props?.history}>
                           <Routes>
                             <Route path={ROOT_URL} element={<ContactsPage />} />
                             <Route

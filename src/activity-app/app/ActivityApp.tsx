@@ -17,20 +17,20 @@ import { BrowserRouter, MemoryRouter, unstable_HistoryRouter as HistoryRouter } 
 import { ProtocolsConfigProvider } from 'titanium/common/context/protocols-config.context';
 import './app.styles.scss'
 
-const ActivityApp = ({app}: any) => {
+const ActivityApp = (props) => {
     return (
         <ThemeProvider loader={() => AtlasSdk.theme.getConfig()}>
             <ViewportProvider>
                 <CobaltRoot>
-                    <AtlasSdkProvider value={app?.atlasSdk}>
-                        <CurrentUserProvider value={app?.user}>
-                            <AccountDataProvider value={app?.account}>
-                                <PoliciesProvider value={app?.policies}>
-                                    <HttpClientProvider value={app?.http}>
-                                        <ProtocolsConfigProvider value={app?.protocolsConfig}>
+                    <AtlasSdkProvider value={props?.atlasSdk}>
+                        <CurrentUserProvider value={props?.user}>
+                            <AccountDataProvider value={props?.account}>
+                                <PoliciesProvider value={props?.policies}>
+                                    <HttpClientProvider value={props?.http}>
+                                        <ProtocolsConfigProvider value={props?.protocolsConfig}>
                                             <QueryClientProvider client={queryClient}>
-                                                <CurrentUserInstalledAppsProvider value={app?.userInstalledApps}>
-                                                    <HistoryRouter history={app?.history}>
+                                                <CurrentUserInstalledAppsProvider value={props?.userInstalledApps}>
+                                                    <HistoryRouter history={props?.history}>
                                                         <ActivityPage />
                                                     </HistoryRouter>
                                                 </CurrentUserInstalledAppsProvider>

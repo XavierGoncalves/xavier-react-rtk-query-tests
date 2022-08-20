@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import AtlasSdk from '@atlas/sdk';
-import ContactsApp from './contacts-app/app/ContactsApp';
+import ContactsApp from 'contacts-app/app/ContactsApp';
 import createAtlasApp from 'titanium/common/create-atlas-app';
 import { apiScopes } from 'contacts-app/constants/scopes.constants';
 import { policies } from 'contacts-app/constants/policies.constants';
@@ -16,8 +16,8 @@ createAtlasApp(AtlasSdk, {
     account: true,
     policies,
     getUserAppsList: true,
-    navigationEnabled: true,
   },
+  navigationEnabled: true,
   protocolList: getActivitiesProtocol(),
   /*
   react-dom.development.js:86 Warning: Legacy context API has been detected within a strict-mode tree.
@@ -56,7 +56,11 @@ createAtlasApp(AtlasSdk, {
     );
       // console.log('Render ->', app)
     // root.render(<ActivityApp app={app} />)
-    root.render(<VoicemailsApp app={app} />)
+    root.render(
+      // <ActivityApp {...app} />
+      <VoicemailsApp {...app} />
+      // <ContactsApp {...app} />
+    )
       {/* <React.StrictMode>
          <ContactsApp {...app} /> */}
         
