@@ -10,10 +10,14 @@ interface Input {
   http: AxiosInstance;
 }
 
+interface Output {
+  [key: string]: User
+}
+
 const fetchUsersById = async ({ 
   userIds = [],
   http
-}: Input): Promise<User[]> => {
+}: Input): Promise<Output> => {
   const uniqueIds = uniq(userIds).filter(Boolean)
   const response = await http.get('/graph/users', {
     params: {
@@ -27,7 +31,16 @@ const fetchUsersById = async ({
     .filter(Boolean)
     .map(presentUser)
 
-  return users
+  return groupById(users)
 }
+
+const groupById = users =>
+  users.reduce(
+    (usersById, user) => ({
+      ...usersById,
+      [user.id]: user
+    }),
+    {}
+  )
 
 export default fetchUsersById

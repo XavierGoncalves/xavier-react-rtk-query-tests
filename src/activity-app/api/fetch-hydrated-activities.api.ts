@@ -44,11 +44,17 @@ const hydrateWithContacts = async (activities: Activity[], http: AxiosInstance) 
         const hydratedActivities = activities.map(activity => {
             const { id: contactId } = activity.contact
             const contactById = contactsById ? contactsById[contactId] : {}
+            // if(activity.id === "bfc7faf92b8142cf894a6e0245cddec7") {
+            // debugger
+            // }
             const updatedContact = contactById
                 ? { ...activity.contact, ...contactById }
                 : { ...activity.contact, deleted: true }
-            // console.log('hydratedActivities - oldContact->', activity.contact)
-            // console.log('hydratedActivities - updatedContact->', updatedContact)
+                // if(activity.id === "bfc7faf92b8142cf894a6e0245cddec7") {
+                //     console.log('hydratedActivities - oldContact->', activity.contact)
+                //     console.log('hydratedActivities - updatedContact->', updatedContact)
+                // }
+            
             return {
                 ...activity,
                 contact: updatedContact
@@ -61,7 +67,6 @@ const hydrateWithContacts = async (activities: Activity[], http: AxiosInstance) 
         console.error('Error on hydrating activities with contacts', {
             exception: error
         })
-    } finally {
         return activities
     }
 }
@@ -78,13 +83,18 @@ const hydrateWithUsers = async (activities: Activity[], http: AxiosInstance) => 
             return activities
         }
         const users = await fetchUsersById({ userIds, http })
+        // debugger
         const hydratedActivities = activities.map(activity => {
             const { id: agentId } = activity.agent
-            const userObj = users.find(({ id }) => id === agentId)
+            const userObj = agentId ? users[agentId] : {}
+            // if(activity.id === "bfc7faf92b8142cf894a6e0245cddec7") {
+            //     console.log('hydratedActivities - oldAgent->', activity.agent)
+            //     console.log('hydratedActivities - updatedAgent->', userObj)
+            // }
             if (userObj) {
                 return {
                     ...activity,
-                    agent: { id: agentId, name: userObj.name }
+                    agent: userObj
                 }
             }
             return activity
@@ -96,7 +106,6 @@ const hydrateWithUsers = async (activities: Activity[], http: AxiosInstance) => 
         console.error('Error on hydrating activities with users', {
             exception: error
         })
-    } finally {
         return activities
     }
 }
@@ -128,16 +137,18 @@ const fetchHydratedActivitiesApi = async ({
         },
         paramsSerializer
     })
-    let activities = get(response, 'data._embedded', []).map(presentActivity)
-
-    if (activities.length > 0) {
-        activities = await hydrateWithContacts(activities, http)
-        activities = await hydrateWithUsers(activities, http)
+    let origActivities = get(response, 'data._embedded', []).map(presentActivity)
+    console.log('before hydrate->', origActivities[3])
+    let newActivities
+    if (origActivities.length > 0) {
+        newActivities = await hydrateWithContacts(origActivities, http)
+        // console.log('after hydrateWithContacts->', activitiesHydratedWithContacts[3])
+        newActivities = await hydrateWithUsers(newActivities, http)
+        // console.log('after hydrateWithUsers->', activitiesHydratedWithUsers[3])
     }
     const { page: currentPage, total } = response.data
-
     return {
-        activities,
+        activities: newActivities,
         total,
         totalPages: Math.ceil(total / perPage),
         page: currentPage,
