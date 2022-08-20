@@ -31,7 +31,9 @@
     "presence-hub:read",
     "apps:graphql",
     "activity-subscriptions:write",
-    "interaction-contacts:read"
+    "interaction-contacts:read",
+    "voicemails:read",
+    "voicemails:write"
   ],
   "assets": {
     "icon": "https://cdn1.iconfinder.com/data/icons/miscicons/500/globe-512.png"

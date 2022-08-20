@@ -7,6 +7,7 @@ import { apiScopes } from 'contacts-app/constants/scopes.constants';
 import { policies } from 'contacts-app/constants/policies.constants';
 import ActivityApp from 'activity-app/app/ActivityApp';
 import { getActivitiesProtocol } from '@titanium/activity-details'
+import VoicemailsApp from 'voicemails-app/app/VoicemailsApp';
 
 createAtlasApp(AtlasSdk, {
   apiScopes,
@@ -53,8 +54,9 @@ createAtlasApp(AtlasSdk, {
     const root = ReactDOM.createRoot(
       document.getElementById('root') as HTMLElement,
     );
-      console.log('Render ->', app)
-    root.render(<ActivityApp app={app} />)
+      // console.log('Render ->', app)
+    // root.render(<ActivityApp app={app} />)
+    root.render(<VoicemailsApp app={app} />)
       {/* <React.StrictMode>
          <ContactsApp {...app} /> */}
         

@@ -13,5 +13,7 @@ export const apiScopes = [
     'account-custom-fields:read',
     'apps:graphql',
     'interaction-contacts:read',
-    "ring-groups:read"
+    'ring-groups:read',
+    'voicemails:read',
+    'voicemails:write'
 ]
