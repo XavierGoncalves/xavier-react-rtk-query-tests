@@ -34,7 +34,7 @@ const useAppUrlParams = () => {
     const agentId = params.get('agent[id]') || ALL
     const agentName = params.get('agent[name]') || null
     const when = params.get('when') || ALL
-    debugger
+    // debugger
     return {
         page,
         type,

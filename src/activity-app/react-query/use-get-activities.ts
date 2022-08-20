@@ -1,5 +1,6 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import fetchActivitiesApi, { FetchActivitiesOutput } from "activity-app/api/fetch-activities.api"
+import fetchHydratedActivitiesApi from "activity-app/api/fetch-hydrated-activities.api"
 import useAppUrlParams from "activity-app/hooks/use-app-url-params"
 import { useHttpClient } from "titanium/common/context/http.context"
 import { Activity } from "types"
@@ -25,7 +26,7 @@ export const useGetActivities = () => {
         contact,
         agent,
         sortBy
-    }], () => fetchActivitiesApi({
+    }], () => fetchHydratedActivitiesApi({
         sortBy,
         page,
         type,

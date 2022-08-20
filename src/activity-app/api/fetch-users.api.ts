@@ -30,7 +30,7 @@ const fetchUsersApi = async ({
     return { users, total }
 }
 
-const presentUser = user => ({
+export const presentUser = user => ({
     id: user.id,
     name: user.name
 })

@@ -1,5 +1,6 @@
 export const apiScopes = [
     'account:read',
+    "contacts:read",
     'contact-details:read',
     'contact-details:write',
     'contacts-activities:read',
