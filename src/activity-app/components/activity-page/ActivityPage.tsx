@@ -21,7 +21,7 @@ const ActivityPage = () => {
     const { createUrl } = useCreateSearchParams()
     useGetActivities()
     const { open, visible, element } = useAddToContacts(
-        process.env.CONTACT_CREATION_APP_ID,
+        process.env.REACT_APP_CONTACT_CREATION_APP_ID,
         atlasSdk
     )
     const { filtersVisible, selectedActivityId } = useAppUrlParams()
