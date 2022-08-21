@@ -1,4 +1,4 @@
-import { CUSTOM } from "voicemails-app/constants/filters.constants"
+import { CUSTOM, defaultFilterValues } from "voicemails-app/constants/filters.constants"
 
 const PRESET_DATES = ['last-six-hours', 'last-day', 'last-week', 'last-month']
 const CUSTOM_DATE_REG_EXP = /^((20\d{2})(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1]))(-((20\d{2})(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])))?$/
@@ -32,7 +32,7 @@ const queryStringToWhen = value => {
             }
         }
     }
-    return null
+    return defaultFilterValues.when
 }
 
 export default queryStringToWhen

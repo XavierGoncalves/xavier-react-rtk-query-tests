@@ -12,15 +12,15 @@ export const DURATION_MINUTES: string = DurationInput.MINUTES
 export const DURATION_SECONDS: string = DurationInput.SECONDS
 
 export const defaultFilterValues = {
-  status: ALL,
-  contact: { id: VALUE_FILTER_ALL, label: null },
+  voicemailStatus: ALL,
+  contactId: { id: VALUE_FILTER_ALL, label: null },
+  assignedTo: { id: VALUE_FILTER_ALL, name: null },
   when: { value: ALL, customRange: { start: null, end: null } },
+  ringGroups: [],
   duration: {
     min: null,
     max: null,
     unit: DURATION_MINUTES
   },
-  ringGroups: [],
-  assignedUser: { id: VALUE_FILTER_ALL, name: null },
-  id: null
+  voicemailId: null
 }

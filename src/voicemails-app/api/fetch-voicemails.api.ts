@@ -1,8 +1,9 @@
 import getRequestParams from "voicemails-app/utils/get-request-params"
 import paramsSerializer from 'voicemails-app/utils/params-serializer'
 import get from 'lodash/get'
-import fetchContactsByIdApi from "./fetch-contacts-by-id"
+import fetchContactsByIdApi from "./fetch-contacts-by-id.api"
 import { Voicemail } from "types";
+import presentVoicemail from "voicemails-app/utils/present-voicemail";
 
 interface Ouput {
   voicemails: Voicemail[];
@@ -10,7 +11,6 @@ interface Ouput {
   totalPages: number;
   lastUpdated: string;
 }
-
 
 const fetchVoicemailsApi = async ({
   page,
@@ -22,21 +22,6 @@ const fetchVoicemailsApi = async ({
   assignedTo,
   http
 }): Promise<Ouput> => {
-
-  /* 
-    default param values
-    page = 1
-    status = all
-    contact = undefined
-    when = {value: all, customrange: {start: null, end: null} }
-    duration = { min: null, max: null, unit: "MINUTES" }
-    ringGroups = []
-    se a url for "/" vem populado
-    assigned = 6037b7ca1a3e5369c2dc59a2
-    se a url for "/all" vem assim
-    assigned = {id: ALL, name: null}
-  */
-
   const teste = getRequestParams({
     page,
     voicemailStatus,
@@ -47,15 +32,7 @@ const fetchVoicemailsApi = async ({
     assignedTo,
   })
 
-  // default 
-  // created_at[gte]: null
-  // duration[gte]: null
-  // duration[lte]: null
-  // order_by: "-date"
-  // page: 1
-  // per_page: 10
-  // user_id: "6037b7ca1a3e5369c2dc59a2"
- debugger
+//  debugger
   const response = await http.get('voicemails', {
     params: teste,
     headers: {
@@ -66,8 +43,9 @@ const fetchVoicemailsApi = async ({
 
   const { total, per_page } = response.data
   const voicemailsRaw = get(response, 'data._embedded.voicemails', [])
+  const presentedVoicemails = voicemailsRaw.map(presentVoicemail)
 
-  const voicemails = await hydrateWithContacts(voicemailsRaw, http)
+  const voicemails = await hydrateWithContacts(presentedVoicemails, http)
   // ?page=1&per_page=10&order_by=-date
   return {
     voicemails: voicemails,

@@ -6,7 +6,7 @@ const queryStringToAssignedUser = (value: string | null, currentTab: string, cur
         return {id: currentUserId }
     }
     if(value === null) {
-        return defaultFilterValues.assignedUser
+        return defaultFilterValues.assignedTo
     }
     return { id: value }
 }

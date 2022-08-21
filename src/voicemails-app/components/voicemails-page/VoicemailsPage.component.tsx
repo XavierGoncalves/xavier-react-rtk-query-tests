@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useAddToContacts } from '@contacts/creation-app-sdk'
 import { Loader, Page, PanelsLayout } from '@cobalt/cobalt-react-components'
 // import { VoicemailHeader } from '../voicemail-header'
@@ -17,6 +17,13 @@ import { useAtlasSdk } from 'titanium/common/context/atlas.context'
 import VoicemailsHeader from '../voicemails-header/VoicemailsHeader.component'
 import useGetVoicemails from 'voicemails-app/react-query/use-get-voicemails'
 import VoicemailsToolbar from '../voicemail-toolbar/VoicemailsToolbar.component'
+import VoicemailsFiltersToolbar from '../voicemails-filters-toolbar/VoicemailFiltersToolbar.component'
+import useAppUrlParams from 'voicemails-app/hooks/use-search-params'
+import VoicemailsAssignModal from '../voicemail-assign-modal/VoicemailsAssignModal.component'
+import { useQueryClient } from '@tanstack/react-query'
+import { useNavigate } from 'react-router-dom'
+import useCreateSearchParams from 'voicemails-app/hooks/use-create-search-params'
+import VoicemailsFilters from '../voicemails-filters/VoicemailFilters.component'
 
 // {
 //     appLoaded: bool.isRequired,
@@ -32,6 +39,11 @@ import VoicemailsToolbar from '../voicemail-toolbar/VoicemailsToolbar.component'
 //   }
 
 const VoicemailsPage = () => {
+    const [assignModalOpen, setAssignModalOpen] = useState(false)
+    const navigate = useNavigate()
+    const { createUrl } = useCreateSearchParams()
+    const closeAssignModal = () => setAssignModalOpen(false)
+    const { voicemailId, filtersVisible } = useAppUrlParams()
     useGetVoicemails()
 
 
@@ -47,6 +59,12 @@ const VoicemailsPage = () => {
             // onUpdateVoicemailContact(voicemailId, createdContact.id)
         }
     }
+    
+    const onCloseHandler = () => {
+      navigate(createUrl({
+        filtersVisible: undefined
+      }))
+    }
 
     return (
         <PanelsLayout>
@@ -56,28 +74,13 @@ const VoicemailsPage = () => {
                 >
                     <VoicemailsHeader />
                     <VoicemailsToolbar />
-                    {/*<VoicemailFiltersToolbar />
-                    {voicemailId && (
-                        <VoicemailAssignModal
+                    <VoicemailsFiltersToolbar />
+                    {voicemailId && assignModalOpen && (
+                        <VoicemailsAssignModal
                             voicemailId={voicemailId}
-                            currentUser={currentUser}
-                            staticOptions={[
-                                {
-                                    id: currentUser.id,
-                                    name: 'fields.assigned.currentUser'
-                                },
-                                {
-                                    id: VALUE_FILTER_UNASSIGNED,
-                                    name: 'fields.assigned.unassigned',
-                                    hasBorderBottom: true
-                                }
-                            ]}
-                            errorMessage={'fields.assigned.errorMessage'}
-                            retryMessage={'fields.assigned.retryMessage'}
-                            fetchSingle={fetchUser}
-                            fetchMultiple={fetchUsers}
+                            onClose={closeAssignModal}
                         />
-                    )} */}
+                    )}
                     {/* <Page>
                         <Page.Content>
                             <VoicemailTable onAddContact={onAddContact} />
@@ -86,17 +89,17 @@ const VoicemailsPage = () => {
                     </Page> */}
                 </div>
             </PanelsLayout.Content>
-            {/* <PanelsLayout.Panel
+            <PanelsLayout.Panel
                 id="filters-panel"
                 small
                 active={filtersVisible}
                 overlay={filtersVisible}
-                onClickOutside={() => onCloseFilters()}
+                onClickOutside={() => onCloseHandler()}
                 over
             >
-                <VoicemailFilters />
+                <VoicemailsFilters onClose={onCloseHandler} />
             </PanelsLayout.Panel>
-            <PanelsLayout.Panel id="details-panel" active={detailsVisible} over>
+            {/* <PanelsLayout.Panel id="details-panel" active={detailsVisible} over>
                 <VoicemailDetails onAddContact={onAddContact} />
             </PanelsLayout.Panel> */}
             <PanelsLayout.Panel id="contacts-panel" active={visible} over>

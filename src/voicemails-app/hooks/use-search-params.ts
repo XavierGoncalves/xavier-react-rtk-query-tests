@@ -17,9 +17,9 @@ const useAppUrlParams = () => {
     const page = queryStringToPage(params.get('page'))
     const selectedVoicemailId = params.get('open')
     const filtersVisible = params.get('filtersVisible') || false
-    const voicemailId = params.get('id') || defaultFilterValues.id
+    const voicemailId = params.get('id') || defaultFilterValues.voicemailId
     const voicemailStatus = queryStringToStatus(params.get('status'))
-    const contactId = params.get('contact[id]')
+    const contactId = params.get('contact[id]') || defaultFilterValues.contactId
     const assignedTo = queryStringToAssignedUser(params.get('assigned'), currentTab, currentUserId)
     const when = queryStringToWhen(params.get('when'))
     let teste

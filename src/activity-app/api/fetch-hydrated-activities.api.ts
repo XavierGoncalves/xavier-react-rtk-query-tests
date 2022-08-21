@@ -5,7 +5,7 @@ import get from 'lodash/get'
 import uniq from 'lodash/uniq'
 import uniqBy from 'lodash/uniqBy'
 import paramsSerializer from 'activity-app/utils/params-serializer'
-import { Activity, ActivityAgent, AgentFilter, ContactFilter, SortType } from 'types'
+import { Activity, ActivityAgent, ActivityAgentFilter, ActivityContactFilter, SortType } from 'types'
 import { AxiosInstance } from 'axios'
 import { perPage } from 'contacts-app/constants/constants'
 import fetchContactsById from './fetch-contacts-by-id'
@@ -19,8 +19,8 @@ interface Input {
     type: string;
     via: string;
     when: string;
-    agent: AgentFilter;
-    contact: ContactFilter;
+    agent: ActivityAgentFilter;
+    contact: ActivityContactFilter;
 }
 
 export interface FetchHydratedActivitiesOutput {

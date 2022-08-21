@@ -1,66 +1,10 @@
 import { ALL, defaultFilters, LAST_MONTH, LAST_SIX_HOURS, LAST_TWENTY_FOUR_HOURS, LAST_WEEK } from "activity-app/constants/filters.constants"
 import diffBetweenObjects from "activity-app/utils/diff-between-objects"
-import { AppliedFilter } from "types"
+import { ActivityAppliedFilter } from "types"
 import useAppUrlParams from "./use-app-url-params"
 import isEmpty from 'lodash/isEmpty'
 import { getActivityType } from '@titanium/activity-details'
-import useGetAppliedFiltersCount from "./use-get-applied-filters-count"
-import useGetCurrentFilters from "./use-get-current-filters"
 import { useCurrentUser } from "titanium/common/context/user.context"
-const merdas = [
-    {
-        "name": "type",
-        "label": "fields.activityType.label",
-        "values": [
-            {
-                "value": "INBOUND",
-                "label": "activityTypes.inboundCall",
-                "translate": true
-            }
-        ]
-    },
-    {
-        "name": "agent",
-        "label": "fields.agent.label",
-        "values": [
-            {
-                "value": "613f28ccbd32b443cbaa86f3",
-                "label": "Agent Valeria STG"
-            }
-        ]
-    },
-    {
-        "name": "when",
-        "label": "fields.date.label",
-        "values": [
-            {
-                "value": "LAST_WEEK",
-                "label": "fields.date.lastWeek",
-                "translate": true
-            }
-        ]
-    },
-    {
-        "name": "ringGroups",
-        "label": "fields.ringGroups.label",
-        "values": [
-            {
-                "value": "%22xavier",
-                "label": "%22xavier"
-            }
-        ]
-    },
-    {
-        "name": "contact",
-        "label": "fields.contact.label",
-        "values": [
-            {
-                "value": "61d60793d782fd001df203ef",
-                "label": "+12014355369 20220718-creation-app-custom-fields-edit-contactssssssssddd"
-            }
-        ]
-    }
-]
 
 const FILTERS_SORT_ORDER = {
     type: 1,
@@ -122,7 +66,7 @@ const getFilterValueLabel = (name, value, props) =>
     contact: value => ({ label: value.label })
 }[name](value, props))
 
-const useGetAppliedFilters = (): AppliedFilter[] => {
+const useGetAppliedFilters = (): ActivityAppliedFilter[] => {
     const {
         type,
         agent,

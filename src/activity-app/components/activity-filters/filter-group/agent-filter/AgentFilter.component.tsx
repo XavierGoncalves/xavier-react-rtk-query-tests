@@ -5,7 +5,7 @@ import { Dropdown } from '@titanium/components'
 import { ALL, ALL_USER } from 'activity-app/constants/filters.constants'
 import { useCurrentUser } from 'titanium/common/context/user.context'
 import useGetUsersForDropdown from 'activity-app/react-query/use-get-users-for-dropdown'
-import { AgentFilter as AgentFilterType } from 'types'
+import { ActivityAgentFilter as AgentFilterType } from 'types'
 import isSearchTextTooShort from 'activity-app/utils/is-searchtext-too-short'
 
 

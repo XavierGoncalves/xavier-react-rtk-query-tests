@@ -19,14 +19,14 @@ const getRequestParams = ({
         per_page: 10
     }
 
-    console.log('getRequestParams - input - page ->', page)
-    console.log('getRequestParams - input - statusFilter ->', voicemailStatus)
-    console.log('getRequestParams - input - contactFilter ->', contactId)
-    console.log('getRequestParams - input - whenFilter ->', when)
-    console.log('getRequestParams - input - durationFilter ->', duration)
-    console.log('getRequestParams - input - ringGroupFilter ->', ringGroups)
+    // console.log('getRequestParams - input - page ->', page)
+    // console.log('getRequestParams - input - statusFilter ->', voicemailStatus)
+    // console.log('getRequestParams - input - contactFilter ->', contactId)
+    // console.log('getRequestParams - input - whenFilter ->', when)
+    // console.log('getRequestParams - input - durationFilter ->', duration)
+    // console.log('getRequestParams - input - ringGroupFilter ->', ringGroups)
     
-    console.log('getRequestParams - input - assignedFilter ->', assignedTo)
+    // console.log('getRequestParams - input - assignedFilter ->', assignedTo)
 
     const assignedFilterId = assignedTo
         ? assignedTo.id || assignedTo
@@ -37,8 +37,8 @@ const getRequestParams = ({
     } else if (voicemailStatus === VOICEMAIL_OPEN) {
         params = { ...params, resolved: false }
     }
-
-    if (contactId && contactId.id !== ALL) {
+    // debugger
+    if (contactId && contactId.id !== VALUE_FILTER_ALL) {
         params = { ...params, contact_id: contactId.id }
     }
 

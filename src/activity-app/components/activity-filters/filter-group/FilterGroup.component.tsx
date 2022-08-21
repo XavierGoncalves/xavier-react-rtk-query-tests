@@ -16,7 +16,7 @@ import ActivityFilter from './activity-filter/ActivityFilter.component'
 // import AgentFilter from './agent-filter/AgentFilter.component'
 // import WhenFilter from './when-filter/WhenFilter.component'
 // import RingGroupFilter from './ring-group-filter/RingGroupFilter.component'
-import { ActionTypes, Filters, SetFilterAction } from 'types'
+import { ActivityFiltersActionTypes, ActivityFilters, SetActivityFilterAction } from 'types'
 import { useCurrentUser } from 'titanium/common/context/user.context'
 import { useNavigate } from 'react-router-dom'
 import useCreateSearchParams from 'activity-app/hooks/use-create-search-params'
@@ -52,14 +52,14 @@ const Title = styled.h2`
   outline: 0;
 `
 
-const filterReducer = (state: Filters, action: SetFilterAction) => {
+const filterReducer = (state: ActivityFilters, action: SetActivityFilterAction) => {
   switch (action.type) {
-    case ActionTypes.SET_ACTIVITY_TYPE:
-    case ActionTypes.RESET_FILTERS:
-    case ActionTypes.SET_AGENT:
-    case ActionTypes.SET_CONTACT:
-    case ActionTypes.SET_WHEN:
-    case ActionTypes.SET_RING_GROUP: {
+    case ActivityFiltersActionTypes.SET_ACTIVITY_TYPE:
+    case ActivityFiltersActionTypes.RESET_FILTERS:
+    case ActivityFiltersActionTypes.SET_AGENT:
+    case ActivityFiltersActionTypes.SET_CONTACT:
+    case ActivityFiltersActionTypes.SET_WHEN:
+    case ActivityFiltersActionTypes.SET_RING_GROUP: {
       return { ...state, ...action.payload }
     }
     default:
@@ -104,8 +104,8 @@ const FilterGroup = () => {
     // if (!isEqual(activeFilters, defaultFilters)) {
     //   onClearClick()
     // }
-    // setFilters({ type: ActionTypes.RESET_FILTERS, payload: defaultFilters })
-    setFilters({ type: ActionTypes.RESET_FILTERS, payload: defaultFilters })
+    // setFilters({ type: ActivityFiltersActionTypes.RESET_FILTERS, payload: defaultFilters })
+    setFilters({ type: ActivityFiltersActionTypes.RESET_FILTERS, payload: defaultFilters })
     // navigate(ROOT_URL)
     navigate(createUrlFromRoot({
       filtersVisible: true
@@ -138,7 +138,7 @@ const FilterGroup = () => {
                       value={filters.type}
                       onChange={value =>
                         setFilters({
-                          type: ActionTypes.SET_ACTIVITY_TYPE,
+                          type: ActivityFiltersActionTypes.SET_ACTIVITY_TYPE,
                           payload: { type: value }
                         })
                       }
@@ -150,7 +150,7 @@ const FilterGroup = () => {
                     <ContactFilter
                       onChange={(value) => {
                         setFilters({
-                          type: ActionTypes.SET_CONTACT,
+                          type: ActivityFiltersActionTypes.SET_CONTACT,
                           payload: { contact: value }
                         })
                       }}
@@ -165,7 +165,7 @@ const FilterGroup = () => {
                         value={filters.agent}
                         onChange={value =>
                           setFilters({
-                            type: ActionTypes.SET_AGENT,
+                            type: ActivityFiltersActionTypes.SET_AGENT,
                             payload: { agent: value }
                           })
                         }
@@ -179,7 +179,7 @@ const FilterGroup = () => {
                       value={filters.when}
                       onChange={value =>
                         setFilters({
-                          type: ActionTypes.SET_WHEN,
+                          type: ActivityFiltersActionTypes.SET_WHEN,
                           payload: { when: value }
                         })
                       }
@@ -192,7 +192,7 @@ const FilterGroup = () => {
                       value={filters.ringGroups}
                       onChange={value =>
                         setFilters({
-                          type: ActionTypes.SET_RING_GROUP,
+                          type: ActivityFiltersActionTypes.SET_RING_GROUP,
                           payload: { ringGroups: value }
                         })
                       }

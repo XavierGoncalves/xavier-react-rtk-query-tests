@@ -3,7 +3,7 @@ import getRequestParams from 'activity-app/utils/get-request-params'
 import presentActivity from 'activity-app/utils/present-activity'
 import get from 'lodash/get'
 import paramsSerializer from 'activity-app/utils/params-serializer'
-import { Activity, AgentFilter, ContactFilter, SortType } from 'types'
+import { Activity, ActivityAgentFilter, ActivityContactFilter, SortType } from 'types'
 import { AxiosInstance } from 'axios'
 import { perPage } from 'contacts-app/constants/constants'
 
@@ -15,8 +15,8 @@ interface Input {
     type: string;
     via: string;
     when: string;
-    agent: AgentFilter;
-    contact: ContactFilter;
+    agent: ActivityAgentFilter;
+    contact: ActivityContactFilter;
 }
 
 export interface FetchActivitiesOutput {

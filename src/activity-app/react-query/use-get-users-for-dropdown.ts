@@ -4,9 +4,9 @@ import { ALL_USER } from "activity-app/constants/filters.constants"
 import isSearchTextTooShort from "activity-app/utils/is-searchtext-too-short"
 import { useHttpClient } from "titanium/common/context/http.context"
 import { useCurrentUser } from "titanium/common/context/user.context"
-import { AgentFilter } from "types"
+import { ActivityAgentFilter } from "types"
 
-const useGetUsersForDropdown = (searchText: string, selectedValue: AgentFilter) => {
+const useGetUsersForDropdown = (searchText: string, selectedValue: ActivityAgentFilter) => {
     const http = useHttpClient()
     const currentUser = useCurrentUser()
     return useQuery(['users', 'dropdown', { searchText }], () => fetchUsersApi({
