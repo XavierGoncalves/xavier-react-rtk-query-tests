@@ -158,3 +158,61 @@ export interface User {
 export interface RingGroup {
   name: string
 }
+
+export interface VoicemailStatus {
+  value: string;
+  loading: boolean;
+}
+
+export interface VoicemailRecording {
+  id: string;
+  index: number;
+  duration: number;
+  src: string | null;
+  active?: boolean;
+}
+
+export interface VoicemailRecordings {
+  status: string;
+  items: VoicemailRecording[];
+}
+
+export interface VoicemailContact {
+  id: string;
+  name: string | null;
+  initials: string;
+}
+
+
+/* 
+id: data.id,
+date: data.created_at,
+duration: data.duration,
+talkdeskPhoneNumber: data.talkdesk_phone_number,
+contactPhoneNumber: data.contact_phone_number,
+contactId: data.contact_id,
+assignedTo: data.user_id,
+ringGroups: data.ring_groups || [],
+status: {
+    value: data.resolved
+        ? VOICEMAIL_RESOLVED
+        : VOICEMAIL_OPEN,
+    loading: false
+},
+phoneNumberId: get(data, 'number_id', null),
+recordings: { status: UNINITIALIZED, items: [] } 
+*/
+export interface Voicemail {
+  id: string;
+  date: string;
+  duration: number;
+  talkdeskPhoneNumber: string;
+  contactPhoneNumber: string;
+  contactId: string;
+  assignedTo: string;
+  ringGroups: string[];
+  status: VoicemailStatus;
+  phoneNumberId: string;
+  recordings: VoicemailRecordings;
+  contact: VoicemailContact;
+}

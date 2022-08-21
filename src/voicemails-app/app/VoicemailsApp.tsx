@@ -13,9 +13,8 @@ import { queryClient } from 'react-query/query-client';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import CobaltRoot from '@cobalt/cobalt-react-components'
 import '../../styles.css';
-import VoicemailsHome from 'voicemails-app/components/home/VoicemailsHome.component';
+import VoicemailsPage from 'voicemails-app/components/voicemails-page/VoicemailsPage.component';
 import { ALL_VOICEMAILS_URL, ROOT_URL } from 'voicemails-app/constants/url.constants';
-import VoicemailsAll from 'voicemails-app/components/all-voicemails/VoicemailsAll.component';
 
 const VoicemailsApp = (props) => {
   return (
@@ -31,10 +30,10 @@ const VoicemailsApp = (props) => {
                       <CurrentUserInstalledAppsProvider value={props?.userInstalledApps}>
                         <HistoryRouter history={props?.history}>
                           <Routes>
-                            <Route path={ROOT_URL} element={<VoicemailsHome />} />
+                            <Route path={ROOT_URL} element={<VoicemailsPage />} />
                             <Route
                               path={ALL_VOICEMAILS_URL}
-                              element={<VoicemailsAll />}
+                              element={<VoicemailsPage />}
                             />
                             <Route path="*" element={<Navigate to={ROOT_URL} replace={true} />} />
                           </ Routes>
