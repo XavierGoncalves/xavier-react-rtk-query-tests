@@ -2,7 +2,7 @@ import { Dropdown } from '@titanium/components'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import ErrorMessage from 'voicemails-app/components/common/dropdown-error-message/ErrorMessage.component'
-import { ERROR, LOADING, SUCCESS } from 'voicemails-app/constants/state-types.constants'
+import { STATE_ERROR, STATE_LOADING, STATE_SUCCESS } from 'voicemails-app/constants/state-types.constants'
 import { useContacts } from 'voicemails-app/hooks/use-contacts'
 import { VALUE_FILTER_ALL } from '../../../../../constants/ui.constants'
 
@@ -47,9 +47,9 @@ const ContactDropdown = ({
   const ALL_USER = { id: VALUE_FILTER_ALL, label: null }
 
   const statusType = {
-    [LOADING]: Dropdown.LOADING,
-    [SUCCESS]: Dropdown.SUCCESS,
-    [ERROR]: Dropdown.ERROR
+    [STATE_LOADING]: Dropdown.LOADING,
+    [STATE_SUCCESS]: Dropdown.SUCCESS,
+    [STATE_ERROR]: Dropdown.ERROR
   }
 
   const {

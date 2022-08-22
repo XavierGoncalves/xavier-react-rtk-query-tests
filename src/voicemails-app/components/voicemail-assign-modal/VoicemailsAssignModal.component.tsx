@@ -19,7 +19,7 @@ import { useCurrentUser } from 'titanium/common/context/user.context'
 import useAppUrlParams from 'voicemails-app/hooks/use-search-params'
 import { useHttpClient } from 'titanium/common/context/http.context'
 import { useAgents } from 'voicemails-app/hooks/use-agents'
-import { ERROR, LOADING, SUCCESS } from 'voicemails-app/constants/state-types.constants'
+import { STATE_ERROR, STATE_LOADING, STATE_SUCCESS } from 'voicemails-app/constants/state-types.constants'
 import useUpdateVoicemailMutation from 'voicemails-app/react-query/update-voicemail-mutation'
 import fetchUserApi from 'voicemails-app/api/fetch-user.api'
 import fetchUsersApi from 'voicemails-app/api/fetch-users-api'
@@ -84,9 +84,9 @@ const VoicemailsAssignModal = ({
   })
 
   const statusType = {
-    [LOADING]: LOADING,
-    [SUCCESS]: SUCCESS,
-    [ERROR]: ERROR
+    [STATE_LOADING]: STATE_LOADING,
+    [STATE_SUCCESS]: STATE_SUCCESS,
+    [STATE_ERROR]: STATE_ERROR
   }
 
   const isLoading = status && statusType[status]

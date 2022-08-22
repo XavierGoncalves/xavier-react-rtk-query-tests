@@ -23,9 +23,10 @@ const VoicemailsHeader = () => {
   const [t] = useTranslation()
   const theme = useTheme()
   const userScope = useGetScopePermission()
+  console.log('userScope->', userScope)
   const currentTab = useGetCurrentTab()
   const navigate = useNavigate()
-  
+
   const { data, isFetching, refetch } = useGetVoicemails()
   const lastUpdated = data?.lastUpdated
   const tabs = [
@@ -45,6 +46,9 @@ const VoicemailsHeader = () => {
 
   return (
     <NavHeader
+      style={{
+        maxHeight: "20%"
+      }}
       title={<H1 data-testid="voicemail-header__title">{t('header.title')}</H1>}
       selectedTab={currentTab}
       borderless
@@ -75,15 +79,19 @@ const VoicemailsHeader = () => {
         </>
       }
     >
-      {userScope !== VOICEMAILS_SCOPE_AGENT &&
-        tabs.map(tab => (
-          <NavHeader.Tab
-            data-testid={`voicemail-header__${tab.text}-tab`}
-            heading={tab.text}
-            value={tab.value}
-            key={tab.value}
-          />
-        ))}
+      {/* <> */}
+        {
+          userScope !== VOICEMAILS_SCOPE_AGENT ?
+          tabs.map(tab => (
+            <NavHeader.Tab
+              data-testid={`voicemail-header__${tab.text}-tab`}
+              heading={tab.text}
+              value={tab.value}
+              key={tab.value}
+            />
+          )) : []
+        }
+      {/* </> */}
     </NavHeader>
   )
 }

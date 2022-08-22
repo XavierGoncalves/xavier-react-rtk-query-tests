@@ -24,7 +24,8 @@ import { useQueryClient } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import useCreateSearchParams from 'voicemails-app/hooks/use-create-search-params'
 import VoicemailsFilters from '../voicemails-filters/VoicemailFilters.component'
-
+import VoicemailsTable from '../voicemails-table/VoicemailsTable.component'
+import VoicemailsFooter from '../voicemail-footer/VoicemailsFooter.component'
 // {
 //     appLoaded: bool.isRequired,
 //     activeFilters: ActiveFiltersPropType.isRequired,
@@ -72,7 +73,7 @@ const VoicemailsPage = () => {
                 <div
                     style={{ display: 'flex', height: '100%', flexDirection: 'column' }}
                 >
-                    <VoicemailsHeader />
+                    {/* <VoicemailsHeader /> */}
                     <VoicemailsToolbar />
                     <VoicemailsFiltersToolbar />
                     {voicemailId && assignModalOpen && (
@@ -81,12 +82,12 @@ const VoicemailsPage = () => {
                             onClose={closeAssignModal}
                         />
                     )}
-                    {/* <Page>
+                    <Page>
                         <Page.Content>
-                            <VoicemailTable onAddContact={onAddContact} />
-                            <VoicemailFooter />
+                            <VoicemailsTable onAddContact={onAddContact} />
+                            <VoicemailsFooter />
                         </Page.Content>
-                    </Page> */}
+                    </Page>
                 </div>
             </PanelsLayout.Content>
             <PanelsLayout.Panel
@@ -106,7 +107,7 @@ const VoicemailsPage = () => {
                 <div
                     ref={element}
                     style={{ display: 'flex', height: '100%', width: '100%' }}
-                ></div>
+                />
             </PanelsLayout.Panel>
         </PanelsLayout>
     )

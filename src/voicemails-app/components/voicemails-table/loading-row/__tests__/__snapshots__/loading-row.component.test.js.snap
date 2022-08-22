@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LoadingRow /> when small prop is false renders the large loading row 1`] = `
+<div>
+  <table>
+    <tbody>
+      <tr
+        class="co-table__row"
+      >
+        <td
+          class="co-table__cell"
+        >
+          <div
+            class="co-placeholder co-placeholder--animated co--medium"
+          />
+        </td>
+        <td
+          class="co-table__cell"
+        >
+          <div
+            class="co-placeholder co-placeholder--animated co--small"
+          />
+        </td>
+        <td
+          class="co-table__cell"
+        >
+          <div
+            class="co-placeholder co-placeholder--animated co--medium"
+          />
+        </td>
+        <td
+          class="co-table__cell"
+        >
+          <div
+            class="co-placeholder co-placeholder--animated co--medium"
+          />
+        </td>
+        <td
+          class="co-table__cell"
+        >
+          <div
+            class="co-placeholder co-placeholder--animated co--small"
+          />
+        </td>
+        <td
+          class="co-table__cell"
+        >
+          <div
+            class="co-placeholder co-placeholder--animated co--medium"
+          />
+        </td>
+        <td
+          class="co-table__cell"
+        >
+          <div
+            class="co-placeholder co-placeholder--animated co--small"
+          />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
+
+exports[`<LoadingRow /> when small prop is true renders the small loading row 1`] = `
+<div>
+  <table>
+    <tbody>
+      <tr
+        class="co-table__row"
+      >
+        <td
+          class="co-table__cell"
+        >
+          <div
+            class="co-placeholder co-placeholder--animated co--large"
+          />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;

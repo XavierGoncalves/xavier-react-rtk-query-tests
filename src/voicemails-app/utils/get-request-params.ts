@@ -1,6 +1,6 @@
 import { mapWhenToDate } from "activity-app/utils/map-when-to-date"
 import { ALL, CUSTOM, defaultFilterValues, DURATION_SECONDS } from "voicemails-app/constants/filters.constants"
-import { VOICEMAIL_OPEN, VOICEMAIL_RESOLVED } from "voicemails-app/constants/state-types.constants"
+import { STATE_VOICEMAIL_OPEN, STATE_VOICEMAIL_RESOLVED } from "voicemails-app/constants/state-types.constants"
 import { VALUE_FILTER_ALL, VALUE_FILTER_UNASSIGNED } from "voicemails-app/constants/ui.constants"
 import addDaysToDate from "./add-days-to-date"
 import isEqual from 'lodash/isEqual'
@@ -32,9 +32,9 @@ const getRequestParams = ({
         ? assignedTo.id || assignedTo
         : undefined
 
-    if (voicemailStatus === VOICEMAIL_RESOLVED) {
+    if (voicemailStatus === STATE_VOICEMAIL_RESOLVED) {
         params = { ...params, resolved: true }
-    } else if (voicemailStatus === VOICEMAIL_OPEN) {
+    } else if (voicemailStatus === STATE_VOICEMAIL_OPEN) {
         params = { ...params, resolved: false }
     }
     // debugger

@@ -1,8 +1,8 @@
-import { useQuery } from "@tanstack/react-query"
+import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { useHttpClient } from "titanium/common/context/http.context"
-import fetchAssignedUsersApi from "voicemails-app/api/fetch-assigned-users"
 import fetchVoicemailsApi from "voicemails-app/api/fetch-voicemails.api"
 import useAppUrlParams from "voicemails-app/hooks/use-search-params"
+import useGetAssignedUsers from "./use-get-assigned-users"
 
 const useGetVoicemails = () => {
     const http = useHttpClient()
@@ -18,7 +18,9 @@ const useGetVoicemails = () => {
         currentTab
     } = useAppUrlParams()
 
-    const resultGetVoicemails = useQuery(['voicemails', 'list', {
+    useGetAssignedUsers()
+
+    return useQuery(['voicemails', 'list', {
         page,
         voicemailStatus,
         contactId,
@@ -37,22 +39,25 @@ const useGetVoicemails = () => {
         ringGroups,
         http
     }))
-    const voicemailsList = resultGetVoicemails.data?.voicemails || []
-    const reduceResult = voicemailsList.reduce((acc, voicemail) => {
-        const { assignedTo, ringGroups } = voicemail
-        // debugger
-        const userRingGroups = ringGroups.filter(item =>
-            item.match(/^[A-Fa-f0-9]{24}$/) || []
-        )
-        // debugger
-        return acc.concat([assignedTo, ...userRingGroups])
-    }, [] as string[]) || []
-    // debugger
-    const userIds = reduceResult?.filter(id => !!id)
-    const shouldFetchAssignedUsers = userIds.length > 0
-    // console.log('shouldFetchAssignedUsers->', shouldFetchAssignedUsers)
-    // debugger
-    useQuery(['assignedUsers', 'list', {
+}
+
+export const usePrefetchGetVoicemails = () => {
+    const http = useHttpClient()
+    const queryClient = useQueryClient()
+
+    const {
+        voicemailStatus,
+        contactId,
+        assignedTo,
+        when,
+        duration,
+        ringGroups,
+        currentTab
+    } = useAppUrlParams()
+    useGetAssignedUsers()
+
+
+    return (page: number) => queryClient.prefetchQuery(['voicemails', 'list', {
         page,
         voicemailStatus,
         contactId,
@@ -61,13 +66,16 @@ const useGetVoicemails = () => {
         duration,
         ringGroups,
         currentTab
-    }], () => fetchAssignedUsersApi({
-        userIds,
+    }], () => fetchVoicemailsApi({
+        page,
+        voicemailStatus,
+        contactId,
+        assignedTo,
+        when,
+        duration,
+        ringGroups,
         http
-    }), { enabled: shouldFetchAssignedUsers }
-    )
-
-    return resultGetVoicemails
+    }))
 }
 
 export default useGetVoicemails

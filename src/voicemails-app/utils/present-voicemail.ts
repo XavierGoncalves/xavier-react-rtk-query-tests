@@ -1,4 +1,4 @@
-import { UNINITIALIZED, VOICEMAIL_OPEN, VOICEMAIL_RESOLVED } from "voicemails-app/constants/state-types.constants"
+import { STATE_UNINITIALIZED, STATE_VOICEMAIL_OPEN, STATE_VOICEMAIL_RESOLVED } from "voicemails-app/constants/state-types.constants"
 import get from 'lodash/get'
 
 const presentVoicemail = data => ({
@@ -12,12 +12,12 @@ const presentVoicemail = data => ({
     ringGroups: data.ring_groups || [],
     status: {
         value: data.resolved
-            ? VOICEMAIL_RESOLVED
-            : VOICEMAIL_OPEN,
+            ? STATE_VOICEMAIL_RESOLVED
+            : STATE_VOICEMAIL_OPEN,
         loading: false
     },
     phoneNumberId: get(data, 'number_id', null),
-    recordings: { status: UNINITIALIZED, items: [] }
+    recordings: { status: STATE_UNINITIALIZED, items: [] }
 })
 
 export default presentVoicemail

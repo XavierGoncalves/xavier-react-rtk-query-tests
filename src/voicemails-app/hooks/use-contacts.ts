@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useHttpClient } from 'titanium/common/context/http.context'
 import { VoicemailUseContact } from 'types'
 import { fetchContactApi, fetchContactsApi } from 'voicemails-app/api/fetch-contacts.api'
-import { LOADING } from 'voicemails-app/constants/state-types.constants'
+import { STATE_LOADING } from 'voicemails-app/constants/state-types.constants'
 import { VALUE_FILTER_ALL } from '../constants/ui.constants'
 
 export const useContacts = ({
@@ -70,7 +70,7 @@ export const useContacts = ({
       setTotalContacts(0)
       setNoResultsMsg(typeMoreMessage)
     } else {
-      setStatus(LOADING)
+      setStatus(STATE_LOADING)
       setError(false)
 
       const { contacts, total } = await fetchContacts()

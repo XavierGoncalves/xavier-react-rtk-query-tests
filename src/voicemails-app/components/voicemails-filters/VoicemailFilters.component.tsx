@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 import { NavHeader } from '@titanium/components'
-import { FilterGroup } from './filter-group'
+//import { FilterGroup } from './filter-group'
 
 const Title = styled.h2`
   outline: 0;
@@ -20,7 +20,7 @@ const VoicemailsFilters = ({ onClose }) => {
         }
         onClose={onClose}
       />
-      <FilterGroup onClose={onClose} />
+      {/* <FilterGroup onClose={onClose} /> */}
     </>
   )
 }

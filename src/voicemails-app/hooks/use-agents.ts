@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { LOADING } from 'voicemails-app/constants/state-types.constants'
+import { STATE_LOADING } from 'voicemails-app/constants/state-types.constants'
 import {
   VALUE_FILTER_ALL,
   VALUE_FILTER_UNASSIGNED
@@ -87,7 +87,7 @@ export const useAgents = ({
       setTotalUsers(0)
       setNoResultsMsg(typeMoreMessage)
     } else {
-      setStatus(LOADING)
+      setStatus(STATE_LOADING)
       setError(false)
 
       const { newAgents, total } = await fetchUsers()

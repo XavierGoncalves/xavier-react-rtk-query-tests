@@ -1,7 +1,7 @@
 import diffBetweenObjects from "activity-app/utils/diff-between-objects"
 import isEmpty from 'lodash/isEmpty'
 import { ALL, defaultFilterValues, DURATION_MINUTES, LAST_DAY, LAST_MONTH, LAST_SIX_HOURS, LAST_WEEK } from "voicemails-app/constants/filters.constants"
-import { VOICEMAIL_OPEN, VOICEMAIL_RESOLVED } from "voicemails-app/constants/state-types.constants"
+import { STATE_VOICEMAIL_OPEN, STATE_VOICEMAIL_RESOLVED } from "voicemails-app/constants/state-types.constants"
 import { formatDateRange } from '@titanium/components'
 import useAppUrlParams from "./use-search-params"
 import { useCurrentUser } from "titanium/common/context/user.context"
@@ -21,8 +21,8 @@ const FILTERS_SORT_ORDER = {
 
 const STATUS_LABELS = {
     [ALL]: 'fields.status.all',
-    [VOICEMAIL_OPEN]: 'fields.status.open',
-    [VOICEMAIL_RESOLVED]: 'fields.status.resolved'
+    [STATE_VOICEMAIL_OPEN]: 'fields.status.open',
+    [STATE_VOICEMAIL_RESOLVED]: 'fields.status.resolved'
 }
 
 const FILTER_LABELS = {
