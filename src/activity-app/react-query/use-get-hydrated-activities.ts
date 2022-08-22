@@ -102,40 +102,37 @@ const useGetHydratedActivities = () => {
 }
 // THERE'S NO WAY TO PREFETCH DEPENDENT QUERIES VIA HOOKS, USE "MEGA" API INSTEAD
 export const usePrefetchGetHydratedActivities = () => {
-//     const http = useHttpClient()
-//     const queryClient = useQueryClient();
-//     const {
-//         type,
-//         via,
-//         ringGroups,
-//         contact,
-//         agent,
-//         sortBy,
-//         when
-//     } = useAppUrlParams()
-//     return async (page: number) => {
-//         const prefetchHydratedActivities = await queryClient.prefetchQuery(['activities', 'list', {
-//             page,
-//             type,
-//             via,
-//             ringGroups,
-//             contact,
-//             agent,
-//             sortBy,
-//             when
-//         }], () => fetchActivitiesApi({
-//             sortBy,
-//             page,
-//             type,
-//             via,
-//             ringGroups,
-//             contact,
-//             agent,
-//             when,
-//             http
-//         }))
-//         console.log('prefetchHydratedActivities->', prefetchHydratedActivities) 
-//     }
+    const http = useHttpClient()
+    const queryClient = useQueryClient();
+    const {
+        type,
+        via,
+        ringGroups,
+        contact,
+        agent,
+        sortBy,
+        when
+    } = useAppUrlParams()
+    return async (page: number) => queryClient.prefetchQuery(['activities', 'list', {
+        page,
+        type,
+        via,
+        ringGroups,
+        contact,
+        agent,
+        sortBy,
+        when
+    }], () => fetchActivitiesApi({
+        sortBy,
+        page,
+        type,
+        via,
+        ringGroups,
+        contact,
+        agent,
+        when,
+        http
+    }))
 }
 
 export default useGetHydratedActivities

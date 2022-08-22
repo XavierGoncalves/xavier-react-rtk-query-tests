@@ -57,8 +57,8 @@ createAtlasApp(AtlasSdk, {
       // console.log('Render ->', app)
     // root.render(<ActivityApp app={app} />)
     root.render(
-      // <ActivityApp {...app} />
-      <VoicemailsApp {...app} />
+      <ActivityApp {...app} />
+      // <VoicemailsApp {...app} />
       // <ContactsApp {...app} />
     )
       {/* <React.StrictMode>

@@ -33,11 +33,12 @@ const ActivityFooter = () => {
   const { createUrl } = useCreateSearchParams()
   const navigate = useNavigate()
   const prefetchGetActivities = usePrefetchGetActivities()
+  const prefetchHydratedActivities = usePrefetchGetHydratedActivities()
   const onPageClick = (page: number) => {
     navigate(createUrl({ page, selectedActivityId: undefined }))
   }
   const onPageMouseEnter = (page: number) => {
-    prefetchGetActivities(page)
+    prefetchHydratedActivities(page)
   }
   return (<>
     {
